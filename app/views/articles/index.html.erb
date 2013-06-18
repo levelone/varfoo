@@ -24,7 +24,7 @@
 				  </li>
 				</ul>
 
-				<div class="comments">
+				<div id="comments">
 					<%= form_for [article, Comment.new] do |f| %>
 					  <% if article.errors.any? %>
 					    <div id="error_explanation">
@@ -49,7 +49,6 @@
 					  </div>
 
 					<% end %>
-				</div>
 
 				<% if article.comments.present? %>
 					<% article.comments.each do |comment| %>
@@ -60,6 +59,7 @@
 						</ul>
 			    <% end %>
 		    <% end %>
+			</div>
 
 			</li>
 		</ul>

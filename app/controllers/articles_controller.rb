@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
 	def index
     @articles = Article.order('created_at DESC')
-    @comments = Comment.new
+    @comments = Comment.order('created_at DESC')
 	end
 
 	def edit
