@@ -1,0 +1,27 @@
+<h1><%= @article.title %></h1>
+
+<p>
+  <% if @article.image? %>
+    <%= image_tag @article.image_url %>
+  <% end %>
+</p>
+<p>
+	<%= @article.content %>
+</p>
+<p>
+	<%= ('by ' + @article.user.email) %>
+</p>
+
+
+<%= link_to 'Back to Articles', articles_path %> &middot;
+
+<% if can? :update, @article %>
+  <%= link_to 'Edit', edit_article_path(@article) %> &middot;
+<% end %>
+
+
+<% if can? :destroy, @article %>
+  <%= link_to 'Delete', article_path(@article), :confirm => "Are you sure you want to delete", :method => :delete %> &middot;
+<% end %>
+
+<%= link_to 'View Comments', article_comments_path(@article, :comments) %>

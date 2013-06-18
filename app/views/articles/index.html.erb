@@ -1,0 +1,71 @@
+<div id='wrapper'>
+	<% @articles.each do |article| %>
+		<ul class='article clearfix'>
+			<li>
+			 	<ul class='header clearfix'>
+					<li class="title">
+						<%= link_to article.title, article_path(article), :class => 'title' %>
+					</li>
+					<li class="author">
+						<%= article.created_at.strftime("%d %b. %Y") %> &middot;
+						<%= article.user.email %> &middot;
+						<%= link_to (article.comments.count.to_s + ' Comments'),  article_comments_path(article, @comments) %>
+					</li>
+				</ul>
+				<ul class='left-side clearfix'>
+				  <li class='content clearfix'>
+				  	<p class='image clearfix'>
+				  		<%= image_tag article.image_url.to_s %>
+				  	</p>
+				  	<span>
+				  		<%= article.content %>
+				  	</span>
+				  </li>
+				</ul>
+
+				<% article.comments.each do |comment| %>
+				<ul class='right-side clearfix'>
+
+						<li class='clearfix'>
+						  <%= ( comment.user.email + ': ' + comment.content) %>
+						</li>
+					</ul>
+				</li>
+		  <% end %>
+
+
+		    <% new_article_comment do |comment| %>
+				  <%= form_for [article, comment] do |f| %>	  
+						<% if comment.errors.any? %>
+					    <div id="error_explanation">
+					      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+					      <ul>
+					      <% comment.errors.full_messages.each do |msg| %>
+					        <li>
+					        	<%= msg %>
+					        </li>
+						      <% end %>
+					      </ul>
+					    </div>
+					  <% end %>
+			  
+					  <div class='field'>
+					    <%= f.label :content %>
+					    <%= f.text_area :content %>
+					  </div>
+					  <div class='actions'>
+					    <%= f.submit %>
+					  </div>
+					<% end %>
+
+			</li>
+		</ul>
+	<% end %>
+
+
+				
+
+<% if can? :create, @article %>
+	<%= link_to 'New Article', new_article_path %>
+<% end %>
