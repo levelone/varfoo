@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
 	def index
-    @articles = Article.includes :comments
+    @articles = Article.order('created_at DESC')
+    @comments = Comment.new
 	end
 
 	def edit

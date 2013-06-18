@@ -12,6 +12,7 @@
 						<%= link_to (article.comments.count.to_s + ' Comments'),  article_comments_path(article, @comments) %>
 					</li>
 				</ul>
+
 				<ul class='left-side clearfix'>
 				  <li class='content clearfix'>
 				  	<p class='image clearfix'>
@@ -23,49 +24,44 @@
 				  </li>
 				</ul>
 
-				<% article.comments.each do |comment| %>
-				<ul class='right-side clearfix'>
-
-						<li class='clearfix'>
-						  <%= ( comment.user.email + ': ' + comment.content) %>
-						</li>
-					</ul>
-				</li>
-		  <% end %>
-
-
-		    <% new_article_comment do |comment| %>
-				  <%= form_for [article, comment] do |f| %>	  
-						<% if comment.errors.any? %>
+				<div class="comments">
+					<%= form_for [article, Comment.new] do |f| %>
+					  <% if article.errors.any? %>
 					    <div id="error_explanation">
-					      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this user from being saved:</h2>
+					      <h2><%= pluralize(article.errors.count, "error") %> prohibited this user from being saved:</h2>
 
 					      <ul>
-					      <% comment.errors.full_messages.each do |msg| %>
-					        <li>
-					        	<%= msg %>
-					        </li>
+						      <% article.errors.full_messages.each do |msg| %>
+						        <li><%= msg %></li>
 						      <% end %>
 					      </ul>
 					    </div>
 					  <% end %>
-			  
-					  <div class='field'>
-					    <%= f.label :content %>
-					    <%= f.text_area :content %>
-					  </div>
-					  <div class='actions'>
+
+					  <%= hidden_field :redirect_to, :value=> root_url %>
+
+						<div class='field'>
+						  <%= f.text_area :content, :placeholder => 'What is on your mind?' %>
+						</div>
+
+            <div class='actions'>
 					    <%= f.submit %>
 					  </div>
+
 					<% end %>
+				</div>
+
+				<% if article.comments.present? %>
+					<% article.comments.each do |comment| %>
+						<ul class='right-side clearfix'>
+							<li class='clearfix'>
+							  <%= (comment.user.email + ': ' + comment.content) %>
+							</li>
+						</ul>
+			    <% end %>
+		    <% end %>
 
 			</li>
 		</ul>
 	<% end %>
-
-
-				
-
-<% if can? :create, @article %>
-	<%= link_to 'New Article', new_article_path %>
-<% end %>
+</div>

@@ -1,27 +1,43 @@
-<h1><%= @article.title %></h1>
+<div id='wrapper'>
+	<ul class='clearfix'>
+		<li>
+		 	<ul class='header clearfix'>
+				<li class="title">
+					<%= @article.title %>
+				</li>
+				<li class="author">
+					<%= @article.created_at.strftime("%d %b. %Y") %> &middot;
+					<%= @article.user.email %> &middot;
+					<%= link_to (@article.comments.count.to_s + ' Comments'),  article_comments_path(@article, @comments) %>
+				</li>
+			</ul>
+		</li>
+	</ul>
 
-<p>
-  <% if @article.image? %>
-    <%= image_tag @article.image_url %>
-  <% end %>
-</p>
-<p>
-	<%= @article.content %>
-</p>
-<p>
-	<%= ('by ' + @article.user.email) %>
-</p>
+	<ul class='full clearfix'>
+	  <li>
+	  	<p class='image-full'>
+	  		<% if @article.image? %>
+			    <%= image_tag @article.image_url %>
+			  <% end %>
+	  	</p>
+	  	<span>
+	  		<%= (@article.content + 'by ' + @article.user.email) %>
+	  	</span>
+	  </li>
+	</ul>
+
+	<%= link_to 'Back to Articles', articles_path %> &middot;
+
+	<% if can? :update, @article %>
+	  <%= link_to 'Edit', edit_article_path(@article) %> &middot;
+	<% end %>
 
 
-<%= link_to 'Back to Articles', articles_path %> &middot;
+	<% if can? :destroy, @article %>
+	  <%= link_to 'Delete', article_path(@article), :confirm => "Are you sure you want to delete", :method => :delete %> &middot;
+	<% end %>
 
-<% if can? :update, @article %>
-  <%= link_to 'Edit', edit_article_path(@article) %> &middot;
-<% end %>
-
-
-<% if can? :destroy, @article %>
-  <%= link_to 'Delete', article_path(@article), :confirm => "Are you sure you want to delete", :method => :delete %> &middot;
-<% end %>
-
-<%= link_to 'View Comments', article_comments_path(@article, :comments) %>
+	<%= link_to 'View Comments', article_comments_path(@article, :comments) %>
+	
+</div>

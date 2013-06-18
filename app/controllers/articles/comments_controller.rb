@@ -20,7 +20,7 @@ class Articles::CommentsController < ApplicationController
     @comment.user_id = current_user.id
 
 		if @comment.save
-			redirect_to article_comments_path, :notice => 'Comment created!'
+			redirect_to root_path, :notice => 'Comment created!'
 		else
 			render :action => :new
 		end

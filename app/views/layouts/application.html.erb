@@ -22,6 +22,9 @@
 		</div>
 
 		<div id="user_nav">
+			<% if can? :create, Article %>
+				<%= link_to 'New Article', new_article_path %>
+			<% end %>
 		  <% if current_user %>
 			  <h4>
 			    Logged in as <%= current_user.email %>.

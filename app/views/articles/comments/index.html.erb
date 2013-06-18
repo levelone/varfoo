@@ -4,12 +4,12 @@
     <%= comment.user.email + (' says: ') + comment.content %>
   </li>
   <li>
-    <% if can? :update, @comment %>
+    <% if can? :update, comment %>
     <%= link_to 'Edit', edit_article_comment_path(@article, comment) %>
     <% end %>
   </li>
   <li>
-    <% if can? :destroy, @comment %>
+    <% if can? :destroy, comment %>
     <%= link_to 'Delete', article_comment_path(@article, comment), :confirm => 'Are you sure?', :method => :delete %>
     <% end %>
   </li>

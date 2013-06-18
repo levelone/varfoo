@@ -11,6 +11,7 @@ class Ability
       can :destroy, Article
       can :create, Comment
       can :read, Comment
+      can :update, Comment
       can :destroy, Comment
     else
       can :read, Article
