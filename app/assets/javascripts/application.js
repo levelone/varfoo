@@ -15,6 +15,8 @@
 //= require jquery.ui.all
 //= require bootstrap
 //= require foundation
+//= require spin.min
+//= require jquery.spin
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

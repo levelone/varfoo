@@ -2,11 +2,11 @@
   <%= paginate @articles %> -->
 
 <div id='wrapper'>
-  <% @articles.each do |article| %>
-      <div class='article clearfix'>
+  <% @articles.each_with_index do |article, index| %>
+      <div class='article clearfix <%= index.odd? ? "odd" : "even" %>'>
         <h1 class="title">
           <% if current_user.present? %>
-            <%= link_to article.title, (article), :id => "#{article.id}-#{article.title.parameterize}", :class => 'title' %>
+            <%= link_to article.title, (article), :class => "#{article.id}-#{article.title.parameterize}" %>
           <% else %>
             <%= article.title %>
           <% end %>
@@ -18,38 +18,40 @@
                 <%= tag.name %>
               <% end %> &middot;
             <% end %> 
-          <%= ( 'By ' + article.user.name) %> &middot;
+          <!-- <%= ( article.user.name) %> &middot; -->
           <span><%= (article.comments.count.to_s + ' comments') %></span>
         </p>
 
-				<div class='left-side clearfix'>
-			  	<% if article.images.present? %>
-						<% article.images.each do |image| %>
-						  <%= image_tag image.image_url.to_s %>
-				    <% end %> 
-					<% end %>
+        <div class='left-side clearfix'>
+          <% if article.images.present? %>
+            <% article.images.each do |image| %>
+              <%= image_tag image.image_url.to_s %>
+            <% end %> 
+          <% end %>
 
-			  	<% if article.videos.present? %>
-						<% article.videos.each do |video| %>
-						  <%= video.video_url %>
-				    <% end %> 
-					<% end %>
+          <% if article.videos.present? %>
+            <% article.videos.each do |video| %>
+              <%= video.video_url.to_s.html_safe %>
+            <% end %> 
+          <% end %>
 
-			  	<p class='description'>
-			  		<%= article.content.html_safe %>
-			  	</p>
-				</div>
+          <p class='description'>
+            <%= article.content.html_safe %>
+          </p>
+        </div>
 
-				<div class='right-side'>
-					<div id='comments_wrapper'>
-						<%= form_for [article, Comment.new], :remote => true, :html => { :'data-type' => 'json' } do |f| %>
-						  <% if article.errors.any? %>
-						    <div id="error_explanation">
-						      <h2><%= pluralize(article.errors.count, "error") %> prohibited this user from being saved:</h2>
-						      <ul>
-							      <% article.errors.full_messages.each do |msg| %>
-							        <li><%= msg %></li>
-							      <% end %>
+        <div class='right-side'>
+          <div class='comments-wrapper'>
+            <%= form_for [article, Comment.new], :remote => true, :html => { :id => nil, :class => 'new-comment', :'data-type' => 'json' } do |f| %>
+              <% if article.errors.any? %>
+                <div id="error_explanation">
+                  <h2>
+                  	<%= pluralize(article.errors.count, "error") %> prohibited this user from being saved:
+                  </h2>
+                  <ul>
+                    <% article.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                    <% end %>
 						      </ul>
 						    </div>
 						  <% end %>
@@ -63,13 +65,14 @@
 							<div class='submit'>
 								<%= f.submit 'Submit', :class => 'btn btn-success' %>
 							</div>
+
 					  <% end %>
 			    </div>
 
 					<% if article.comments.present? %>
-						<ul id='comments'>
+						<ul class='comments'>
 							<% article.comments.order('created_at DESC').limit(5).each do |comment| %>
-								<li class='comment clearfix'>
+								<li class='comment'>
 									<span><%= comment.user.name + ': ' %></span>
 								  <%= comment.content %>
 								</li>
@@ -77,7 +80,8 @@
 						</ul>
 
 				    <% if article.comments.order('created_at DESC').count > 5 %>
-					    <%= link_to 'more', '#', :class => 'more_comments', :'data-article-id' => article.id, :'data-offset' => 5 %>
+					    <%= link_to 'more', '#', :class => 'more-comments', :'data-article-id' => article.id, :'data-offset' => 5, :'data-comments-count' => article.comments.count, :loading => 'target' %>
+					    <div class="loading"></div>
 				    <% end %>
 					<% end %>
 				</div>
