@@ -1,60 +1,73 @@
 class Articles::CommentsController < ApplicationController
-	before_filter :require_login, :only => [:new, :create]
+  before_filter :require_login, :only => [:new, :create]
 
-	def index
-		@article = Article.find(params[:article_id])
-		@comments = @article.comments
-	end
+  def index
+    @article = Article.find(params[:article_id])
+    @comments = @article.comments.order('id DESC').limit(5).offset(params[:offset]).includes(:user)
+
+    respond_to do |format|
+      format.json { render :json => { :comments => @comments }.to_json(:include => :user ) and return }
+    end
+  end
 
   def new
-  	@article = Article.find(params[:article_id])
-  	@comment = Comment.new
-  	require_login
-	end
+    @article = Article.find(params[:article_id])
+    @comment = Comment.new
+    require_login
+  end
 
   def create
-  	@article = Article.find(params[:article_id])
-		@comment = Comment.new(params[:comment])
+    @article = Article.find(params[:article_id])
+    @comment = Comment.new(params[:comment])
 
     @comment.article_id = params[:article_id]
     @comment.user_id = current_user.id
 
-		if @comment.save
-			redirect_to root_path, :notice => 'Comment created!'
-		else
-			render :action => :new
-		end
-	end
+    if @comment.save
+      respond_to do |format|
+        format.html { redirect_to root_path, :notice => 'Comment created!' }
+        format.json { render :json => { :comment => @comment }.to_json(:include => { :user => @comment.user }) and return }
+      end
+    else  
+      respond_to do |format|
+        format.html { 
+          flash[:error] = "#{@comment.errors.full_messages.to_sentence}"
+          redirect_to root_path(:anchor => "#{@article.id}-#{@article.title.parameterize}")
+        }
+        format.json { render :json => @comment.errors.full_messages and return }
+      end
+    end
+  end
 
-	def edit
-  	@article = Article.find(params[:article_id])
+  def edit
+    @article = Article.find(params[:article_id])
     @comment = Comment.find(params[:id])
   end
 
   def update
-  	@article = Article.find(params[:article_id])
-	  @comment = Comment.find(params[:id])
+    @article = Article.find(params[:article_id])
+    @comment = Comment.find(params[:id])
 
     @comment.update_attributes(params[:comment])
-	  redirect_to article_comments_path, :notice => 'Comment successfully updated!'
+    redirect_to article_comments_path, :notice => 'Comment successfully updated!'
   end
 
-	def show
+  def show
     @comment = Comment.find(params[:id])
-	end
+  end
 
-	def destroy
-		@article = Article.find(params[:article_id])
-		@comment = Comment.find(params[:id])
+  def destroy
+    @article = Article.find(params[:article_id])
+    @comment = Comment.find(params[:id])
 
     @comment.destroy
 
     redirect_to article_comments_path, :notice => 'Comment removed!'
-	end
+  end
 
-	private
+  private
 
-	def require_login
-		redirect_to log_in_path, :notice => 'Log in or Sign up first!' if current_user.blank?
-	end
+  def require_login
+    redirect_to log_in_path, :notice => 'Log in or Sign up first!' if current_user.blank?
+  end
 end

@@ -7,22 +7,18 @@
 				</li>
 				<li class="author">
 					<%= @article.created_at.strftime("%d %b. %Y") %> &middot;
-					<%= @article.user.email %> &middot;
+					<%= @article.user.name %> &middot;
 					<%= link_to (@article.comments.count.to_s + ' Comments'),  article_comments_path(@article, @comments) %>
 				</li>
 			</ul>
-		</li>
+		</li>	
 	</ul>
 
 	<ul class='full clearfix'>
 	  <li>
-	  	<p class='image-full'>
-	  		<% if @article.image? %>
-			    <%= image_tag @article.image_url %>
-			  <% end %>
-	  	</p>
+
 	  	<span>
-	  		<%= (@article.content + 'by ' + @article.user.email) %>
+	  		<%= (@article.content + ' by ' + @article.user.name) %>
 	  	</span>
 	  </li>
 	</ul>
@@ -38,6 +34,6 @@
 	  <%= link_to 'Delete', article_path(@article), :confirm => "Are you sure you want to delete", :method => :delete %> &middot;
 	<% end %>
 
-	<%= link_to 'View Comments', article_comments_path(@article, :comments) %>
+	<%= link_to 'View Comments', article_comments_path(@article) %>
 	
 </div>

@@ -1,42 +1,76 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>MarcSeifert</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-	<body> 
-		<div id="notification">
-			<% flash.each do |name, msg| %>
-			  <%= content_tag :div, msg, :id => "flash_#{name}" %>
-			<% end %>
-		</div>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Myapp" %></title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Uncomment to make IE8 render like IE7 -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+    <!-- Set the viewport width to device width for mobile -->
 
-		<h1 id="logo">
-	  	Marc.
-	  </h1>
+    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
-	  <div id="container">
-			<%= yield %>
-		</div>
+    <%= stylesheet_link_tag    "application", :media => "all"%>
+    <%= javascript_include_tag "vendor/custom.modernizr" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <%= yield(:head) %>
+  </head>
 
-		<div id="user_nav">
-			<% if can? :create, Article %>
-				<%= link_to 'New Article', new_article_path %>
-			<% end %>
-		  <% if current_user %>
-			  <h4>
-			    Logged in as <%= current_user.email %>.
-			    <%= link_to "Log out", log_out_path %>
-			  </h4>
-		  <% else %>
-			  <h4>
-			    <%= link_to "Sign up", sign_up_path %> or
-			    <%= link_to "Log in", log_in_path %>
-		    </h4>
-		  <% end %>
-		</div>
+  <body> 
 
-	</body>
+<!--     <div id="notification" class="alert">
+      Some message
+    </div>
+
+    <a class="close" data-dismiss="alert" href="#notification">Close "notification"</a>
+ -->
+    <div id="notification" data-dismiss="alert">
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, :id => "flash_#{name}"  %>
+      <% end %>
+    </div>
+    
+    <div id="header">
+      <h1 id="logo">
+        Marc.
+      </h1>
+    </div>
+
+    <div id='fluid'>
+      <div id='links'>
+        <%= link_to 'Recent Posts',  root_path, :class => 'recent_posts' %> &middot;
+        <%= link_to 'About / CV', '#' %>
+        <% if can? :create, Article %>
+           &middot; <%= link_to 'New Article', new_article_path %>
+        <% end %>
+      </div>
+    </div>
+
+    <div id="main" role="main">
+      <div class="container">
+          <%= yield %>
+      </div> <!--! end of .container -->
+    </div> <!--! end of #main -->
+
+    <div id="user_nav">
+      <% if current_user %>
+        <h4>
+          Logged in as <%= current_user.name %>.
+          <%= link_to "Log out", log_out_path %>
+        </h4>
+      <% else %>
+        <h4>
+          <%= link_to "Sign up", sign_up_path %> or
+          <%= link_to "Log in", log_in_path %>
+        </h4>
+      <% end %>
+    </div>
+
+  </body>
 </html>

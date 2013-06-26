@@ -11,44 +11,61 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130617045400) do
-
-  create_table "admins", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "article_images", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.string   "image"
-  end
+ActiveRecord::Schema.define(:version => 20130621100554) do
 
   create_table "articles", :force => true do |t|
+    t.integer  "user_id"
     t.string   "title"
     t.string   "content"
-    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "image"
   end
 
-  create_table "comments", :force => true do |t|
-    t.string   "content"
-    t.integer  "user_id"
+  create_table "articles_tags", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "article_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  add_index "articles_tags", ["article_id"], :name => "index_articles_tags_on_article_id"
+  add_index "articles_tags", ["tag_id"], :name => "index_articles_tags_on_tag_id"
+
+  create_table "comments", :force => true do |t|
+    t.integer  "user_id"
     t.integer  "article_id"
+    t.string   "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "images", :force => true do |t|
+    t.integer  "article_id"
+    t.string   "image_url"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email"
+    t.string   "name"
     t.string   "password_hash"
     t.string   "password_salt"
+    t.boolean  "admin"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.string   "role"
-    t.boolean  "admin"
+  end
+
+  create_table "videos", :force => true do |t|
+    t.integer  "article_id"
+    t.string   "video_url"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

@@ -1,67 +1,91 @@
+<!-- 
+  <%= paginate @articles %> -->
+
 <div id='wrapper'>
-	<% @articles.each do |article| %>
-		<ul class='article clearfix'>
-			<li>
-			 	<ul class='header clearfix'>
-					<li class="title">
-						<%= link_to article.title, article_path(article), :class => 'title' %>
-					</li>
-					<li class="author">
-						<%= article.created_at.strftime("%d %b. %Y") %> &middot;
-						<%= article.user.email %> &middot;
-						<%= link_to (article.comments.count.to_s + ' Comments'),  article_comments_path(article, @comments) %>
-					</li>
-				</ul>
+  <% @articles.each do |article| %>
+      <div class='article clearfix'>
+        <h1 class="title">
+          <% if current_user.present? %>
+            <%= link_to article.title, (article), :id => "#{article.id}-#{article.title.parameterize}", :class => 'title' %>
+          <% else %>
+            <%= article.title %>
+          <% end %>
+        </h1>
+        <p class="author">
+          <%= article.created_at.strftime("%d %b. %Y") %> &middot;
+            <% if article.tags.present? %>
+              <% article.tags.each do |tag| %>
+                <%= tag.name %>
+              <% end %> &middot;
+            <% end %> 
+          <%= ( 'By ' + article.user.name) %> &middot;
+          <span><%= (article.comments.count.to_s + ' comments') %></span>
+        </p>
 
-				<ul class='left-side clearfix'>
-				  <li class='content clearfix'>
-				  	<p class='image clearfix'>
-				  		<%= image_tag article.image_url.to_s %>
-				  	</p>
-				  	<span>
-				  		<%= article.content %>
-				  	</span>
-				  </li>
-				</ul>
-
-				<div id="comments">
-					<%= form_for [article, Comment.new] do |f| %>
-					  <% if article.errors.any? %>
-					    <div id="error_explanation">
-					      <h2><%= pluralize(article.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-					      <ul>
-						      <% article.errors.full_messages.each do |msg| %>
-						        <li><%= msg %></li>
-						      <% end %>
-					      </ul>
-					    </div>
-					  <% end %>
-
-					  <%= hidden_field :redirect_to, :value=> root_url %>
-
-						<div class='field'>
-						  <%= f.text_area :content, :placeholder => 'What is on your mind?' %>
-						</div>
-
-            <div class='actions'>
-					    <%= f.submit %>
-					  </div>
-
+				<div class='left-side clearfix'>
+			  	<% if article.images.present? %>
+						<% article.images.each do |image| %>
+						  <%= image_tag image.image_url.to_s %>
+				    <% end %> 
 					<% end %>
 
-				<% if article.comments.present? %>
-					<% article.comments.each do |comment| %>
-						<ul class='right-side clearfix'>
-							<li class='clearfix'>
-							  <%= (comment.user.email + ': ' + comment.content) %>
-							</li>
-						</ul>
-			    <% end %>
-		    <% end %>
-			</div>
+			  	<% if article.videos.present? %>
+						<% article.videos.each do |video| %>
+						  <%= video.video_url %>
+				    <% end %> 
+					<% end %>
 
-			</li>
-		</ul>
+			  	<p class='description'>
+			  		<%= article.content.html_safe %>
+			  	</p>
+				</div>
+
+				<div class='right-side'>
+					<div id='comments_wrapper'>
+						<%= form_for [article, Comment.new], :remote => true, :html => { :'data-type' => 'json' } do |f| %>
+						  <% if article.errors.any? %>
+						    <div id="error_explanation">
+						      <h2><%= pluralize(article.errors.count, "error") %> prohibited this user from being saved:</h2>
+						      <ul>
+							      <% article.errors.full_messages.each do |msg| %>
+							        <li><%= msg %></li>
+							      <% end %>
+						      </ul>
+						    </div>
+						  <% end %>
+
+						  <%= hidden_field_tag(:redirect_to, 'homepage') %>
+
+							<div class='field'>
+							  <%= f.text_area :content, :placeholder => 'What is on your mind?', :id => 'test', :type => 'text' %>
+							</div>
+
+							<div class='submit'>
+								<%= f.submit 'Submit', :class => 'btn btn-success' %>
+							</div>
+					  <% end %>
+			    </div>
+
+					<% if article.comments.present? %>
+						<ul id='comments'>
+							<% article.comments.order('created_at DESC').limit(5).each do |comment| %>
+								<li class='comment clearfix'>
+									<span><%= comment.user.name + ': ' %></span>
+								  <%= comment.content %>
+								</li>
+					    <% end %>
+						</ul>
+
+				    <% if article.comments.order('created_at DESC').count > 5 %>
+					    <%= link_to 'more', '#', :class => 'more_comments', :'data-article-id' => article.id, :'data-offset' => 5 %>
+				    <% end %>
+					<% end %>
+				</div>
+
+				</li>
+			</ul>
+		</div>
 	<% end %>
 </div>
+
+

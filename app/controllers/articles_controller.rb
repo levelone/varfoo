@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
 	def index
-    @articles = Article.order('created_at DESC')
-    @comments = Comment.order('created_at DESC')
+    # @articles = Article.order('created_at DESC').page params[:page]
+    @articles = Article.order('id DESC').page(params[:page]).per(5)
 	end
 
 	def edit
@@ -16,7 +16,12 @@ class ArticlesController < ApplicationController
   end
 
 	def show
-  	@article = Article.find params[:id]
+    if current_user.admin?
+    	@article = Article.find params[:id]
+    else
+      flash[:error] = "#{@article.errors.full_messages.to_sentence}"
+      redirect_to root_path(:anchor => "#{@article.id}-#{@article.title.parameterize}")
+    end
 	end
 
   def new
@@ -25,8 +30,10 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new params[:article]
+    @article = Article.new (params[:article])
     @article.user_id = current_user.id
+
+    # @article.tags = Tag.where :name=> params[:article][:tag_list].split(', ')
 
 		if @article.save
 			redirect_to articles_path(@article)

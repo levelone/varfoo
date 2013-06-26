@@ -13,8 +13,8 @@
 	  </div>
   <% end %>
   <p>
-  	<%= f.label :email %>
-  	<%= f.text_field :email %>
+  	<%= f.label :name %>
+  	<%= f.text_field :name %>
   </p>
   <p>
   	<%= f.label :password %>
@@ -28,6 +28,6 @@
     <%= f.label :admin %>
     <%= f.check_box :admin %>
   </p>
-  <p class='button'><%= f.submit %></p>
+  <%= f.submit 'Create Account', :class => 'btn-large btn-success' %>
 <% end %>
 </div>

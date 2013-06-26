@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	attr_accessible :email, :password, :password_confirmation, :admin
+  attr_accessible :name, :password, :password_confirmation, :admin
   
   has_many :comments, :dependent => :destroy
   has_many :articles, :dependent => :destroy
@@ -9,11 +9,11 @@ class User < ActiveRecord::Base
 
   validates_confirmation_of :password 
   validates_presence_of :password, :on => :create
-  validates_presence_of :email
-  validates_uniqueness_of :email
+  validates_presence_of :name
+  validates_uniqueness_of :name
 
-  def self.authenticate(email, password)
-    user = find_by_email(email)
+  def self.authenticate(name, password)
+    user = find_by_name(name)
     if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
       user
     else
