@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :password, :password_confirmation, :admin
   
-  has_many :comments, :dependent => :destroy
   has_many :articles, :dependent => :destroy
 
   attr_accessor :password

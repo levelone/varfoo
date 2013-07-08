@@ -1,7 +1,7 @@
 <% @comments.each do |comment| %>
 <ul>
 	<li>
-    <%= comment.user.email + (' says: ') + comment.content %>
+    <%="#{comment.name} says: #{comment.content}" %>
   </li>
   <li>
     <% if can? :update, comment %>

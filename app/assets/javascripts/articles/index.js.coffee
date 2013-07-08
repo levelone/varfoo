@@ -17,6 +17,7 @@ jQuery ->
     top: 0, # Top position relative to parent in px
     left: 'auto' # Left position relative to parent in px
 
+  # Post Comment after submission
   $(document).on 'ajax:success', 'form.new-comment', (e, data, status, xhr) ->
     console.log 'clicked'
     html = ''
@@ -25,7 +26,7 @@ jQuery ->
       html += '<ul>'
 
     html += '<li class="comment clearfix new">\n'
-    html += "<span>#{data.comment.user.name}</span> says:<br/>#{data.comment.content}\n"
+    html += "<span>#{data.comment.name}</span> says:<br/>#{data.comment.content}\n"
     html += '</li>\n' 
 
     if !$(this).parent('.comments-wrapper').siblings('.comments').length
@@ -36,6 +37,7 @@ jQuery ->
     $('.new').fadeIn().removeClass('new').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: 'default'  }, 'slow')
     e.preventDefault()
 
+  # Show More Comments when clicked
   $(document).on 'click', '.more-comments', (e) ->
     parent_container = $(this)
 
@@ -54,7 +56,7 @@ jQuery ->
       for comment in data.comments 
         do ->
           html += '<li class="comment clearfix old">\n'
-          html += "<span>#{comment.user.name}</span> says:<br />#{comment.content}\n"
+          html += "<span>#{comment.name}</span> says:<br />#{comment.content}\n"
           html += '</li>\n'
 
 
@@ -70,7 +72,6 @@ jQuery ->
         parent_container.css('display', 'none')
       
     parent_container.attr('data-offset', parseInt(parent_container.attr('data-offset')) + 5)
-
     e.preventDefault()
 
   $('form').on 'click', '.remove_fields', (event) ->
@@ -84,6 +85,19 @@ jQuery ->
     $(this).before($(this).data('fields').replace(regexp, time))
     event.preventDefault()
 
+  # Sticky Navagation Bar to Scroll down
+  $(window).scroll ->
+    $("#fluid").css "top", $(window).scrollTop()  if $(window).scrollTop() > 281
+
+  # Scroll Up
+  $("a[href='#top']").click ->
+    $("html, body").animate
+      scrollTop: 0
+    , "slow"
+    false 
+
+
+  # Infinity Scroll and Pagination of Articles
   if $('#wrapper').length
     $(window).data('scroll_ready', true)
     all_articles_fetched = false
@@ -173,7 +187,7 @@ jQuery ->
                         for comment in data.comments
                           do ->
                             html += "<li class='comment'>\n"
-                            html += "<span>#{comment.user.name}</span> says:<br/>#{comment.content}\n"
+                            html += "<span>#{comment.name}</span> says:<br/>#{comment.content}\n"
                             html += "</li>\n"
 
                         if data.comments.length

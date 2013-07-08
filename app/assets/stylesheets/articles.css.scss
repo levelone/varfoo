@@ -2,58 +2,98 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// @media screen and (min-width:1260px) { 
+//   #foo                              { display:block; } 
+// }
 
-tr:nth-of-type(odd) {
-  background-color:#E3E3E3;
+@media screen and (min-width:960px) { 
+
+
+  tr:nth-of-type(odd) {
+    background-color:#E3E3E3;
+  }
+
+  #foo                            { display:none; } 
+
+  // Buttons and Fields //
+  .field-new                      { width:100%;
+    input                         { padding:10px; font-size:18px; height:50px; }
+    label                         { font-size:24px; }
+    textarea                      { padding:15px; font-size:18px; width:100%; height:300px; } }
+  .field                          { padding:0px 0px 12px 0px;
+    input                         { width:96%; color:#888888 !important; border-radius:0px !important; height:30px !important; }
+    textarea                      { height:130px; width:96%; margin:0px; color:#888888 !important; border-radius:0px !important; } }
+
+  .cloned { display:none }
+
+  // Body Content //
+  span                            { font-size:18px; color:#37A1E4; }
+  #wrapper                        { width:100%; border-top:1px solid #f2f2f2; 
+    .article                      { padding:80px 370px 120px 70px; border-bottom:1px solid #f2f2f2;
+      &.odd                       { background-color:#f9f9f9; border-bottom:1px solid #fff;
+        .page                     { }
+          .right-side             {  
+            .submit               { text-align:right;
+              input.btn           { width:100%; height:40px; font-weight:bold; } } 
+            ul.comments           { 
+              li.comment          { background-color:#fff} } } }
+      h1.title                    { font-size:90px; color:#000; font-weight:bold; letter-spacing:1px; margin:0 0 0 20px;
+        a                         { color:#000; text-decoration:none; text-shadow:#999999 0px 1px 0px;
+          &:hover                 { text-decoration:none; } } }
+      p.author                    { margin:5px 0 20px 20px; word-spacing:2px; }
+      .left-side                  { float:left; width:100%; display:inline;
+        p.description             { width:100%; font-size:30px; line-height:50px; min-width:500px; } 
+          img                     { width:100%; } }
+      .right-side                 { display:inline; position:absolute; right:0; border-left:1px solid #f2f2f2; border-bottom:1px solid #f2f2f2;
+        .comments-wrapper         { 
+          form.new-comment        { padding: 0 25px 25px 25px;
+          .field                  { }
+          .submit                 { text-align:right; width:100%;
+          input.btn               { width:100%; height:40px; font-weight:bold; } } } }
+        ul.comments               { max-height:470px; overflow-y:auto; min-width:200px; z-index:99;
+          li.comment              { width:82%; border-top:1px solid #f5f5f5; padding:40px 30px; 
+                                    color:rgba(0, 0, 0, 0.5); } }
+          a                         { color:#000; background-color:#f2f2f2; text-align:center; display:inline-block; padding: 10px 0px; width:100%; } } } }
+      .loading                    { display:none; }
 }
 
+@media screen and (max-width:961px) { 
+  #foo                              { display:block; } 
+  .field-new                        { width:100%;
+    input                           { padding:10px; font-size:18px; height:50px; }
+    label                           { font-size:24px; }
+    textarea                        { padding:15px; font-size:18px; width:100%; height:300px; } }
+  .field                            { padding:0px 0px 12px 0px;
+    input                           { width:90%; color:#888888 !important; border-radius:0px !important; height:30px !important; }
+    textarea                        { height:130px; width:90%; margin:0px; color:#888888 !important; border-radius:0px !important; } }
 
-// Buttons and Fields //
-.field-new                      { width:100%;
-  input                         { padding:10px; font-size:18px; height:50px; }
-  label                         { font-size:24px; }
-  textarea                      { padding:15px; font-size:18px; width:100%; height:300px; } }
-.field                          { padding:0px 0px 12px 0px; 
-  textarea                      { height:130px; width:96%; margin:0px; z-index:-1; } }
+    // Body Content //
+  span                              { font-size:18px; color:#37A1E4; }
+  #wrapper                          { width:100%; border-top:1px solid #f2f2f2; }
+    .article                        { border-bottom:1px solid #f2f2f2;
+      // &.odd                       { background-color:#f9f9f9; border-bottom:1px solid #fff; } }
+      //   .right-side               { 
+      //     .submit                 { text-align:right;
+      //       input.btn             { width:50%; height:40px; font-weight:bold; } } }
+      //         ul.comments           { 
+      //           li.comment          { background-color:#fff} } } }
+      h1.title                      { font-size:70px; color:#000; font-weight:bold; letter-spacing:1px; margin:30px 0 0 20px;
+        a                           { color:#000; text-decoration:none; text-shadow:#999999 0px 1px 0px;
+          &:hover                   { text-decoration:none; } } } 
+      p.author                      { margin:5px 0 20px 20px; word-spacing:2px; }
+      .left-side                    { float:left; width:100%; display:inline; }
+        p.description               { width:100%; font-size:30px; line-height:50px; min-width:500px; } 
+          img                       { width:100%; } }
+      .right-side                   {
+        .comments-wrapper           { width:50%; display:inline-block;
+          form.new-comment          { padding: 0 25px 50px 25px;
+          .field                    { }
+          .submit                   { 
+            input.btn               { width:94%; height:40px; font-weight:bold; } } } }
+        ul.comments                 { display:inline-block; width:45%; border-bottom:1px solid #f5f5f5; padding-top:20px;
+          li.comment                { width:92%; border-top:1px solid #f5f5f5; border-left:1px solid #f5f5f5; border-right:1px solid #f5f5f5; padding:16px;
+                                      color:rgba(0, 0, 0, 0.5); } }
+          a                         { text-align:center; display:block; padding: 10px 0px;color:#000; background-color:#f2f2f2; } 
+        .loading                    { display:none; } }
 
-.cloned { display:none }
-
-// Body Content //
-span                            { font-size:18px; color:#37A1E4; }
-#wrapper                        { width:100%; border-top:1px solid #f2f2f2; 
-  .article                      { padding:80px 370px 120px 70px; border-bottom:1px solid #f2f2f2;
-    &.odd                       { background-color:#f9f9f9; border-bottom:1px solid #fff;
-      .page                     { }
-        .right-side             {  
-          .submit               { text-align:right; padding:0px 0px 20px 0px; width:100%; border-bottom:2px dotted rgba(255, 255, 255, 0.9); 
-                                  margin:0px 0px 20px 0px;
-            input.btn           { width:100%; height:40px; font-weight:bold; } } 
-          ul.comments           { 
-            li.comment          { } } } }
-          // a                     { color:#000; background-color:#f2f2f2; text-align:center; display:inline-block; padding: 10px 0px; width:100%; } 
-    // h1.title                    { margin:55px 255px 0px 50px; font-size:90px; color:#000; font-weight:bold; letter-spacing:1px; line-height:55px;
-    h1.title                    { font-size:90px; color:#000; font-weight:bold; letter-spacing:1px; margin:0 0 0 20px;
-      a                         { color:#000; text-decoration:none; text-shadow:#999999 0px 1px 0px;
-        &:hover                 { text-decoration:none; } } }
-    // p.author                    { margin:20px 0px 25px 50px; }
-    p.author                    { margin:5px 0 20px 20px; word-spacing:2px; }
-    // .left-side                  { float:left; width:76%; padding:0px 40px;
-    //   img                       { width:100%; }
-    //   p.description             { width:100%; font-size:30px; line-height:50px; } }
-      .left-side                { float:left; width:100%;
-      img                       { width:100%; }
-      p.description             { width:100%; font-size:30px; line-height:50px;} }
-        // object                  { padding:0px 300px 0px 0px; } 
-    // .right-side                 { float:left; width:18%; 
-    .right-side                 { position:absolute; right:0; padding:0 30px 0 0; border-left:1px solid #f2f2f2; border-bottom:1px solid #f2f2f2;
-      .comments-wrapper         {
-        form.new-comment        { padding-left:20px;
-        .field                  { }
-        .submit                 { text-align:right; padding:0px 0px 20px 0px; width:100%;
-                                  margin:0px 0px 20px 0px; 
-        input.btn               { width:100%; height:40px; font-weight:bold; } } } }
-      ul.comments               { 
-        li.comment              { width:80%; border-top:1px solid #f5f5f5; padding:40px; 
-                                  color:rgba(0, 0, 0, 0.5); } }
-      a                         { color:#000; background-color:#f2f2f2; text-align:center; display:inline-block; padding: 10px 15px; width:100%; } } } }
-    .loading                    { display:none; }
+}

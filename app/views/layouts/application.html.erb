@@ -24,12 +24,6 @@
 
   <body> 
 
-<!--     <div id="notification" class="alert">
-      Some message
-    </div>
-
-    <a class="close" data-dismiss="alert" href="#notification">Close "notification"</a>
- -->
     <div id="notification" data-dismiss="alert">
       <% flash.each do |name, msg| %>
         <%= content_tag :div, msg, :id => "flash_#{name}"  %>
@@ -46,7 +40,8 @@
     <div id='fluid'>
       <div id='links'>
         <%= link_to 'Recent Posts',  root_path, :class => 'recent_posts' %> &middot;
-        <%= link_to 'About / CV', '#' %>
+        <%= link_to 'About / CV', '#' %> &middot;
+        <%= link_to 'Scroll Up', '#top' %>
         <% if can? :create, Article %>
            &middot; <%= link_to 'New Article', new_article_path %>
         <% end %>
@@ -56,8 +51,8 @@
     <div id="main" role="main">
       <div class="container">
           <%= yield %>
-      </div> <!--! end of .container -->
-    </div> <!--! end of #main -->
+      </div>
+    </div>
 
     <div id="user_nav">
       <% if current_user %>
