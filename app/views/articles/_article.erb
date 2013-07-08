@@ -1,89 +1,87 @@
 <div class='article clearfix <%= index.odd? ? "odd" : "even" %>'>
-  <div class='page'>
-    <h1 class="title">
-      <% if current_user.present? %>
-       <%= link_to article.title, (article), :class => "#{article.id}-#{article.title.parameterize}" %>
-      <% else %>
-        <%= article.title %>
-      <% end %>
-    </h1>
-    <p class="author">
-      <%= article.created_at.strftime("%d %b. %Y") %> &middot;
-        <% if article.tags.present? %>
-          <% article.tags.each do |tag| %>
-            <%= tag.name %>
-          <% end %> &middot;
+  <h1 class="title">
+    <% if current_user.present? %>
+     <%= link_to article.title, (article), :class => "#{article.id}-#{article.title.parameterize}" %>
+    <% else %>
+      <%= article.title %>
+    <% end %>
+  </h1>
+  <p class="author">
+    <%= article.created_at.strftime("%d %b. %Y") %> &middot;
+      <% if article.tags.present? %>
+        <% article.tags.each do |tag| %>
+          <%= tag.name %>
+        <% end %> &middot;
+      <% end %> 
+    <span><%= (article.comments.count.to_s + ' comments') %></span>
+  </p>
+
+  <div class='left-side clearfix'>
+    <p class='description'>
+      <% if article.images.present? %>
+        <% article.images.each do |image| %>
+          <%= image_tag image.image_url.to_s %>
         <% end %> 
-      <span><%= (article.comments.count.to_s + ' comments') %></span>
-    </p>
-
-    <div class='left-side clearfix'>
-      <p class='description'>
-        <% if article.images.present? %>
-          <% article.images.each do |image| %>
-            <%= image_tag image.image_url.to_s %>
-          <% end %> 
-        <% end %>
-
-        <% if article.videos.present? %>
-          <% article.videos.each do |video| %>
-            <object width="100%" height="575" type="movie" data="http://www.youtube.com/v/9DXL9vIUbWg?version=3&amp;hl=en_US&amp;rel=0">
-            <param name="movie" value="http://www.youtube.com/v/9DXL9vIUbWg?version=3&amp;hl=en_US&amp;rel=0"></param><param name="allowFullScreen" value="true" />
-            <param name="allowscriptaccess" value="always" />
-            <embed src="http://www.youtube.com/v/9DXL9vIUbWg?version=3&amp;hl=en_US&amp;rel=0" type="application/x-shockwave-flash" width="100%" height="575" allowscriptaccess="always" allowfullscreen="true"></embed>
-            </object>
-          <% end %> 
-        <% end %>
-
-        <%= article.content.html_safe %>
-      </p>
-    </div>
-
-    <div class='right-side'>
-      <div class='comments-wrapper'>
-        <%= form_for [article, Comment.new], :remote => true, :html => { :id => nil, :class => 'new-comment', :'data-type' => 'json' } do |f| %>
-          <% if article.errors.any? %>
-            <div id="error_explanation">
-              <h2>
-                <%= pluralize(article.errors.count, "error") %> prohibited this user from being saved:
-              </h2>
-              <ul>
-                <% article.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
-
-          <%= hidden_field_tag(:redirect_to, 'homepage') %>
-
-          <div class='field'>
-            <%= f.text_area :content, :placeholder => 'What is on your mind?', :id => 'test', :type => 'text' %>
-          </div>
-
-          <div class='submit'>
-            <%= f.submit 'Submit', :class => 'btn btn-success' %>
-          </div>
-
-        <% end %>
-      </div>
-
-      <% if article.comments.present? %>
-        <ul class='comments'>
-          <% article.comments.order('created_at DESC').limit(5).each do |comment| %>
-            <li class='comment'>
-              <span><%= comment.user.name + ' ' %></span><%=' says: '%><br />
-              <%= comment.content %>
-            </li>
-          <% end %>
-        </ul>
-
-        <% if article.comments.order('created_at DESC').count > 5 %>
-          <%= link_to 'more', '#', :class => 'more-comments', :'data-article-id' => article.id, :'data-offset' => 5, :'data-comments-count' => article.comments.count, :loading => 'target' %>
-          <div class="loading"></div>
-        <% end %>
       <% end %>
 
+      <% if article.videos.present? %>
+        <% article.videos.each do |video| %>
+          <object width="100%" height="650" type="movie" data="http://www.youtube.com/v/9DXL9vIUbWg?version=3&amp;hl=en_US&amp;rel=0">
+          <param name="movie" value="http://www.youtube.com/v/9DXL9vIUbWg?version=3&amp;hl=en_US&amp;rel=0"></param><param name="allowFullScreen" value="true" />
+          <param name="allowscriptaccess" value="always" />
+          <embed src="http://www.youtube.com/v/9DXL9vIUbWg?version=3&amp;hl=en_US&amp;rel=0" type="application/x-shockwave-flash" width="100%" height="575" allowscriptaccess="always" allowfullscreen="true"></embed>
+          </object>
+        <% end %> 
+      <% end %>
+
+      <%= article.content.html_safe %>
+    </p>
+  </div>
+
+  <div class='right-side'>
+    <div class='comments-wrapper'>
+      <%= form_for [article, Comment.new], :remote => true, :html => { :id => nil, :class => 'new-comment', :'data-type' => 'json' } do |f| %>
+        <% if article.errors.any? %>
+          <div id="error_explanation">
+            <h2>
+              <%= pluralize(article.errors.count, "error") %> prohibited this user from being saved:
+            </h2>
+            <ul>
+              <% article.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <%= hidden_field_tag(:redirect_to, 'homepage') %>
+
+        <div class='field'>
+          <%= f.text_area :content, :placeholder => 'What is on your mind?', :id => 'test', :type => 'text' %>
+        </div>
+
+        <div class='submit'>
+          <%= f.submit 'Submit', :class => 'btn btn-success' %>
+        </div>
+
+      <% end %>
     </div>
+
+    <% if article.comments.present? %>
+      <ul class='comments'>
+        <% article.comments.order('created_at DESC').limit(4).each do |comment| %>
+          <li class='comment'>
+            <span><%= comment.user.name + ' ' %></span><%=' says: '%><br />
+            <%= comment.content %>
+          </li>
+        <% end %>
+      </ul>
+
+      <% if article.comments.order('created_at DESC').count > 5 %>
+        <%= link_to 'more', '#', :class => 'more-comments', :'data-article-id' => article.id, :'data-offset' => 5, :'data-comments-count' => article.comments.count %>
+        <div class="loading"></div>
+      <% end %>
+    <% end %>
+
   </div>
 </div>

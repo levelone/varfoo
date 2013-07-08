@@ -3,7 +3,7 @@ class Articles::CommentsController < ApplicationController
 
   def index
     @article = Article.find(params[:article_id])
-    @comments = @article.comments.order('id DESC').limit(5).offset(params[:offset]).includes(:user)
+    @comments = @article.comments.order('id DESC').limit(4).offset(params[:offset]).includes(:user)
 
     respond_to do |format|
       format.json { render :json => { :comments => @comments }.to_json(:include => :user ) and return }
