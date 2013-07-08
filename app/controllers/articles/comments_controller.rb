@@ -30,10 +30,8 @@ class Articles::CommentsController < ApplicationController
       end
     else  
       respond_to do |format|
-        format.html { 
-          flash[:error] = "#{@comment.errors.full_messages.to_sentence}"
-          redirect_to root_path(:anchor => "#{@article.id}-#{@article.title.parameterize}")
-        }
+        format.html { flash[:error] = "#{@comment.errors.full_messages.to_sentence}"
+                      redirect_to root_path(:anchor => "#{@article.id}-#{@article.title.parameterize}") }
         format.json { render :json => @comment.errors.full_messages and return }
       end
     end

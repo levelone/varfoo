@@ -1,7 +1,12 @@
 class ArticlesController < ApplicationController
 	def index
     # @articles = Article.order('created_at DESC').page params[:page]
-    @articles = Article.order('id DESC').page(params[:page]).per(5)
+    @articles = Article.order('id DESC').includes(:comments => :user).includes(:tags).includes(:images).includes(:videos).page(params[:page]).per(4)
+    # added code for infinity scroll
+    respond_to do |format|
+      format.json { render :json => { :articles => @articles }.to_json(:include => [ :tags, :videos, :images, :comments => { :include => :user }] ) and return }
+      format.html
+    end
 	end
 
 	def edit
@@ -36,7 +41,7 @@ class ArticlesController < ApplicationController
     # @article.tags = Tag.where :name=> params[:article][:tag_list].split(', ')
 
 		if @article.save
-			redirect_to articles_path(@article)
+			redirect_to article_path(@article)
 		else
 			render :action => :new
 		end

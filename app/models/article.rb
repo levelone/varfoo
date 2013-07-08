@@ -19,16 +19,6 @@ class Article < ActiveRecord::Base
   validates :content, :length => { :maximum => 1000,
     :too_long => "%{count} characters is the maximum allowed" }
 
-# def find_dimensions
-#    debugger
-#    temporary = attachment.queued_for_write[:original]
-#    filename = temporary.path unless temporary.nil?
-#    filename = attachment.path if filename.blank?
-#    geometry = Paperclip::Geometry.from_file(filename)
-#    self.attachment_width  = geometry.width
-#    self.attachment_height = geometry.height
-#  end
-
   def self.tagged_with(name)
     Tag.find_by_name!(name).articles_id
   end

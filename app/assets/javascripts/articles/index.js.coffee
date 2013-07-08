@@ -18,11 +18,19 @@ jQuery ->
     left: 'auto' # Left position relative to parent in px
 
   $('form.new-comment').on 'ajax:success', (e, data, status, xhr) ->
+    console.log 'clicked'
     html = ''
+
+    if !$(this).parent('.comments-wrapper').siblings('.comments').length
+      html += '<ul>'
+
     html += '<li class="comment clearfix new">\n'
-    html += "<span>#{data.comment.user.name}: </span>#{data.comment.content}\n"
+    html += "<span>#{data.comment.user.name}</span> says:<br/>#{data.comment.content}\n"
     html += '</li>\n' 
 
+    if !$(this).parent('.comments-wrapper').siblings('.comments').length
+      html += '</ul>'
+    
     $(this).parent('.comments-wrapper').siblings('.comments').prepend(html)
     
     $('.new').fadeIn().removeClass('new').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: 'default'  }, 'slow')
@@ -46,7 +54,7 @@ jQuery ->
       for comment in data.comments 
         do ->
           html += '<li class="comment clearfix old">\n'
-          html += "<span>#{comment.user.name}: </span>#{comment.content}\n"
+          html += "<span>#{comment.user.name}</span> says:<br />#{comment.content}\n"
           html += '</li>\n'
 
 
@@ -64,5 +72,3 @@ jQuery ->
     parent_container.attr('data-offset', parseInt(parent_container.attr('data-offset')) + 5)
 
     e.preventDefault()
-
-  # $('.loading').spin(spinner_options)
