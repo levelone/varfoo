@@ -122,21 +122,18 @@ jQuery ->
                 all_articles_fetched = true
               else
                 if data.articles.length || !all_articles_fetched 
+                  index = 0
                   for article in data.articles
                     do ->
+                      index += 1
 
                       html = ''
-                      html += "<div class='article clearfix even'>"
+                      html += "<div class='article clearfix #{if ((index % 2) > 0) then 'even' else 'odd'}'>"
                       html += "<div class='page'>"
                       html += "<h1 class='title'>"
-
-                      # $.get "sessions/#{user.id}", (data) ->
-                      #   if user.id present
-                      #     console.log data.length
                       html += "<a class='#{article.id}-#{article.title}' href='/articles/#{article.id}'>#{article.title}</a>"
-
                       html += "</h1>\n"
-                      html += "<p class='author'>#{article.created_at} &middot "
+                      html += "<p class='author'>#{Date.today(Date.parse(article.created_at)).toString('dd MMM. yyyy')} &middot "
 
                       for tag in article.tags 
                         do ->
@@ -150,12 +147,10 @@ jQuery ->
                         do ->
                           html += "<img src='#{image.image_url.url}' />"
 
-
                       for video in article.videos
                         do ->
                           html += "#{video.video_url}"
                       
-
                       html += "#{article.content}"
                       html += "</p>"
                       html += "</div>"
@@ -166,7 +161,6 @@ jQuery ->
                                <input type='hidden' value='✓' name='utf8' name='authenticity_token'>
                                <input type='hidden' value='IOAjsyjgp9Uql2VnhCqy64SY34pl79Tg8Pb0ctuFr/U=' name='authenticity_token'>
                                </div>"
-
                       html += "<div class='field'>
                                <textarea id='test' type='text' rows='20' placeholder='What is on your mind?' name='comment[content]' cols='40'></textarea>
                                </div>"
@@ -176,13 +170,9 @@ jQuery ->
                       html += "<input id='redirect_to' type='hidden' value='homepage' name='redirect_to'>"
                       html += "</div>"
 
-
                       $.get "articles/#{article.id}/comments", (data) ->
                         if data.comments.length
                           html += "<ul class='comments'>\n"
-
-                        # if article.comments.length > 5
-                          #write count code here...
 
                         for comment in data.comments
                           do ->
@@ -196,9 +186,19 @@ jQuery ->
                         html += "<a class='more-comments' loading='target' data-offset='5' data-comments-count='#{article.comments.length}'
                                  data-article-id='#{article.id}' href='#'>more</a>"
                         html += "<div class='loading'></div>"
-                      
                         html += "</div>"
                         html += "</div>"
+
+                        # Extra code for resized-author class
+                        html += "<ul class='resized-author'>"
+                        html += "<li class='resized-date first'>#{Date.today(Date.parse(article.created_at)).toString('dd MMM. yyyy')}</li>"
+
+                        for tag in article.tags 
+                          do ->
+                            html += "<li class='resized-tags'>#{tag.name}</li>"
+
+                        html += "<li class='resized-comments'>#{article.comments.length} Comments</li>"
+                        html += "</ul>"
                         html += "</div>"
                         html += "\n"
 

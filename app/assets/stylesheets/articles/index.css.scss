@@ -1,0 +1,101 @@
+// Place all the styles related to the articles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// @media screen and (min-width:1260px) { 
+//   #foo                              { display:block; } 
+// }
+
+@media screen and (min-width:960px) { 
+
+
+  tr:nth-of-type(odd) {
+    background-color:#E3E3E3;
+  }
+
+  #foo                            { display:none; }
+
+  // Buttons and Fields //
+  .field-new                      { width:100%;
+    input                         { padding:10px; font-size:18px; height:50px; }
+    label                         { font-size:24px; }
+    textarea                      { padding:15px; font-size:18px; width:100%; height:300px; } }
+  .field                          { padding:0px 0px 12px 0px;
+    input                         { width:96%; color:#888888 !important; border-radius:0px !important; height:30px !important; }
+    textarea                      { height:130px; width:96%; margin:0px; color:#888888 !important; border-radius:0px !important; } }
+
+  .cloned { display:none }
+
+  // Body Content //
+  span                            { font-size:18px; color:#37A1E4; }
+  #wrapper                        { width:100%; border-top:1px solid #f2f2f2; 
+    .article                      { padding:80px 370px 120px 70px; border-bottom:1px solid #f2f2f2;
+      &.odd                       { background-color:#f9f9f9; border-bottom:1px solid #fff;
+        .right-side               {  
+          .submit                 { text-align:right;
+            input.btn             { width:100%; height:40px; font-weight:bold; } } 
+          ul.comments             { 
+            li.comment            { background-color:#fff} } } }
+      h1.title                    { font-size:90px; color:#000; font-weight:bold; letter-spacing:1px;
+        a                         { color:#000; text-decoration:none; text-shadow:#999999 0px 1px 0px;
+          &:hover                 { text-decoration:none; } } }
+      p.author                    { margin:5px 0 20px 0; word-spacing:2px; }
+      .left-side                  { float:left; width:100%; display:inline;
+        p.description             { width:100%; font-size:30px; line-height:50px; min-width:500px; } 
+          img                     { width:100%; } }
+      .right-side                 { display:inline; position:absolute; right:0; border-left:1px solid #f2f2f2; border-bottom:1px solid #f2f2f2;
+        .comments-wrapper         { 
+          form.new-comment        { padding: 0 25px 25px 25px;
+          .field                  { }
+          .submit                 { text-align:right; width:100%;
+          input.btn               { width:100%; height:40px; font-weight:bold; } } } }
+        ul.comments               { max-height:470px; overflow-y:auto; min-width:200px; z-index:99;
+          li.comment              { width:82%; border-top:1px solid #f5f5f5; padding:40px 30px; 
+                                    color:rgba(0, 0, 0, 0.5); } }
+          a                       { color:#000; background-color:#f2f2f2; text-align:center; display:inline-block; padding: 10px 0px; width:100%; } } } }
+      .loading                    { display:none; }
+      ul.resized-author           { display:none;
+        li                        { display:none; } }
+}
+
+@media screen and (max-width:960px) { 
+  #foo                              { display:block; } 
+  .field-new                        { width:100%;
+    input                           { padding:10px; font-size:18px; height:50px; }
+    label                           { font-size:24px; }
+    textarea                        { padding:15px; font-size:18px; width:100%; height:300px; } }
+  .field                            { padding:0px 0px 12px 0px;
+    input                           { width:90%; color:#888888 !important; border-radius:0px !important; height:30px !important; }
+    textarea                        { height:130px; width:90%; margin:0px; color:#888888 !important; border-radius:0px !important; } }
+
+    // Body Content //
+  span                              { font-size:18px; color:#37A1E4; }
+  #wrapper                          { width:100%; border-top:1px solid #f2f2f2; }
+    .article                        { border-bottom:1px solid #f2f2f2;
+      &.odd                         { background-color:#f9f9f9; border-bottom:1px solid #fff; }
+      h1.title                      { font-size:70px; color:#000; font-weight:bold; letter-spacing:1px; margin:80px 0 0 20px; min-width:500px;
+        a                           { color:#000; text-decoration:none; text-shadow:#999999 0px 1px 0px;
+          &:hover                   { text-decoration:none; } } } 
+      p.author                      { display:none; }
+      .left-side                    { float:left; width:100%; display:inline; min-width:500px; 
+        p.description               { width:96%; font-size:30px; line-height:50px; margin:10px 20px; 
+          img                       { width:100%; } } }
+      a.resize-comments             { text-decoration:none; padding:16px; font-size:22px; background-color:#000; color:#fff }
+      .right-side                   {
+        .comments-wrapper           { display:none;
+          input.btn                 { width:94%; height:40px; font-weight:bold; } }
+        ul.comments                 { display:none;
+          li.comment                { display:none; } }
+        a                           { display:none; } }
+      ul.resized-author             { cursor:default; color:#fff; min-width:550px; 
+        li                          { display:inline-block; padding:15px 20px; background-color:#000; font-size:22px; margin:15px 0 50px 7px;
+          &:hover                   { background-color: rgba(0, 0, 0, 0.8); transition: color 220ms ease-in-out 0s; transition: border 120ms ease-in-out 0s; } }  
+        li.first                    { margin:15px 0 50px 20px; } } }
+     
+        // ul.comments                 { display:inline-block; width:45%; border-bottom:1px solid #f5f5f5; padding-top:20px;
+        //   li.comment                { width:92%; border-top:1px solid #f5f5f5; border-left:1px solid #f5f5f5; border-right:1px solid #f5f5f5; padding:16px;
+        //                               color:rgba(0, 0, 0, 0.5); } }
+        // a                           { text-align:center; display:block; padding: 10px 0px;color:#000; background-color:#f2f2f2; } 
+        // .loading                    { display:none; } }
+
+}
