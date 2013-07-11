@@ -66,7 +66,7 @@ class Articles::CommentsController < ApplicationController
 
     @comment.destroy
 
-    redirect_to article_comments_path, :notice => 'Comment removed!'
+    redirect_to root_path, :notice => 'Comment removed!'
   end
 
   # private

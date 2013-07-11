@@ -62,7 +62,7 @@ Notification section
 // #logo                          { background: none repeat scroll 0 0 #f2f2f2; width:100%; margin:0 auto; text-align:center; 
 // 	                               padding:65px 0px; font-size:48px; letter-spacing:8px; color:#000; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 //                                  border-bottom:2px solid #f2f2f2; }
-#notification #flash_notice    { background-color:yellow; text-align:center; font-size:22px; padding: 20px 0px; }
+#notification #flash_notice    { background-color:yellow; text-align:center; padding: 10px 0px; position:absolute; width:100%; }
 #notification #flash_error     { background-color:red; text-align:center; padding: 20px 0px; color:#fff; font-weight:bold; }
 #links                         { width:100%; text-align:center; padding:24px 0px; border-bottom:1px solid #f2f2f2;
       a                        { display:inline-block; margin:0 50px; color: rgba(0, 0, 0, 0.5); font-size:20px; transition: color 220ms ease-in-out 0s; transition: border 120ms ease-in-out 0s;

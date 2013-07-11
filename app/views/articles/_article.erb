@@ -1,7 +1,7 @@
 <div class='article clearfix <%= index.odd? ? "odd" : "even" %>'>
   <h1 class="title">
     <% if current_user.present? %>
-      <%= link_to article.title, (article), :class => "#{article.id}-#{article.title.parameterize}" %>
+      <%= link_to article.title, (article), :class => "#{article.id}-#{article.title.parameterize}", :'data-current-user' => true %>
     <% else %>
       <%= article.title %>
     <% end %>
@@ -69,14 +69,19 @@
       <ul class='comments'>
         <% article.comments.order('created_at DESC').limit(4).each do |comment| %>
           <li class='comment'>
-            <span><%= "#{comment.name} " %></span><%=' says: '%><br />
+            <% if current_user.present? %>
+              <p class='comment_delete'>
+                <%= link_to image_tag("button_cancel.png"), [comment.article, comment], :class => 'icon', :confirm => 'Are you sure?',   :method => :delete, :'data-current-user' => true %>
+              </p>
+            <% end %>
+            <span><%= "#{comment.name} " %></span><%=' says, '%><br /><br />
             <%= comment.content %>
           </li>
         <% end %>
       </ul>
     <% end %>
-    <% if article.comments.order('created_at DESC').count > 5 %>
-      <%= link_to 'more', '#', :class => 'more-comments', :'data-article-id' => article.id, :'data-offset' => 5, :'data-comments-count' => article.comments.count %>
+    <% if article.comments.order('created_at DESC').count > 4 %>
+      <%= link_to 'more', '#', :class => 'more-comments', :'data-article-id' => article.id, :'data-offset' => 4, :'data-comments-count' => article.comments.count %>
       <div class="loading"></div>
     <% end %>
   </div>

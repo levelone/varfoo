@@ -2,6 +2,7 @@ class ArticlesController < ApplicationController
 	def index
     # @articles = Article.order('created_at DESC').page params[:page]
     @articles = Article.order('id DESC').includes(:comments).includes(:tags).includes(:images).includes(:videos).page(params[:page]).per(4)
+
     # added code for infinity scroll
     respond_to do |format|
       format.json { render :json => { :articles => @articles }.to_json(:include => [:tags, :videos, :images, :comments] ) and return }

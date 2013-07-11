@@ -25,9 +25,9 @@ jQuery ->
     if !$(this).parent('.comments-wrapper').siblings('.comments').length
       html += '<ul>'
 
-    html += '<li class="comment clearfix new">\n'
+    html += "<li class='comment clearfix new'>\n"
     html += "<span>#{data.comment.name}</span> says:<br/>#{data.comment.content}\n"
-    html += '</li>\n' 
+    html += "</li>\n" 
 
     if !$(this).parent('.comments-wrapper').siblings('.comments').length
       html += '</ul>'
@@ -55,10 +55,18 @@ jQuery ->
 
       for comment in data.comments 
         do ->
-          html += '<li class="comment clearfix old">\n'
-          html += "<span>#{comment.name}</span> says:<br />#{comment.content}\n"
-          html += '</li>\n'
-
+          if $('p.comment_delete a').attr('data-current-user')
+            html += '<li class="comment clearfix old">\n'
+            html += "<p class='comment_delete'>"
+            html += "<a class='icon' rel='nofollow' data-method='delete' data-confirm='Are you sure?' href='articles/#{article_id}/comments/#{comment.id}'>"
+            html += "<img src='/assets/button_cancel.png' alt='Button_cancel'>"
+            html += "</a></p>"
+            html += "<span>#{comment.name}</span> says,<br /><br /> #{comment.content}\n"
+            html += '</li>\n'
+          else
+            html += '<li class="comment clearfix old">\n'
+            html += "<span>#{comment.name}</span> says,<br /><br /> #{comment.content}\n"
+            html += '</li>\n'
 
       parent_container.parent('.right-side').find('.comments').append(html)
       $('.old').fadeIn().removeClass('old').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: '#fff' }, 'fast')
@@ -71,7 +79,7 @@ jQuery ->
       if parseInt(parent_container.attr('data-offset')) > parseInt(parent_container.attr('data-comments-count'))
         parent_container.css('display', 'none')
       
-    parent_container.attr('data-offset', parseInt(parent_container.attr('data-offset')) + 5)
+    parent_container.attr('data-offset', parseInt(parent_container.attr('data-offset')) + 4)
     e.preventDefault()
 
   $('form').on 'click', '.remove_fields', (event) ->
@@ -131,7 +139,12 @@ jQuery ->
                       html += "<div class='article clearfix #{if ((index % 2) > 0) then 'even' else 'odd'}'>"
                       html += "<div class='page'>"
                       html += "<h1 class='title'>"
-                      html += "<a class='#{article.id}-#{article.title}' href='/articles/#{article.id}'>#{article.title}</a>"
+
+                      if $('.title a').attr('data-current-user')
+                        html += "<a class='#{article.id}-#{article.title}' href='/articles/#{article.id}' data-current-user='true'>#{article.title} </a>"
+                      else
+                        html += "#{article.title}"
+
                       html += "</h1>\n"
                       html += "<p class='author'>#{Date.today(Date.parse(article.created_at)).toString('dd MMM. yyyy')} &middot "
 
@@ -177,13 +190,22 @@ jQuery ->
                         for comment in data.comments
                           do ->
                             html += "<li class='comment'>\n"
-                            html += "<span>#{comment.name}</span> says:<br/>#{comment.content}\n"
-                            html += "</li>\n"
+
+                            if $('p.comment_delete a').attr('data-current-user')
+                              html += "<p class='comment_delete'>"
+                              html += "<a class='icon' rel='nofollow' data-method='delete' data-confirm='Are you sure?' href='/articles/#{article.id}/comments/#{comment.id}'>"
+                              html += "<img src='/assets/button_cancel.png' alt='Button_cancel'>"
+                              html += "</a></p>"
+                              html += "<span>#{comment.name}</span> says,<br/><br/>#{comment.content}\n"
+                              html += "</li>\n"
+                            else
+                              html += "<span>#{comment.name}</span> says,<br/><br/>#{comment.content}\n"
+                              html += "</li>\n"
 
                         if data.comments.length
                           html += "</ul>\n"
 
-                        html += "<a class='more-comments' loading='target' data-offset='5' data-comments-count='#{article.comments.length}'
+                        html += "<a class='more-comments' data-offset='4' data-comments-count='#{article.comments.length}'
                                  data-article-id='#{article.id}' href='#'>more</a>"
                         html += "<div class='loading'></div>"
                         html += "</div>"
