@@ -12,7 +12,6 @@ class ArticlesController < ApplicationController
 
 	def edit
   	@article = Article.find params[:id]
-    authorize! :create, @article
 	end
 
   def update
@@ -22,7 +21,7 @@ class ArticlesController < ApplicationController
   end
 
 	def show
-    if current_user.admin?
+    if current_user.present?
     	@article = Article.find params[:id]
     else
       flash[:error] = "#{@article.errors.full_messages.to_sentence}"
@@ -32,12 +31,20 @@ class ArticlesController < ApplicationController
 
   def new
   	@article = Article.new
-  	authorize! :create, @article
   end
 
   def create
-    @article = Article.new (params[:article])
-    @article.user_id = current_user.id
+    @article = current_user.articles.new (params[:article])
+    # @article.user_id = current_user.id
+
+    authentication = current_user.authentications.where(:provider => 'twitter').first
+
+    twitter_client = Twitter::Client.new(
+      :oauth_token => authentication.token,
+      :oauth_token_secret => authentication.secret
+    )
+
+    twitter_client.update(@article.title)
 
     # @article.tags = Tag.where :name=> params[:article][:tag_list].split(', ')
 
@@ -53,6 +60,5 @@ class ArticlesController < ApplicationController
 
 		@article.destroy
 		redirect_to articles_path, :notice => 'Article Removed'
-    authorize! :destroy, @article
   end
 end

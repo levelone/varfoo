@@ -2,14 +2,15 @@ class User < ActiveRecord::Base
   attr_accessible :name, :password, :password_confirmation, :admin
   
   has_many :articles, :dependent => :destroy
+  has_many :authentications, :dependent => :destroy
 
   attr_accessor :password
   before_save :encrypt_password
 
-  validates_confirmation_of :password 
-  validates_presence_of :password, :on => :create
+  # validates_confirmation_of :password 
+  # validates_presence_of :password, :on => :create
   validates_presence_of :name
-  validates_uniqueness_of :name
+  # validates_uniqueness_of :name
 
   def self.authenticate(name, password)
     user = find_by_name(name)

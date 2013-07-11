@@ -42,7 +42,7 @@
         <%= link_to 'Recent Posts',  root_path, :class => 'recent_posts' %> &middot;
         <%= link_to 'About / CV', '#', :class => 'about_cv' %> &middot;
         <%= link_to 'Scroll Up', '#top', :class => 'scroll_up' %>
-        <% if can? :create, Article %>
+        <% if current_user.present? %>
            &middot; <%= link_to 'New Article', new_article_path %>
         <% end %>
       </div>
@@ -62,8 +62,7 @@
         </h4>
       <% else %>
         <h4>
-          <%= link_to "Sign up", sign_up_path %> or
-          <%= link_to "Log in", log_in_path %>
+          <%= link_to "Sign in with Twitter", "/auth/twitter" %>
         </h4>
       <% end %>
     </div>
