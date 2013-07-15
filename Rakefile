@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-MarcSeifert::Application.load_tasks
+Varfoo::Application.load_tasks

@@ -15,7 +15,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: marc_seifert_development
+  database: varfoo_development
   pool: 5
   username: postgres
   password: qwerty
@@ -42,7 +42,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: marc_seifert_test
+  database: varfoo_test
   pool: 5
   username: postgres
   password: qwerty
@@ -51,7 +51,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: marc_seifert_production
+  database: varfoo_production
   pool: 5
   username: postgres
   password: qwerty

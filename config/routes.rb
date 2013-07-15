@@ -1,4 +1,4 @@
-MarcSeifert::Application.routes.draw do
+Varfoo::Application.routes.draw do
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
 
