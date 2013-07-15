@@ -46,8 +46,6 @@ class ArticlesController < ApplicationController
 
     twitter_client.update(@article.title)
 
-    # @article.tags = Tag.where :name=> params[:article][:tag_list].split(', ')
-
 		if @article.save
 			redirect_to article_path(@article)
 		else
