@@ -25,15 +25,10 @@
 
 	<%= link_to 'Back to Articles', articles_path %> &middot;
 
-	<% if can? :update, @article %>
-	  <%= link_to 'Edit', edit_article_path(@article) %> &middot;
-	<% end %>
+    <%= link_to 'Edit', edit_article_path(@article) %> &middot;
 
-
-	<% if can? :destroy, @article %>
-	  <%= link_to 'Delete', article_path(@article), :confirm => "Are you sure you want to delete", :method => :delete %> &middot;
-	<% end %>
-
+	<%= link_to 'Delete', article_path(@article), :confirm => "Are you sure you want to delete", :method => :delete %> &middot;
+	
 	<%= link_to 'View Comments', article_comments_path(@article) %>
 	
 </div>

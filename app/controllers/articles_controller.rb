@@ -44,7 +44,7 @@ class ArticlesController < ApplicationController
       :oauth_token_secret => authentication.secret
     )
 
-    twitter_client.update(@article.title)
+    twitter_client.update('Posted: "' + @article.title + '" ... on http://www.Varfoo.com #' + @article.tag_list + '')
 
 		if @article.save
 			redirect_to article_path(@article)

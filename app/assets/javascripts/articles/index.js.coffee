@@ -137,7 +137,6 @@ jQuery ->
 
                       html = ''
                       html += "<div class='article clearfix #{if ((index % 2) > 0) then 'even' else 'odd'}'>"
-                      html += "<div class='page'>"
                       html += "<h1 class='title'>"
 
                       if $('.title a').attr('data-current-user')
@@ -175,6 +174,9 @@ jQuery ->
                                <input type='hidden' value='IOAjsyjgp9Uql2VnhCqy64SY34pl79Tg8Pb0ctuFr/U=' name='authenticity_token'>
                                </div>"
                       html += "<div class='field'>
+                               <input id='comment_name' type='text' size='30' placeholder='Nickname' name='comment[name]'>
+                               </div>"
+                      html += "<div class='field'>
                                <textarea id='test' type='text' rows='20' placeholder='What is on your mind?' name='comment[content]' cols='40'></textarea>
                                </div>"
                       html += "<div class='submit'>
@@ -205,11 +207,11 @@ jQuery ->
                         if data.comments.length
                           html += "</ul>\n"
 
-                        html += "<a class='more-comments' data-offset='4' data-comments-count='#{article.comments.length}'
-                                 data-article-id='#{article.id}' href='#'>more</a>"
-                        html += "<div class='loading'></div>"
-                        html += "</div>"
-                        html += "</div>"
+                        if article.comments.length > 4 
+                          html += "<a class='more-comments' data-offset='4' data-comments-count='#{article.comments.length}'
+                                   data-article-id='#{article.id}' href='#'>more</a>"
+                          html += "<div class='loading'></div>"
+                          html += "</div>"
 
                         # Extra code for resized-author class
                         html += "<ul class='resized-author'>"
