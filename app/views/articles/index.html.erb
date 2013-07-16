@@ -1,9 +1,7 @@
 <div id="foo"></div>
 
 <div id='wrapper' data-article-page="1">
-  
   <% @articles.each_with_index do |article, index| %>
     <%= render 'articles/article', :article => article, :index => index %>
 	<% end %>
-
 </div>

@@ -1,10 +1,8 @@
 <div class='article clearfix <%= index.odd? ? "odd" : "even" %>'>
+  <div class="arrow-right">
+  </div>
   <h1 class="title">
-    <% if current_user.present? %>
-      <%= link_to article.title, (article), :class => "#{article.id}-#{article.title.parameterize}", :'data-current-user' => true %>
-    <% else %>
-      <%= article.title %>
-    <% end %>
+    <%= link_to article.title, (article), :class => "#{article.id}-#{article.title.parameterize}", :'data-current-user' => true %>
   </h1>
   <p class="author">
     <%= article.created_at.strftime("%d %b. %Y") %> &middot;
@@ -65,21 +63,19 @@
       <% end %>
     </div>
 
-    <% if article.comments.present? %>
-      <ul class='comments'>
-        <% article.comments.order('created_at DESC').limit(4).each do |comment| %>
-          <li class='comment'>
-            <% if current_user.present? %>
-              <p class='comment_delete'>
-                <%= link_to image_tag("button_cancel.png"), [comment.article, comment], :class => 'icon', :confirm => 'Are you sure?',   :method => :delete, :'data-current-user' => true %>
-              </p>
-            <% end %>
-            <span><%= "#{comment.name} " %></span><%=' says, '%><br /><br />
-            <%= comment.content %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
+    <ul class='comments'>
+      <% article.comments.order('created_at DESC').limit(4).each do |comment| %>
+        <li class='comment'>
+          <% if current_user.present? && current_user.admin %>
+            <p class='comment_delete'>
+              <%= link_to image_tag("button_cancel.png"), [comment.article, comment], :class => 'icon', :confirm => 'Are you sure?',   :method => :delete, :'data-current-user' => true %>
+            </p>
+          <% end %>
+          <span><%= "#{comment.name} " %></span><%=' says, '%><br /><br />
+          <%= comment.content %>
+        </li>
+      <% end %>
+    </ul>
     <% if article.comments.order('created_at DESC').count > 4 %>
       <%= link_to 'more', '#', :class => 'more-comments', :'data-article-id' => article.id, :'data-offset' => 4, :'data-comments-count' => article.comments.count %>
       <div class="loading"></div>

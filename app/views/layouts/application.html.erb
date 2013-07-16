@@ -5,8 +5,9 @@
 <!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
   <head>
+    <%= favicon_link_tag 'vf2.png' %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Myapp" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Varfoo" %></title>
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Uncomment to make IE8 render like IE7 -->
@@ -42,7 +43,7 @@
         <%= link_to 'Recent Posts',  root_path, :class => 'recent_posts' %> &middot;
         <%= link_to 'About / CV', '#', :class => 'about_cv' %> &middot;
         <%= link_to 'Scroll Up', '#top', :class => 'scroll_up' %>
-        <% if current_user.present? %>
+        <% if current_user.present? && current_user.admin %>
            &middot; <%= link_to 'New Article', new_article_path %>
         <% end %>
       </div>

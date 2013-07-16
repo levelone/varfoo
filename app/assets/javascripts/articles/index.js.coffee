@@ -95,7 +95,7 @@ jQuery ->
 
   # Sticky Navagation Bar to Scroll down
   $(window).scroll ->
-    $("#fluid").css "top", $(window).scrollTop()  if $(window).scrollTop() > 281
+    $("#fluid").css "top", $(window).scrollTop()  if $(window).scrollTop() > 370
 
   # Scroll Up
   $("a[href='#top']").click ->
