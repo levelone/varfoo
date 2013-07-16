@@ -8,7 +8,7 @@
 
 # Create an admin user
 User.create(
-  :name	=> 'Marc',
+  :name	=> 'marcseifert',
   :admin => true,
-  :password => 'password'
+  :password => 'yanimakieizzy137'
 )
