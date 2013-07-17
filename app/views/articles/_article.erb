@@ -1,6 +1,4 @@
 <div class='article clearfix <%= index.odd? ? "odd" : "even" %>'>
-  <div class="arrow-right">
-  </div>
   <h1 class="title">
     <%= link_to article.title, (article), :class => "#{article.id}-#{article.title.parameterize}", :'data-current-user' => true %>
   </h1>
@@ -28,7 +26,7 @@
         <% end %> 
       <% end %>
       <%= article.content.html_safe %>
-      
+
       <ul class='resized-author'>
         <li class='resized-date first'>
           <%= article.created_at.strftime("%d %b. %Y") %>

@@ -1,4 +1,4 @@
-.container                             { background-color:#f2f2f2; min-width:630px; }
+.container                             { background-color:#f2f2f2; }
 #show-wrapper                          { color:#000; margin:50px 40px 10px 40px;
   h1.title                             { font-size:75px; color:#000; font-weight:bold; letter-spacing:1px; text-decoration: none;
                                          text-shadow: 0 1px 0 #999999; } 
@@ -6,7 +6,7 @@
   p.content                            { font-size:25px; margin:20px 0 0 0; line-height:42px; word-spacing:2px; 
     a                                  { text-decoration:none; } }
   a.return                             { font-size:20px; text-decoration:none; } 
-	ul.resized-author-show               { cursor:default; color:#fff; min-width:630px; margin:20px 0 40px 0;
+	ul.resized-author-show               { cursor:default; color:#fff;  margin:20px 0 40px 0;
     li.resized-date-show               { margin:0; }
     li.resized-tags-show               { margin:0; }
     li.resized-comments-show           { margin:0; }
@@ -18,14 +18,14 @@
 }
 
 @media screen and (max-width:1040px) { 
-#user_nav                              { min-width:600px; background-color:#fff; }
+#user_nav                              { background-color:#fff; }
 #show-wrapper                          { color:#000; margin:0px;
   h1.title                             { font-size:65px; color:#000; font-weight:bold; letter-spacing:1px; margin:30px 0 0 0; min-width:630px; }
   p.author                             { font-size:18px; margin:0 0 0 8px; }
-  ul.resized-author-show               { cursor:default; color:#fff; min-width:630px; 
-    li.resized-date-show               { margin:0;  }
-    li.resized-tags-show               { margin:0;  }
-    li.resized-comments-show           { margin:0;  }
+  ul.resized-author-show               { cursor:default; color:#fff; 
+    li.resized-date-show               { margin:0; }
+    li.resized-tags-show               { margin:0; }
+    li.resized-comments-show           { margin:0; }
     li.resized-back-show               { margin:0; }
     li                                 { display:inline-block; padding:15px 20px; background-color:#000; font-size:20px; 
       &:hover                          { transition: color 220ms ease-in-out 0s; transition: border 120ms ease-in-out 0s; color:#37A1E4; } } } }
