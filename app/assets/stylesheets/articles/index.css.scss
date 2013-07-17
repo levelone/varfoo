@@ -97,7 +97,7 @@
   #wrapper                          { width:100%;
     .article                        { padding:50px 0px 0px 0px ; border-bottom:1px solid #f2f2f2; background-color:#f9f9f9;
       &.odd                         { background-color:#fff; border-bottom:1px solid #fff; }
-      h1.title                      { font-size:55px; color:#000; font-weight:bold; margin:0 0 9px 20px;
+      h1.title                      { font-size:52px; color:#000; font-weight:bold; margin:0 0 9px 20px; letter-spacing:0px;
         a                           { color:#000; text-decoration:none; text-shadow:#999999 0px 1px 0px;
           &:hover                   { text-decoration:none; border-bottom:4px solid #000; border-top:4px solid #000; transition: color 220ms ease-in-out 0s; transition: border 120ms ease-in-out 0s; } } } 
       p.author                      { display:none; }
