@@ -55,24 +55,25 @@ body { position:relative; font-family:proximanova-light; } /* no .ttf */
 Notification section
 ------------------------------------------ */
 
-#header2                       { background-image:url('01818_pleasantsymmetry_1920x1080.jpg'); background-size:100%; background-position:center; background-repeat:no-repeat; padding:160px 0px;  }
-#logo                          { text-align:center; font-family:Delikatessen;
-                                 font-size:63pt; letter-spacing:3px; color:#fff; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25); min-width:480px; }
-  #notification #flash_notice  { background-color:yellow; text-align:center; padding: 10px 0px; position:absolute; width:100%; }
-#notification #flash_error     { background-color:red; text-align:center; padding: 20px 0px; color:#fff; font-weight:bold; }
-#links                         { width:100%; text-align:center; padding:24px 0px; border-bottom:1px solid #f2f2f2; box-shadow:0px 1px 12px #999;
-      a                        { display:inline-block; margin:5px 50px; color: rgba(0, 0, 0, 0.5); font-size:20px; transition: color 220ms ease-in-out 0s; transition: border 120ms ease-in-out 0s;
-        &:hover                { text-decoration:none; border-bottom:4px solid #000; color:#000; } } }
 
-#fluid                         { background-color:#fff; position:absolute; z-index:100; top:375px; width:100%; } 
+#header2                       { background-image:url('01818_pleasantsymmetry_1920x1080.jpg'); background-size:100%; background-position:center bottom; background-repeat:no-repeat; padding:135px 0; min-width:630px; }
+#logo                          { text-align:center; font-family:Delikatessen;
+                                 font-size:63pt; letter-spacing:3px; color:#fff; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25); min-width:630px; }
+#notification #flash_notice    { background-color:yellow; text-align:center; padding: 10px 0px; position:absolute; width:100%; }
+#notification #flash_error     { background-color:red; text-align:center; padding: 20px 0px; color:#fff; font-weight:bold; }
+#links                         { position:relative; text-align:center; padding:24px 0px; border-bottom:1px solid #f2f2f2; box-shadow:0px -1px 7px #999; min-width:630px;
+      a                        { display:inline; margin:5px 50px; color: rgba(0, 0, 0, 0.5); font-size:20px; transition: color 220ms ease-in-out 0s; transition: border 120ms ease-in-out 0s;
+        &:hover                { text-decoration:none; border-bottom:3px solid #000; color:#000; } } }
+
+#fluid                         { background-color:#fff; top:375px; } 
 .container                     { width:100%; }
 
 @media screen and (max-width:1040px) { 
-#fluid                         { background-color:#fff; position:static; top:375px; width:100%; }
+#fluid                         { background-color:#fff; position:static; top:375px; }
 #links                         { }
 embed                          { height:500px; }
 //  #fluid                     { background-color:#fff; z-index:100; top:350px; width:100%; } 
-//  #links                     { width:100%; text-align:center; padding:24px 0px; border-bottom:1px solid #f2f2f2;
+//  #links                     { width:100%; text-align:center; padding:20px 0px; border-bottom:1px solid #f2f2f2;
 //    a                        { display:inline-block; margin:5px 50px; color: rgba(0, 0, 0, 0.5); font-size:20px; transition: color 220ms ease-in-out 0s; transition: border 120ms ease-in-out 0s;
 //      &:hover                { text-decoration:none; border-bottom:4px solid #000; color:#000; } } }
 }

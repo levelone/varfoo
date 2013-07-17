@@ -10,5 +10,5 @@
 User.create(
   :name	=> 'marcseifert',
   :admin => true,
-  :password => 'yanimakieizzy137'
+  :password => ''
 )

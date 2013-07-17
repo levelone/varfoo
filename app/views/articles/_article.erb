@@ -28,6 +28,22 @@
         <% end %> 
       <% end %>
       <%= article.content.html_safe %>
+      
+      <ul class='resized-author'>
+        <li class='resized-date first'>
+          <%= article.created_at.strftime("%d %b. %Y") %>
+        </li>
+        <li class='resized-tags'>
+          <% if article.tags.present? %>
+            <% article.tags.each do |tag| %>
+              <%= tag.name %>
+            <% end %>
+          <% end %> 
+        </li>
+        <li class='resized-comments'>
+          <%= (article.comments.count.to_s + ' Comments') %>
+        </li>
+      </ul>
     </p>
   </div>
 
@@ -82,20 +98,4 @@
     <% end %>
   </div>
 
-
-  <ul class='resized-author'>
-    <li class='resized-date first'>
-      <%= article.created_at.strftime("%d %b. %Y") %>
-    </li>
-    <li class='resized-tags'>
-      <% if article.tags.present? %>
-        <% article.tags.each do |tag| %>
-          <%= tag.name %>
-        <% end %>
-      <% end %> 
-    </li>
-    <li class='resized-comments'>
-      <%= (article.comments.count.to_s + ' Comments') %>
-    </li>
-  </ul>
 </div>

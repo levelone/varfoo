@@ -41,8 +41,7 @@
     <div id='fluid'>
       <div id='links'>
         <%= link_to 'Recent Posts',  root_path, :class => 'recent_posts' %> &middot;
-        <%= link_to 'About / CV', '#', :class => 'about_cv' %> &middot;
-        <%= link_to 'Scroll Up', '#top', :class => 'scroll_up' %>
+        <%= link_to 'About / CV', '#', :class => 'about_cv' %>
         <% if current_user.present? && current_user.admin %>
            &middot; <%= link_to 'New Article', new_article_path %>
         <% end %>

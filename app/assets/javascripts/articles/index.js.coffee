@@ -26,7 +26,7 @@ jQuery ->
       html += '<ul>'
 
     html += "<li class='comment clearfix new'>\n"
-    html += "<span>#{data.comment.name}</span> says:<br/>#{data.comment.content}\n"
+    html += "<span>#{data.comment.name}</span> says,<br/><br/>#{data.comment.content}\n"
     html += "</li>\n" 
 
     if !$(this).parent('.comments-wrapper').siblings('.comments').length
@@ -94,15 +94,18 @@ jQuery ->
     event.preventDefault()
 
   # Sticky Navagation Bar to Scroll down
-  $(window).scroll ->
-    $("#fluid").css "top", $(window).scrollTop()  if $(window).scrollTop() > 370
+    # $(window).scroll ->
+    #   $("#fluid").css "top", $(window).scrollTop()  if $(window).scrollTop() > 370
 
   # Scroll Up
-  $("a[href='#top']").click ->
-    $("html, body").animate
-      scrollTop: 0
-    , "slow"
-    false 
+    # $("a[href='#top']").click ->
+    #   $("html, body").animate
+    #     scrollTop: 0
+    #   , "slow"
+    #   false 
+
+  # Scroll Link - Paste In Layout/Application
+    # <%= link_to 'Scroll Up', '#top', :class => 'scroll_up' %>
 
 
   # Infinity Scroll and Pagination of Articles
