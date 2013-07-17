@@ -82,4 +82,6 @@ embed                          { height:500px; }
 @media screen and (max-width:520px) { 
 embed                          { height:375px; }
 img                            { height:300px; }
+#links                         { 
+  a                            { margin:5px 20px; } }
 }
