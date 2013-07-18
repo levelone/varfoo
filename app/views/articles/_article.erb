@@ -9,14 +9,14 @@
           <%= tag.name %>
         <% end %> &middot;
       <% end %> 
-    <span><%= (article.comments.count.to_s + ' Comments') %></span>
+    <span><%= "#{article.comments.count} Comments" %></span>
   </p>
 
   <div class='left-side clearfix'>
     <p class='description'>
       <% if article.images.present? %>
         <% article.images.each do |image| %>
-          <%= image_tag image.image_url.to_s %>
+          <%= image_tag image.image_url %>
         <% end %> 
       <% end %>
 
@@ -39,7 +39,7 @@
           <% end %> 
         </li>
         <li class='resized-comments'>
-          <%= (article.comments.count.to_s + ' Comments') %>
+          <%= "#{article.comments.count} Comments" %>
         </li>
       </ul>
     </p>

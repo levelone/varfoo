@@ -41,7 +41,7 @@
       .left-side                  { float:left; width:100%; display:inline;
         p.description             { width:100%; font-size:25px; line-height:42px;
           a                       { text-decoration:none; } 
-          img                     { width:100%; } } }
+          img                     { } } }
       .right-side                 { display:inline; position:absolute; right:0; border-left:1px solid #f2f2f2; border-bottom:1px solid #f2f2f2;
         .comments-wrapper         { 
           form.new-comment        { padding: 0 25px 25px 25px;
@@ -73,7 +73,7 @@
       .left-side                    { float:left; width:100%; display:inline;
         p.description               { font-size:25px; line-height:42px; margin:10px 20px 0px 20px; 
           a                         { text-decoration:none; }
-          img                       { width:100%; } }
+          img                       { } }
         ul.resized-author           { cursor:default; color:#fff; margin:40px 0;
           li.resized-date           { margin:0 2px 0 20px; }
           li.resized-tags           { margin:0 2px 0 0; }
@@ -104,7 +104,7 @@
       .left-side                    { float:left; width:100%; display:inline;
         p.description               { font-size:25px; line-height:42px; margin:10px 20px 0px 20px; 
           a                         { text-decoration:none; }
-          img                       { width:100%; } }
+          img                       { } }
         ul.resized-author           {
           li.resized-date           { margin:0 0 5px 0; }
           li.resized-tags           { margin:0; }

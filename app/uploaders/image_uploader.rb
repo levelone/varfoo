@@ -3,10 +3,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
 
-  storage :file
+  storage :fog
 
   def store_dir
-    "uploads/#{model.class.to_s.underscore.pluralize}/#{model.id}"
+    "uploads/articles/#{model.article.id}"
   end
 
   # new issue. it fails with this block. you can easily debug it
