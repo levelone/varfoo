@@ -164,10 +164,23 @@ jQuery ->
 
                       for video in article.videos
                         do ->
-                          html += "#{video.video_url}"
+                          html += "<embed src='http://www.youtube.com/v/#{video.video_url}?version=3&amp;hl=en_US&amp;rel=0' type='application/x-shockwave-flash' width='100%' height='705' allowscriptaccess='always' allowfullscreen='true'></embed>"
                       
                       html += "#{article.content}"
                       html += "</p>"
+
+                      # Extra code for resized-author class
+                      html += "<ul class='resized-author'>"
+                      html += "<li class='resized-date first'>#{Date.today(Date.parse(article.created_at)).toString('dd MMM. yyyy')}</li>"
+
+                      for tag in article.tags 
+                        do ->
+                          html += "<li class='resized-tags'>#{tag.name}</li>"
+
+                      html += "<li class='resized-comments'>#{article.comments.length} Comments</li>"
+                      html += "</ul>"
+
+
                       html += "</div>"
                       html += "<div class='right-side clearfix'>"
                       html += "<div class='comments-wrapper'>"
@@ -216,16 +229,6 @@ jQuery ->
                           html += "<div class='loading'></div>"
                           html += "</div>"
 
-                        # Extra code for resized-author class
-                        html += "<ul class='resized-author'>"
-                        html += "<li class='resized-date first'>#{Date.today(Date.parse(article.created_at)).toString('dd MMM. yyyy')}</li>"
-
-                        for tag in article.tags 
-                          do ->
-                            html += "<li class='resized-tags'>#{tag.name}</li>"
-
-                        html += "<li class='resized-comments'>#{article.comments.length} Comments</li>"
-                        html += "</ul>"
                         html += "</div>"
                         html += "\n"
 

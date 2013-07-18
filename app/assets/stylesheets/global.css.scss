@@ -72,14 +72,12 @@ Notification section
 #links                         { 
   a                            { margin:5px 35px; } }
 embed                          { height:500px; }
-//  #fluid                     { background-color:#fff; z-index:100; top:350px; width:100%; } 
-//  #links                     { width:100%; text-align:center; padding:20px 0px; border-bottom:1px solid #f2f2f2;
-//    a                        { display:inline-block; margin:5px 50px; color: rgba(0, 0, 0, 0.5); font-size:20px; transition: color 220ms ease-in-out 0s; transition: border 120ms ease-in-out 0s;
-//      &:hover                { text-decoration:none; border-bottom:4px solid #000; color:#000; } } }
+iframe                         { height:500px; }
 }
 
 @media screen and (max-width:520px) { 
-embed                          { height:375px; }
+embed                          { height:325px; }
+iframe                         { height:325px; }
 img                            { height:300px; }
 #links                         { 
   a                            { margin:5px 20px; } }
