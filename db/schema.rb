@@ -66,9 +66,9 @@ ActiveRecord::Schema.define(:version => 20130711084138) do
     t.string   "name"
     t.string   "password_hash"
     t.string   "password_salt"
-    t.boolean  "admin"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.boolean  "admin",         :default => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "videos", :force => true do |t|
