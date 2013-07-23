@@ -30,4 +30,15 @@ img                                    { width:100%; }
     li.resized-back-show               { margin:0; }
     li                                 { display:inline-block; padding:15px 20px; background-color:#000; font-size:20px; 
       &:hover                          { transition: color 220ms ease-in-out 0s; transition: border 120ms ease-in-out 0s; color:#37A1E4; } } } }
+ul.resized-comment-list                { color:rgba(0,0,0,0.5);
+  li.resized-comment                   { background-color:#fff; padding:20px; border-left:1px solid #f2f2f2; border-right:1px solid #f2f2f2; border-bottom:1px solid #f2f2f2;
+    p.comment_delete                   { width:10px; float:right;
+      a.icon                           { 
+        img                            {  } } } } }
+
+}
+
+@media screen and (max-width:520px) { 
+
+
 }

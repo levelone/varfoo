@@ -82,16 +82,6 @@ jQuery ->
     parent_container.attr('data-offset', parseInt(parent_container.attr('data-offset')) + 4)
     e.preventDefault()
 
-  $('form').on 'click', '.remove_fields', (event) ->
-    $(this).prev('input[type=hidden]').val('1')
-    $(this).closest('fieldset').hide()
-    event.preventDefault()
-
-  $('form').on 'click', '.add_fields', (event) ->
-    time = new Date().getTime()
-    regexp = new RegExp($(this).data('id'), 'g')
-    $(this).before($(this).data('fields').replace(regexp, time))
-    event.preventDefault()
 
   # Sticky Navagation Bar to Scroll down
     # $(window).scroll ->
@@ -106,6 +96,85 @@ jQuery ->
 
   # Scroll Link - Paste In Layout/Application
     # <%= link_to 'Scroll Up', '#top', :class => 'scroll_up' %>
+
+
+  # Toggle Comments
+  $(document).on 'click', '.resized-comments', (e) ->
+    article_id = $(e.target).attr('data-article-id')
+    $.get "articles/#{article_id}/comments.json", (data) ->
+    $(this).parents('div.left-side').siblings('.resized-comment-input').slideToggle();
+    e.preventDefault()
+    
+  # Post Resized Comment after submission
+  $(document).on 'ajax:success', 'form.new-comment', (e, data, status, xhr) ->
+
+    html = ''
+    html += "<li class='resized-comment new'>\n"
+    html += "<span>#{data.comment.name}</span> says,<br/><br/>#{data.comment.content}\n"
+    html += "</li>\n" 
+    
+    $(this).siblings('.resized-comment-list').prepend(html)
+    
+    $('.new').fadeIn().removeClass('new').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: 'default'  }, 'slow')
+    e.preventDefault()
+
+  # Show Resized More Comments
+  $(document).on 'click', '.resized-more-comments', (e) ->
+    parent_container = $(this)
+
+    # Hide the comment button, show the loading spinner
+    parent_container.css('display', 'none')
+    $('.loading').css('display', 'block')
+    $('.loading').spin(spinner_options)   
+
+    article_id = $(e.target).attr('data-article-id')
+    offset = $(e.target).attr('data-offset')
+
+    # Get comments based on offset
+    $.get "articles/#{article_id}/comments.json?offset=#{offset}", (data) ->
+      html = ''
+
+      for comment in data.comments 
+        do ->
+          if $('p.comment_delete a').attr('data-current-user')
+            html += "<li class='resized-comment old'>\n"
+            html += "<p class='comment_delete'>"
+            html += "<a class='icon' rel='nofollow' data-method='delete' data-confirm='Are you sure?' href='articles/#{article_id}/comments/#{comment.id}'>"
+            html += "<img src='/assets/button_cancel.png' alt='Button_cancel'>"
+            html += "</a> </p>"
+            html += "<span>#{comment.name}</span> says,<br /><br /> #{comment.content}\n"
+            html += '</li>\n'
+          else
+            html += '<li class="resized-comment old">\n'
+            html += "<span>#{comment.name}</span> says,<br /><br /> #{comment.content}\n"
+            html += '</li>\n'
+
+      parent_container.parent('.resized-comment-input').find('ul.resized-comment-list').append(html)
+      $('.old').fadeIn().removeClass('old').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: '#fff' }, 'fast')
+
+      # Show the comment button, hide the loading spinner
+      parent_container.css('display', 'block')
+      $('.loading').css('display', 'none')
+
+      # Hide the more comments button, if no more comments to load
+      if parseInt(parent_container.attr('data-offset')) > parseInt(parent_container.attr('data-comments-count'))
+        parent_container.css('display', 'none')
+      
+    parent_container.attr('data-offset', parseInt(parent_container.attr('data-offset')) + 4)
+    e.preventDefault()
+
+  # Disable Delete For Non-Admin
+  $('form').on 'click', '.remove_fields', (event) ->
+    $(this).prev('input[type=hidden]').val('1')
+    $(this).closest('fieldset').hide()
+    event.preventDefault()
+
+  $('form').on 'click', '.add_fields', (event) ->
+    time = new Date().getTime()
+    regexp = new RegExp($(this).data('id'), 'g')
+    $(this).before($(this).data('fields').replace(regexp, time))
+    event.preventDefault()
+
 
 
   # Infinity Scroll and Pagination of Articles
@@ -177,11 +246,11 @@ jQuery ->
                         do ->
                           html += "<li class='resized-tags'>#{tag.name}</li>"
 
-                      html += "<li class='resized-comments'>#{article.comments.length} Comments</li>"
+                      html += "<li>"
+                      html += "<a class='resized-comments' data-article-id='#{article.id}' href='#'> #{article.comments.length} Comments </a>"
                       html += "</ul>"
-
-
                       html += "</div>"
+
                       html += "<div class='right-side clearfix'>"
                       html += "<div class='comments-wrapper'>"
                       html += "<form class='new-comment' method='post' data-type='json' data-remote='true' action='/articles/#{article.id}/comments' accept-charset='UTF-8'>"
@@ -199,6 +268,7 @@ jQuery ->
                                <input class='btn btn-success' type='submit' value='Submit' name='commit'>
                                </div>"
                       html += "<input id='redirect_to' type='hidden' value='homepage' name='redirect_to'>"
+                      html += "</form>"
                       html += "</div>"
 
                       $.get "articles/#{article.id}/comments", (data) ->
@@ -229,10 +299,56 @@ jQuery ->
                           html += "<div class='loading'></div>"
                           html += "</div>"
 
+                        html += "<div class='resized-comment-input' style='display:none;'>"
+                        html += "<form class='new-comment' method='post' data-type='json' data-remote='true' action='/articles/#{article.id}/comments' accept-charset='UTF-8'>"
+                        html += "<div style='margin:0; padding:0; display:inline;'>
+                                 <input type='hidden' value='✓' name='utf8' name='authenticity_token'>
+                                 <input type='hidden' value='IOAjsyjgp9Uql2VnhCqy64SY34pl79Tg8Pb0ctuFr/U=' name='authenticity_token'>
+                                 </div>"
+                        html += "<div class='field'>
+                                 <input id='comment_name' type='text' size='30' placeholder='Nickname' name='comment[name]'>
+                                 </div>"
+                        html += "<div class='field'>
+                                 <textarea id='test' type='text' rows='20' placeholder='What is on your mind?' name='comment[content]' cols='40'></textarea>
+                                 </div>"
+                        html += "<div class='submit'>
+                                 <input class='btn btn-success' type='submit' value='Submit' name='commit'>
+                                 </div>"
+                        html += "<input id='redirect_to' type='hidden' value='homepage' name='redirect_to'>"
+                        html += "</form>"
+
+                        if data.comments.length
+                          html += "<ul class='resized-comment-list'>\n"
+
+                        for comment in data.comments
+                          do ->
+                            html += "<li class='resized-comment'>\n"
+
+                            if $('p.comment_delete a').attr('data-current-user')
+                              html += "<p class='comment_delete'>"
+                              html += "<a class='icon' rel='nofollow' data-method='delete' data-confirm='Are you sure?' href='/articles/#{article.id}/comments/#{comment.id}'>"
+                              html += "<img src='/assets/button_cancel.png' alt='Button_cancel'>"
+                              html += "</a></p>"
+                              html += "<span>#{comment.name}</span> says,<br/><br/>#{comment.content}\n"
+                              html += "</li>\n"
+                            else
+                              html += "<span>#{comment.name}</span> says,<br/><br/>#{comment.content}\n"
+                              html += "</li>\n"
+
+                        if data.comments.length
+                          html += "</ul>\n"
+
+                        if article.comments.length > 4 
+                          html += "<a class='resized-more-comments' data-offset='4' data-comments-count='#{article.comments.length}'
+                                   data-article-id='#{article.id}' href='#'>more</a>"
+                          html += "<div class='loading'></div>"
+                          html += "</div>"
+
                         html += "</div>"
                         html += "\n"
 
                         $('#wrapper').append(html)
+
 
                     # determins if it should grab new results
                     $(window).data('scroll_ready', true)
