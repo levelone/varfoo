@@ -135,8 +135,11 @@
         a                           { display:none; } }
       .resized-comment-input        { display:none;
         form                        {  
+          .field                    {
+            input                   { width:95%; }
+            textarea                { width:95%; } }
           .submit                   { padding:10px 21px 0px 18px; text-size:50px;
-            input                   { width:71px; height:37px; font-size:14px; } } } }
+            input                   { width:90px; height:37px; font-size:14px; } } } }
         .resized-comment            {  
           .comment_delete           {  
             .icon                   {  
