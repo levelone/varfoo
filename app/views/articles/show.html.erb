@@ -15,6 +15,9 @@
   </p>
 
   <ul class='resized-author-show'>
+    <li class='resized-back-show'>
+      <%= link_to 'Back to Articles', articles_path, :class => 'return' %>
+    </li>
     <li class='resized-date-show'>
       <%= @article.created_at.strftime("%d %b. %Y") %>
     </li>
@@ -28,12 +31,8 @@
     <li class='resized-comments-show'>
       <%= (@article.comments.count.to_s + ' Comments') %>
     </li>
-
-    <li class='resized-back-show'>
-      <%= link_to 'Back to Articles', articles_path, :class => 'return' %>
-    </li>
   </ul>
-
+  
   <% if current_user.present? && current_user.admin %>
     <%= link_to 'View Comments', article_comments_path(@article) %> &middot;
     <%= link_to 'Edit', edit_article_path(@article) %> &middot;
