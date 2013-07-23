@@ -297,8 +297,8 @@ jQuery ->
                           html += "<a class='more-comments' data-offset='4' data-comments-count='#{article.comments.length}'
                                    data-article-id='#{article.id}' href='#'>more</a>"
                           html += "<div class='loading'></div>"
-                          html += "</div>"
 
+                        html += "</div>"
                         html += "<div class='resized-comment-input' style='display:none;'>"
                         html += "<form class='new-comment' method='post' data-type='json' data-remote='true' action='/articles/#{article.id}/comments' accept-charset='UTF-8'>"
                         html += "<div style='margin:0; padding:0; display:inline;'>
