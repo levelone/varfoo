@@ -33,11 +33,55 @@
     </li>
   </ul>
   
+  <div class="resized-comment-input-show" >
+    <%= form_for [@article, Comment.new], :remote => true, :html => { :id => nil, :class => 'new-comment', :'data-article-id' => @article.id, :'data-type' => 'json' } do |f| %>
+      <% if @article.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@article.errors.count, "error") %> prohibited this user from being saved:
+          </h2>
+          <ul>
+            <% @article.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class='field'>
+        <%= f.text_field :name, :placeholder => 'Nickname' %>
+      </div>
+
+      <div class='field'>
+        <%= f.text_area :content, :placeholder => 'What is on your mind?', :id => 'test', :type => 'text' %>
+      </div>
+
+      <div class='submit'>
+        <%= f.submit 'Submit', :class => 'btn btn-success' %>
+      </div>
+    <% end %>
+
+    <ul class='resized-comment-list' >
+      <% @article.comments.order('created_at DESC').limit(4).each do |comment| %>
+        <li class='resized-comment'>
+          <span><%= "#{comment.name} " %></span><%=' says, '%><br /><br />
+          <%= comment.content %>
+        </li>
+      <% end %>
+    </ul>
+
+    <% if @article.comments.order('created_at DESC').count > 4 %>
+      <%= link_to 'more', '#', :class => 'resized-more-comments', :'data-article-id' => @article.id, :'data-offset' => 4, :'data-comments-count' => @article.comments.count %>
+      <div class="loading"></div>
+    <% end %>
+  </div>
+
   <% if current_user.present? && current_user.admin %>
     <%= link_to 'View Comments', article_comments_path(@article) %> &middot;
     <%= link_to 'Edit', edit_article_path(@article) %> &middot;
     <%= link_to 'Delete', article_path(@article), :confirm => "Are you sure you want to delete", :method => :delete %>
   <% end %>
+
 
 </div>
 

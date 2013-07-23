@@ -97,7 +97,6 @@ jQuery ->
   # Scroll Link - Paste In Layout/Application
     # <%= link_to 'Scroll Up', '#top', :class => 'scroll_up' %>
 
-
   # Toggle Comments
   $(document).on 'click', '.resized-comments', (e) ->
     article_id = $(e.target).attr('data-article-id')

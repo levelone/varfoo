@@ -60,6 +60,8 @@ module Varfoo
     config.assets.version = '1.0'
 
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+
+    # Removes Error given when pushing to Heroku 
     config.assets.initialize_on_precompile = false
     
   end
