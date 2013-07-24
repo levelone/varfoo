@@ -22,15 +22,20 @@ img                                    { width:100%; }
 @media screen and (max-width:1040px) { 
 #user_nav                              { background-color:#fff; }
 #show-wrapper                          { color:#000; margin:0px;
-  h1.title                             { font-size:65px; color:#000; font-weight:bold; letter-spacing:1px; margin:30px 0 0 0;}
-  p.author                             { font-size:18px; margin:0 0 0 8px; }
-  ul.resized-author-show               { cursor:default; color:#fff; 
+  h1.title                             { font-size:54px; color:#000; font-weight:bold; letter-spacing:1px; margin:50px 0 10px 0; text-align:center; }
+  p.content                            { font-size:24px; line-height:33px; margin:0 0 20px 0; text-align:justify; }
+  ul.resized-author-show               { cursor:default; color:#fff; text-align:center; 
     li.resized-date-show               { margin:0; }
     li.resized-tags-show               { margin:0; }
     li.resized-comments-show           { margin:0; }
     li.resized-back-show               { margin:0 0 3px 0; }
     li                                 { display:inline-block; padding:15px 20px; background-color:#000; font-size:20px; 
-      &:hover                          { transition: color 220ms ease-in-out 0s; transition: border 120ms ease-in-out 0s; color:#37A1E4; } } } }
+      &:hover                          { transition: color 220ms ease-in-out 0s; transition: border 120ms ease-in-out 0s; color:#37A1E4; } } }
+  div.resized-comment-input-show       { margin:10px;
+    form.new-comment                   { 
+      .field                           { 
+        #comment_name                  { } } } } }
+
 ul.resized-comment-list                { color:rgba(0,0,0,0.5);
   li.resized-comment                   { background-color:#fff; padding:20px; border-left:1px solid #f2f2f2; border-right:1px solid #f2f2f2; border-bottom:1px solid #f2f2f2;
     p.comment_delete                   { width:10px; float:right;
@@ -41,7 +46,7 @@ ul.resized-comment-list                { color:rgba(0,0,0,0.5);
 
 @media screen and (max-width:520px) { 
 #show-wrapper                          { color:#000; margin:0px;
-  h1.title                             { font-size:65px; color:#000; font-weight:bold; letter-spacing:1px; margin:30px 0 0 0; }
+  h1.title                             { font-size:40px; color:#000; font-weight:bold; letter-spacing:1px; margin:30px 0 10px 0; }
   p.content                            { font-size:22px; }
   p.author                             { font-size:18px; margin:0 0 0 8px; }
   ul.resized-author-show               { cursor:default; color:#fff; 
@@ -51,13 +56,13 @@ ul.resized-comment-list                { color:rgba(0,0,0,0.5);
     li.resized-comments-show           { margin:0 0 2px 0; }
     li                                 { display:block; padding:15px 20px; background-color:#000; font-size:20px; 
       &:hover                          { transition: color 220ms ease-in-out 0s; transition: border 120ms ease-in-out 0s; color:#37A1E4; } } } }
-  div.resized-comment-input-show       { 
-    form                               { margin:22px 0 0 0; padding: 20px 15px; border:1px solid #f2f2f2; 
+  div.resized-comment-input-show       { margin:0;
+    form.new-comment                   { margin:22px 0 0 0; padding:0; border-bottom:1px solid #f2f2f2; 
       .field                           { 
         input                          { width:95%; height:30px; border-radius:0px !important; }
         textarea                       { width:95%; height:140px; border-radius:0px !important; } }
       .submit                          { padding:0px;
-        input                          { width:100%; height:37px; font-size:14px; } } } }
+        input                          { width:100%; height:37px; font-size:14px; margin-bottom:10px; } } } }
     .resized-comment                   { background-color:#fff; padding:20px; border-left:0 solid #f2f2f2; border-right:0 solid #f2f2f2; border-bottom:1px solid #f2f2f2;
       .comment_delete                  {  
         .icon                          {  
