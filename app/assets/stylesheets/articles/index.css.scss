@@ -71,7 +71,7 @@
   #wrapper                          { width:100%;
     .article                        { padding:50px 0px 0px 0px ; border-bottom:1px solid #f2f2f2; background-color:#f9f9f9;
       &.odd                         { background-color:#fff; border-bottom:1px solid #fff; }
-      h1.title                      { font-size:56px; color:#000; font-weight:bold; letter-spacing:1px; margin:0 0 0 20px; line-height:71px; text-align:center;
+      h1.title                      { font-size:56px; color:#000; font-weight:bold; letter-spacing:1px; margin:0 0 0 20px; line-height:71px;
         a                           { color:#000; text-decoration:none; text-shadow:#999999 0px 1px 0px;
           &:hover                   { text-decoration:none; border-bottom:5px solid #000; border-top:5px solid #000; transition: color 220ms ease-in-out 0s; transition: border 120ms ease-in-out 0s; } } } 
       p.author                      { display:none; }
@@ -79,7 +79,7 @@
         p.description               { font-size:25px; line-height:42px; margin:10px 20px 0px 20px; text-align: justify; 
           a                         { text-decoration:none; }
           img                       { width:100%; } }
-        ul.resized-author           { cursor:default; color:#fff; margin:40px 0; text-align: center;
+        ul.resized-author           { cursor:default; color:#fff; margin:40px 0;
           li.resized-date           { margin:0 2px 0 20px; }
           li.resized-tags           { margin:0 2px 0 0; }
           li.resized-comments       { margin:0 2px 0 0; }
@@ -118,7 +118,7 @@
         p.description               { font-size:24px; line-height:35px; margin:0; text-align: justify;
           a                         { text-decoration:none; }
           img                       { } }
-        ul.resized-author           { margin: 30px 0;
+        ul.resized-author           { margin: 30px 0; text-align:center;
           li.resized-date           { margin:0 0 2px 0; }
           li.resized-tags           { margin:0 0 2px 0; }
           li.resized-comments       { margin:0 0 2px 0; }
