@@ -1,13 +1,15 @@
+require 'sidekiq/web'
+
 Varfoo::Application.routes.draw do
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
 
   get 'log_out' => 'sessions#destroy', :as => 'log_out'
   get 'log_in' => 'sessions#new', :as => 'log_in'
-  # get 'sign_up' => 'users#new', :as => 'sign_up'
+  get 'sign_up' => 'admins#new', :as => 'sign_up'
   get 'tags/:tag', to: 'articles#index', as: :tag
 
-  resources :users
+  resources :admins
   resources :sessions
 
   resources :articles do
@@ -15,5 +17,7 @@ Varfoo::Application.routes.draw do
   end
 
   root :to => 'articles#index'
+
+  mount Sidekiq::Web, at: '/sidekiq'
 end
 

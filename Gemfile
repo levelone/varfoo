@@ -31,6 +31,9 @@ gem 'datejs-rails'
 gem 'omniauth-twitter'
 gem 'twitter'
 gem 'fog', '~> 1.3.1'
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

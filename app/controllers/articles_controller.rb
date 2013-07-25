@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
   def update
   	@article = Article.find params[:id]
     @article.update_attributes(params[:article])
-	  redirect_to article_path, :notice => 'Update successful!'
+	  redirect_to article_path, :notice => 'Update successful!' 
   end
 
 	def show
@@ -34,22 +34,23 @@ class ArticlesController < ApplicationController
 
   def create
     @article = current_user.articles.new (params[:article])
-    # @article.user_id = current_user.id
 
-    # authentication = current_user.authentications.where(:provider => 'twitter').first
+    authentication = Authentication.where(:provider => 'twitter').first
 
-    # twitter_client = Twitter::Client.new(
-    #   :oauth_token => authentication.token,
-    #   :oauth_token_secret => authentication.secret
-    # )
-
-    # twitter_client.update('Posted: "' + @article.title + '" ... on http://www.Varfoo.com #' + @article.tag_list + '')
-
+    twitter_client = Twitter::Client.new(
+      :oauth_token => authentication.token,
+      :oauth_token_secret => authentication.secret
+    )
+      
+    # twitter_client.update('Please ignore this tweet..')
+    
 		if @article.save
+      # TweetsWorker.perform_async(@article_id)
 			redirect_to article_path(@article)
 		else
 			render :action => :new
 		end
+
   end
 
   def destroy

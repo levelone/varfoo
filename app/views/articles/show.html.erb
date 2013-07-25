@@ -76,7 +76,7 @@
     <% end %>
   </div>
 
-  <% if current_user.present? && current_user.admin %>
+  <% if current_user.present? %>
     <%= link_to 'View Comments', article_comments_path(@article) %> &middot;
     <%= link_to 'Edit', edit_article_path(@article) %> &middot;
     <%= link_to 'Delete', article_path(@article), :confirm => "Are you sure you want to delete", :method => :delete %>

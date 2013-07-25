@@ -42,7 +42,7 @@
       <div id='links'>
         <%= link_to 'Recent Posts',  root_path, :class => 'recent_posts' %> &middot;
         <%= link_to 'About / CV', '#', :class => 'about_cv' %>
-        <% if current_user.present? && current_user.admin %>
+        <% if current_user.present? %>
            &middot; <%= link_to 'New Article', new_article_path %>
         <% end %>
       </div>
@@ -55,7 +55,7 @@
     </div>
 
     
-    <% if current_user %>
+    <% if current_user.present? %>
       <div id="user_nav">
         <h4>
           Logged in as <%= current_user.name %>.
