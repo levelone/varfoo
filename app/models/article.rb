@@ -1,5 +1,5 @@
 class Article < ActiveRecord::Base
-  attr_accessible :content, :title, :videos_attributes, :images_attributes, :tag_list, :tweet_out
+  # attr_accessible :content, :title, :videos_attributes, :images_attributes, :tag_list, :tweet_out
 
   # , :tags
   # attr_accessor :tag_list

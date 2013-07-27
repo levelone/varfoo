@@ -60,10 +60,11 @@
         <%= f.submit 'Submit', :class => 'btn btn-success' %>
       </div>
     <% end %>
+  </div>
 
-    <ul class='resized-comment-list' >
+    <ul class='resized-comment-list-show' >
       <% @article.comments.order('created_at DESC').limit(4).each do |comment| %>
-        <li class='resized-comment'>
+        <li class='resized-comment-show'>
           <span><%= "#{comment.name} " %></span><%=' says, '%><br /><br />
           <%= comment.content %>
         </li>
@@ -71,10 +72,9 @@
     </ul>
 
     <% if @article.comments.order('created_at DESC').count > 4 %>
-      <%= link_to 'more', '#', :class => 'resized-more-comments', :'data-article-id' => @article.id, :'data-offset' => 4, :'data-comments-count' => @article.comments.count %>
+      <%= link_to 'more', '#', :class => 'resized-more-comments-show', :'data-article-id' => @article.id, :'data-offset' => 4, :'data-comments-count' => @article.comments.count %>
       <div class="loading"></div>
     <% end %>
-  </div>
 
   <% if current_user.present? %>
     <%= link_to 'View Comments', article_comments_path(@article) %> &middot;

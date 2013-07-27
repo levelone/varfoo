@@ -117,6 +117,19 @@ jQuery ->
     $('.new').fadeIn().removeClass('new').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: 'default'  }, 'slow')
     e.preventDefault()
 
+  # Post Resized-Show Comment
+   $(document).on 'ajax:success', 'form.new-comment', (e, data, status, xhr) ->
+
+    html = ''
+    html += "<li class='resized-comment-show new'>\n"
+    html += "<span>#{data.comment.name}</span> says,<br/><br/>#{data.comment.content}\n"
+    html += "</li>\n" 
+    
+    $(this).parent('div.resized-comment-input-show').siblings('ul.resized-comment-list-show').prepend(html)
+    
+    $('.new').fadeIn().removeClass('new').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: 'default'  }, 'slow')
+    e.preventDefault()
+
   # Show Resized More Comments
   $(document).on 'click', '.resized-more-comments', (e) ->
     parent_container = $(this)
@@ -174,6 +187,51 @@ jQuery ->
     $(this).before($(this).data('fields').replace(regexp, time))
     event.preventDefault()
 
+
+  # Show Resized More Comments-Show
+  $(document).on 'click', '.resized-more-comments-show', (e) ->
+    parent_container = $(this)
+
+    # Hide the comment button, show the loading spinner
+    parent_container.css('display', 'none')
+    $('.loading').css('display', 'block')
+    $('.loading').spin(spinner_options)   
+
+    article_id = $(e.target).attr('data-article-id')
+    offset = $(e.target).attr('data-offset')
+
+    # Get comments based on offset
+    $.get "#{article_id}/comments.json?offset=#{offset}", (data) ->
+      html = ''
+
+      for comment in data.comments 
+        do ->
+          if $('p.comment_delete a').attr('data-current-user')
+            html += "<li class='resized-comment-show old'>\n"
+            html += "<p class='comment_delete'>"
+            html += "<a class='icon' rel='nofollow' data-method='delete' data-confirm='Are you sure?' href='articles/#{article_id}/comments/#{comment.id}'>"
+            html += "<img src='/assets/button_cancel.png' alt='Button_cancel'>"
+            html += "</a> </p>"
+            html += "<span>#{comment.name}</span> says,<br /><br /> #{comment.content}\n"
+            html += '</li>\n'
+          else
+            html += '<li class="resized-comment-show old">\n'
+            html += "<span>#{comment.name}</span> says,<br /><br /> #{comment.content}\n"
+            html += '</li>\n'
+
+      $('.resized-comment-list-show').append(html)
+      $('.old').fadeIn().removeClass('old').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: '#fff' }, 'fast')
+
+      # Show the comment button, hide the loading spinner
+      parent_container.css('display', 'block')
+      $('.loading').css('display', 'none')
+
+      # Hide the more comments button, if no more comments to load
+      if parseInt(parent_container.attr('data-offset')) > parseInt(parent_container.attr('data-comments-count'))
+        parent_container.css('display', 'none')
+      
+    parent_container.attr('data-offset', parseInt(parent_container.attr('data-offset')) + 4)
+    e.preventDefault()
 
 
   # Infinity Scroll and Pagination of Articles
