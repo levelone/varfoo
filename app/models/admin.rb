@@ -1,8 +1,8 @@
 class Admin < User
   default_scope where(:admin => true)
-  # attr_accessible :name, :password, :password_confirmation, :admin
+  attr_accessible :name, :password, :password_confirmation, :admin
   
-  # attr_accessor :password
+  attr_accessor :password
   before_save :encrypt_password, :admin_must_be_set_to_true
 
   validates_confirmation_of :password

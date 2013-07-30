@@ -50,6 +50,10 @@ gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
 
+# Rails 4 Requirement / Format
+gem 'protected_attributes'
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
