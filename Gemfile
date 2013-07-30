@@ -33,6 +33,8 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'rails_12factor', group: :production
+
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'bootstrap-sass', '~> 2.3.1.3'
