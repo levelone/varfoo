@@ -6,7 +6,7 @@ class Articles::CommentsController < ApplicationController
     @comments = @article.comments.order('id DESC').limit(4).offset(params[:offset])
 
     respond_to do |format|
-      format.json { render :json => { :comments => @comments }.to_json and return }
+      format.json { render :json => { :comments_count => @article.comments.count, :comments => @comments }.to_json and return }
     end
   end
 
@@ -18,7 +18,7 @@ class Articles::CommentsController < ApplicationController
 
   def create
     @article = Article.find(params[:article_id])
-    @comment = Comment.new(params[:comment])
+    @comment = Comment.new(comment_params)
 
     @comment.article_id = params[:article_id]
 
@@ -69,9 +69,10 @@ class Articles::CommentsController < ApplicationController
     redirect_to root_path, :notice => 'Comment removed!'
   end
 
-  # private
+  private
 
-  # def require_login
-  #   redirect_to log_in_path, :notice => 'Log in or Sign up first!' if current_user.blank?
-  # end
+  def comment_params
+    params.require(:comment).permit(:content, :name)
+  end
+
 end

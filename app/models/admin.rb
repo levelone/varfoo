@@ -1,6 +1,8 @@
+require 'bcrypt'
+
 class Admin < User
-  default_scope where(:admin => true)
-  attr_accessible :name, :password, :password_confirmation, :admin
+  include BCrypt
+  default_scope { where(admin: true) }
   
   attr_accessor :password
   before_save :encrypt_password, :admin_must_be_set_to_true
@@ -27,4 +29,5 @@ class Admin < User
   def admin_must_be_set_to_true
     admin = true
   end
+
 end

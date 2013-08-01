@@ -8,8 +8,6 @@ module ApplicationHelper
 		link_to(name, '#', class: 'add_fields', data: {id: id, fields: fields.gsub("\n", "")})
 	end
 
-	
-
 	def tag_cloud(tags, classes)
 	  max = tags.sort_by(&:count).last
 	  tags.each do |tag|
@@ -17,6 +15,4 @@ module ApplicationHelper
 	    yield(tag, classes[index.round])
 	  end
 	end
-
-
 end

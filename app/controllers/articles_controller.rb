@@ -18,7 +18,7 @@ class ArticlesController < ApplicationController
 
   def update
   	@article = Article.find params[:id]
-    @article.update_attributes(params[:article])
+    @article.update_attributes(article_params)
 	  redirect_to article_path, :notice => 'Update successful!' 
   end
 
@@ -33,14 +33,14 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = current_user.articles.new (params[:article])
+    @article = current_user.articles.new(article_params)
 
-    authentication = Authentication.where(:provider => 'twitter').first
+    # authentication = Authentication.where(:provider => 'twitter').first
 
-    twitter_client = Twitter::Client.new(
-      :oauth_token => authentication.token,
-      :oauth_token_secret => authentication.secret
-    )
+    # twitter_client = Twitter::Client.new(
+    #   :oauth_token => authentication.token,
+    #   :oauth_token_secret => authentication.secret
+    # )
       
     # twitter_client.update('Please ignore this tweet..')
     
@@ -62,7 +62,11 @@ class ArticlesController < ApplicationController
 
   private
 
+  def article_params
+    params.require(:article).permit(:content, :title, :tag_list, images_attributes: [:id, :image_url, :_destroy], videos_attributes: [:id, :video_url, :_destroy] )
+  end
+
   def check_if_admin
-    current_user.present? && current_user.admin
+    # current_user.present? && current_user.admin
   end
 end

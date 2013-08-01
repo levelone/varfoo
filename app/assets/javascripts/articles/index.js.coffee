@@ -21,16 +21,9 @@ jQuery ->
   $(document).on 'ajax:success', 'form.new-comment', (e, data, status, xhr) ->
     console.log 'clicked'
     html = ''
-
-    if !$(this).parent('.comments-wrapper').siblings('.comments').length
-      html += '<ul>'
-
     html += "<li class='comment clearfix new'>\n"
     html += "<span>#{data.comment.name}</span> says,<br/><br/>#{data.comment.content}\n"
     html += "</li>\n" 
-
-    if !$(this).parent('.comments-wrapper').siblings('.comments').length
-      html += '</ul>'
     
     $(this).parent('.comments-wrapper').siblings('.comments').prepend(html)
     
@@ -262,6 +255,7 @@ jQuery ->
                   index = 0
                   for article in data.articles
                     do ->
+                      console.log article.id
                       index += 1
 
                       html = ''
@@ -329,8 +323,7 @@ jQuery ->
                       html += "</div>"
 
                       $.get "articles/#{article.id}/comments", (data) ->
-                        if data.comments.length
-                          html += "<ul class='comments'>\n"
+                        html += "<ul class='comments'>\n"
 
                         for comment in data.comments
                           do ->
@@ -347,11 +340,10 @@ jQuery ->
                               html += "<span>#{comment.name}</span> says,<br/><br/>#{comment.content}\n"
                               html += "</li>\n"
 
-                        if data.comments.length
-                          html += "</ul>\n"
+                        html += "</ul>\n"
 
-                        if article.comments.length > 4 
-                          html += "<a class='more-comments' data-offset='4' data-comments-count='#{article.comments.length}'
+                        if data.comments_count > 4 
+                          html += "<a class='more-comments' data-offset='4' data-comments-count='#{data.comments.length}'
                                    data-article-id='#{article.id}' href='#'>more</a>"
                           html += "<div class='loading'></div>"
 
@@ -374,8 +366,8 @@ jQuery ->
                         html += "<input id='redirect_to' type='hidden' value='homepage' name='redirect_to'>"
                         html += "</form>"
 
-                        if data.comments.length
-                          html += "<ul class='resized-comment-list'>\n"
+                        
+                        html += "<ul class='resized-comment-list'>\n"
 
                         for comment in data.comments
                           do ->
@@ -392,10 +384,9 @@ jQuery ->
                               html += "<span>#{comment.name}</span> says,<br/><br/>#{comment.content}\n"
                               html += "</li>\n"
 
-                        if data.comments.length
-                          html += "</ul>\n"
+                        html += "</ul>\n"
 
-                        if article.comments.length > 4 
+                        if data.comments_count > 4 
                           html += "<a class='resized-more-comments' data-offset='4' data-comments-count='#{article.comments.length}'
                                    data-article-id='#{article.id}' href='#'>more</a>"
                           html += "<div class='loading'></div>"

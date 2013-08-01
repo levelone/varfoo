@@ -1,7 +1,4 @@
 class Article < ActiveRecord::Base
-  attr_accessible :content, :title, :videos_attributes, :images_attributes, :tag_list, :tweet_out
-
-  # , :tags
   attr_accessor :tag_list
 
   has_many :articles_tags
@@ -10,7 +7,6 @@ class Article < ActiveRecord::Base
   has_many :videos
   has_many :images
 
-  # belongs_to :admin, :class_name => 'Admin', :foreign_key => 'user_id'
   belongs_to :user
 
   accepts_nested_attributes_for :videos, allow_destroy: true

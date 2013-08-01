@@ -4,11 +4,20 @@ class UsersController < ApplicationController
   end
 
   def create
-  	@user = User.new(params[:user])
+  	@user = User.new(user_params,user_authentication)
   	if @user.save
   		redirect_to root_url, :notice => 'Sign up successful!'
   	else
   		render 'new'
   	end
   end
+
+  def user_params
+    params.require(:user).permit(:name, :user)
+  end
+
+  def user_authentication
+    params.require(:authentication).permit(:provider, :secret, :token, :uid, :user_id)
+  end
+
 end
