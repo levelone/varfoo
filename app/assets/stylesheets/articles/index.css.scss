@@ -8,7 +8,8 @@
   tr:nth-of-type(odd) {
     background-color:#E3E3E3;
   }
-
+  
+  #footer                         { position:relative; width:100%; background-color:#fff; color: rgba(0, 0, 0, 0.5); text-align:center; height:20px; padding:5px 0 2px 0; font-size:14px; }
   #foo                            { display:none; }
 
 // Buttons and Fields //
