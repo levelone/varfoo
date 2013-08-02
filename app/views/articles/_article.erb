@@ -82,7 +82,7 @@
         <li class='comment'>
           <% if current_user.present? %>
             <p class='comment_delete'>
-              <%= link_to image_tag("button_cancel.png"), [comment.article, comment], :class => 'icon', :confirm => 'Are you sure?',   :method => :delete, :'data-current-user' => true %>
+              <%= link_to image_tag("button_cancel.png"), [comment.article, comment], :class => 'icon', data: { confirm: 'Are you sure?'},  :method => :delete, :'data-current-user' => true %>
             </p>
           <% end %>
           <span><%= "#{comment.name} " %></span><%=' says, '%><br /><br />
@@ -130,7 +130,7 @@
         <li class='resized-comment'>
           <% if current_user.present? %>
             <p class='comment_delete'>
-              <%= link_to image_tag("button_cancel.png"), [comment.article, comment], :class => 'icon', :confirm => 'Are you sure?', :method => :delete, :'data-current-user' => true %>
+              <%= link_to image_tag("button_cancel.png"), [comment.article, comment], :class => 'icon', data: { confirm: 'Are you sure?'}, :method => :delete, :'data-current-user' => true %>
             </p>
           <% end %>
           <span><%= "#{comment.name} " %></span><%=' says, '%><br /><br />

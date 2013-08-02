@@ -41,18 +41,16 @@ class SessionsController < ApplicationController
           )
         end
         
-        puts 'fooooooooooo0000---------------'
-        puts user.inspect
-        puts env["omniauth.auth"]
+        # puts 'fooooooooooo0000---------------------------'
+        # puts user.inspect
 
         # user = User.from_omniauth(env["omniauth.auth"])
+        # puts user.id
         session[:user_id] = user.id
-        redirect_to root_url, notice: "Signed in!"
+        redirect_to root_url, notice: "Signed In!"
       else
         redirect_to root_url, :notice => "Not so clever!"
       end
-
-
 
   	  # admin = Admin.authenticate(params[:name], params[:password])
       # puts admin
@@ -68,7 +66,7 @@ class SessionsController < ApplicationController
 
 	def destroy
     session.destroy
-	  session[:admin_id] = nil
+	  session[:user_id] = nil
 	  redirect_to root_url, :notice => "Signed out!"
 	end
 end
