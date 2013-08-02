@@ -26,8 +26,8 @@ class Admin < User
     end
   end
 
-  def admin_must_be_set_to_true
-    admin = true
-  end
+  # def admin_must_be_set_to_true
+  #   admin = true
+  # end
 
 end

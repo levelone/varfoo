@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   # before_filter :authenticate
 
-  helper_method :current_user
+  helper_method :current_user, :current_admin
   # helper_method :logged_in
 
   private
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_admin
-    @current_user ||= Admin.find(session[:admin_id]) if session[:admin_id]
+    @current_admin ||= Admin.find(session[:admin_id]) if session[:admin_id]
   end
 
 

@@ -41,7 +41,7 @@
       <div id='links'>
         <%= link_to 'Recent Posts',  root_path, :class => 'recent_posts' %> &middot;
         <%= link_to 'About / CV', '#', :class => 'about_cv' %>
-        <% if current_user.present? %>
+        <% if current_admin.present? %>
            &middot; <%= link_to 'New Article', new_article_path %>
         <% end %>
       </div>
@@ -57,10 +57,10 @@
       Website by Marc Seifert
     </div>
 
-    <% if current_user.present? %>
+    <% if current_admin.present? %>
       <div id="user_nav">
         <h4>
-          Logged in as <%= current_user.name %>.
+          Logged in as <%= current_admin.name %>.
           <%= link_to "Log out", log_out_path %>
         </h4>
       </div>

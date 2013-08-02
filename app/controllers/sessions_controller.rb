@@ -22,25 +22,15 @@ class SessionsController < ApplicationController
       # User coming from Twitter
       callback_data = request.env['omniauth.auth']
       authentication = Authentication.find_by(:uid => callback_data[:uid], :provider => callback_data[:provider])
-
+      
       if ['marcseifert'].include? callback_data[:extra][:raw_info][:screen_name]
         if authentication.present?
-          user = User.find(authentication.user_id)
-          puts '--------------------------------'
-          puts user.inspect
-          puts authentication.user_id
-          user.update_attributes(:name => callback_data[:info][:name])
-          puts user.inspect
-          puts user.id
-          puts authentication.user_id
-          puts '==================================='
+          user = authentication.user
+          user.update_attributes!(:name => callback_data[:info][:name])
           authentication.update_attributes(
-            :uid => callback_data[:uid],
             :token => callback_data[:credentials][:token],
             :secret => callback_data[:credentials][:secret]
           )
-          puts 'fooooooooooooooooo0000000000000000000'
-          puts authentication.inspect
         else
           user = User.create!(:name => callback_data[:info][:name])
           user.authentications.create(
@@ -50,18 +40,15 @@ class SessionsController < ApplicationController
             :secret => callback_data[:credentials][:secret]
           )
         end
-        
-        # puts 'fooooooooooo0000---------------------------'
-        # puts user.inspect
 
         # user = User.from_omniauth(env["omniauth.auth"])
-        # puts user.id
-        session[:user_id] = authentication.user_id
-        puts user.id
-        redirect_to root_url, notice: "Signed In!"
+        session[:user_id] = user.id
+        redirect_to root_url, notice: "Signed in!"
       else
         redirect_to root_url, :notice => "Not so clever!"
       end
+
+
 
   	  # admin = Admin.authenticate(params[:name], params[:password])
       # puts admin
@@ -77,7 +64,7 @@ class SessionsController < ApplicationController
 
 	def destroy
     session.destroy
-	  session[:user_id] = nil
+	  session[:admin_id] = nil
 	  redirect_to root_url, :notice => "Signed out!"
 	end
 end

@@ -33,7 +33,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = current_user.articles.new(article_params)
+    @article = current_admin.articles.new(article_params)
 
     # authentication = Authentication.where(:provider => 'twitter').first
 

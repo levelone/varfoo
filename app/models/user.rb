@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   default_scope { where(admin: false) }
-  # attr_accessible :name, :user
 
   has_many :articles, :dependent => :destroy
   has_many :authentications, :dependent => :destroy
