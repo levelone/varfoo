@@ -7,7 +7,7 @@
 
 @font-face {
   font-family:'Delikatessen';
-  src: url('fonts/#{Delikatessen}.ttf');
+  src: url(font-path('#{fonts/Delikatessen}.ttf')) format('truetype');
 }
 
 
