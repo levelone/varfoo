@@ -2,13 +2,16 @@
 
 @font-face {
   font-family:proximanova-light;
-  src: url('fonts/ProximaNova-Light.otf');
+  src: url('fonts/#{ProximaNova-Light}.otf'),
+       url('fonts/#{ProximaNova-Light}.eot'); /* IE9 */ 
 }
 
 @font-face {
   font-family:Delikatessen;
-  src: url('fonts/Delikatessen.ttf');
+  src: url('fonts/#{Delikatessen}.ttf'),
+       url('fonts/#{Delikatessen}.eot'); /* IE9 */
 }
+
 
 // @font-face {
 //   font-family:lmmonoltcond;
