@@ -2,7 +2,7 @@
 
 @font-face {
   font-family:'proximanova-light';
-  src: url('fonts/#{ProximaNova-Light}.otf');
+  src: url(font-path('#fonts/ProximaNova-Light}.otf')) format('opentype');
 }
 
 @font-face {
