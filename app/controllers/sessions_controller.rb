@@ -21,7 +21,6 @@ class SessionsController < ApplicationController
 
       # User coming from Twitter
       callback_data = request.env['omniauth.auth']
-      puts callback_data.uid
       authentication = Authentication.find_by(:uid => callback_data[:uid], :provider => callback_data[:provider])
       
       if ['marcseifert'].include? callback_data[:extra][:raw_info][:screen_name]
@@ -41,6 +40,11 @@ class SessionsController < ApplicationController
             :secret => callback_data[:credentials][:secret]
           )
         end
+        
+        puts 'fooooooooooo0000---------------'
+        puts user.inspect
+        puts env["omniauth.auth"]
+
         # user = User.from_omniauth(env["omniauth.auth"])
         session[:user_id] = user.id
         redirect_to root_url, notice: "Signed in!"
