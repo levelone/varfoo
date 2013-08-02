@@ -1,15 +1,13 @@
 @import "bootstrap";
 
 @font-face {
-  font-family:proximanova-light;
-  src: url('fonts/#{ProximaNova-Light}.otf'),
-       url('fonts/#{ProximaNova-Light}.eot'); /* IE9 */ 
+  font-family:'proximanova-light';
+  src: url('fonts/#{ProximaNova-Light}.otf');
 }
 
 @font-face {
-  font-family:Delikatessen;
-  src: url('fonts/#{Delikatessen}.ttf'),
-       url('fonts/#{Delikatessen}.eot'); /* IE9 */
+  font-family:'Delikatessen';
+  src: url('fonts/#{Delikatessen}.ttf');
 }
 
 
@@ -37,7 +35,7 @@ table {	border-collapse:collapse; border-spacing:0; }
 
 a { text-decoration:none; }
 
-body { position:relative; font-family:proximanova-light; } /* no .ttf */ 
+body { position:relative; font-family:'proximanova-light'; } /* no .ttf */ 
 
 .clearfix:after {
     content: ".";
@@ -54,7 +52,7 @@ Notification section
 
 
 #header2                       { background:image-url('purple-shadow.jpg'); padding:135px 0; }
-#logo                          { text-align:center; font-family:Delikatessen;
+#logo                          { text-align:center; font-family:'Delikatessen';
                                  font-size:63pt; letter-spacing:3px; color:#fff; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25); }
 #notification #flash_notice    { background-color:yellow; text-align:center; padding: 10px 0px; position:absolute; width:100%; }
 #notification #flash_error     { background-color:red; text-align:center; padding: 20px 0px; color:#fff; font-weight:bold; }
