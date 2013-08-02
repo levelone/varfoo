@@ -37,7 +37,7 @@
                 a.icon            { width:10px; height:5px; padding:0; } } } } } }
       h1.title                    { font-size:62px; color:#000; font-weight:bold; letter-spacing:1px; margin:0 0 10px 0; line-height:68px;
         a                         { color:#000; text-decoration:none; text-shadow:#999999 0px 1px 0px;
-          &:hover                 {  text-decoration:none; border-bottom:5px solid #000; border-top:5px solid #000; transition: color 220ms ease-in-out 0s; transition: border 120ms ease-in-out 0s;  } } }
+          &:hover                 { text-decoration:none; text-shadow:2px 0px 3px #999 } } } 
       p.author                    { margin:5px 0 20px 6px; word-spacing:2px; font-size:17px; }
       .left-side                  { float:left; width:100%; display:inline;
         p.description             { width:100%; font-size:25px; line-height:42px;
@@ -74,7 +74,7 @@
       &.odd                         { background-color:#fff; border-bottom:1px solid #fff; }
       h1.title                      { font-size:56px; color:#000; font-weight:bold; letter-spacing:1px; margin:0 0 0 20px; line-height:71px;
         a                           { color:#000; text-decoration:none; text-shadow:#999999 0px 1px 0px;
-          &:hover                   { text-decoration:none; border-bottom:5px solid #000; border-top:5px solid #000; transition: color 220ms ease-in-out 0s; transition: border 120ms ease-in-out 0s; } } } 
+          &:hover                   { text-decoration:none; text-shadow:2px 0px 3px #999 } } } 
       p.author                      { display:none; }
       .left-side                    { float:left; width:100%; display:inline;
         p.description               { font-size:25px; line-height:42px; margin:10px 20px 0px 20px; text-align: justify; 
