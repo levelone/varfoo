@@ -56,7 +56,8 @@ class SessionsController < ApplicationController
 
         # user = User.from_omniauth(env["omniauth.auth"])
         # puts user.id
-        session[:user_id] = user.id
+        session[:user_id] = authentication.user_id
+        puts user.id
         redirect_to root_url, notice: "Signed In!"
       else
         redirect_to root_url, :notice => "Not so clever!"
