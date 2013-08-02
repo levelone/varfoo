@@ -24,36 +24,31 @@ class SessionsController < ApplicationController
       puts callback_data.uid
       authentication = Authentication.find_by(:uid => callback_data[:uid], :provider => callback_data[:provider])
       
-      # if ['marcseifert'].include? callback_data[:extra][:raw_info][:screen_name]
-      if authentication.present?
-        user = authentication.user
-        user.update_attributes!(:name => callback_data[:info][:name])
-        authentication.update_attributes(
-          :token => callback_data[:credentials][:token],
-          :secret => callback_data[:credentials][:secret]
-        )
+      if ['marcseifert'].include? callback_data[:extra][:raw_info][:screen_name]
+        if authentication.present?
+          user = authentication.user
+          user.update_attributes!(:name => callback_data[:info][:name])
+          authentication.update_attributes(
+            :token => callback_data[:credentials][:token],
+            :secret => callback_data[:credentials][:secret]
+          )
+        else
+          user = User.create!(:name => callback_data[:info][:name])
+          user.authentications.create(
+            :uid => callback_data[:uid],
+            :provider => callback_data[:provider],
+            :token => callback_data[:credentials][:token],
+            :secret => callback_data[:credentials][:secret]
+          )
+        end
+        # user = User.from_omniauth(env["omniauth.auth"])
+        session[:user_id] = user.id
+        redirect_to root_url, notice: "Signed in!"
       else
-        user = User.create!(:name => callback_data[:info][:name])
-        user.authentications.create(
-          :uid => callback_data[:uid],
-          :provider => callback_data[:provider],
-          :token => callback_data[:credentials][:token],
-          :secret => callback_data[:credentials][:secret]
-        )
+        redirect_to root_url, :notice => "Not so clever!"
       end
 
-        # session[:admin_id] # Sign the user in
-        # redirect_to root_url, :notice => "Signed in!"
-      # else
-      #   redirect_to root_url, :notice => "Not so clever!"
-      # end
 
-
-      # redirect_to root_url, :notice => "Logged in!"
-
-      # user = User.from_omniauth(env["omniauth.auth"])
-      session[:user_id] = user.id
-      redirect_to root_url, notice: "Signed in!"
 
   	  # admin = Admin.authenticate(params[:name], params[:password])
       # puts admin
