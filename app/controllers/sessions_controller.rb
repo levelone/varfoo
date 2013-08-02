@@ -22,24 +22,25 @@ class SessionsController < ApplicationController
       # User coming from Twitter
       callback_data = request.env['omniauth.auth']
       authentication = Authentication.find_by(:uid => callback_data[:uid], :provider => callback_data[:provider])
-      puts authentication.inspect
 
       if ['marcseifert'].include? callback_data[:extra][:raw_info][:screen_name]
         if authentication.present?
+          puts authentication.inspect
           user = authentication.user
+          puts user.inspect
           user.update_attributes(:name => callback_data[:info][:name])
           authentication.update_attributes(
             :token => callback_data[:credentials][:token],
             :secret => callback_data[:credentials][:secret]
           )
         else
-          # user = User.create!(:name => callback_data[:info][:name])
-          # user.authentications.create(
-          #   :uid => callback_data[:uid],
-          #   :provider => callback_data[:provider],
-          #   :token => callback_data[:credentials][:token],
-          #   :secret => callback_data[:credentials][:secret]
-          # )
+          user = User.create!(:name => callback_data[:info][:name])
+          user.authentications.create(
+            :uid => callback_data[:uid],
+            :provider => callback_data[:provider],
+            :token => callback_data[:credentials][:token],
+            :secret => callback_data[:credentials][:secret]
+          )
         end
         
         # puts 'fooooooooooo0000---------------------------'
