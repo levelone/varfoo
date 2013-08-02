@@ -25,8 +25,10 @@ class SessionsController < ApplicationController
 
       if ['marcseifert'].include? callback_data[:extra][:raw_info][:screen_name]
         if authentication.present?
-          user = User.find(authentication.user.id)
-          puts user.inspect
+          user = User.find(authentication.user_id)
+          # puts '--------------------------------'
+          # puts user.inspect
+          # puts authentication.user_id
           user.update_attributes(:name => callback_data[:info][:name])
           authentication.update_attributes(
             :token => callback_data[:credentials][:token],
