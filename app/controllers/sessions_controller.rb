@@ -22,7 +22,8 @@ class SessionsController < ApplicationController
       # User coming from Twitter
       callback_data = request.env['omniauth.auth']
       authentication = Authentication.find_by(:uid => callback_data[:uid], :provider => callback_data[:provider])
-      
+      puts authentication.inspect
+
       if ['marcseifert'].include? callback_data[:extra][:raw_info][:screen_name]
         if authentication.present?
           user = authentication.user
