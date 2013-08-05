@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
       callback_data = request.env['omniauth.auth']
       authentication = Authentication.find_by(:uid => callback_data[:uid], :provider => callback_data[:provider])
       
-      if ['marcseifert'].include? callback_data[:extra][:raw_info][:screen_name]
+      # if ['marcseifert'].include? callback_data[:extra][:raw_info][:screen_name]
         if authentication.present?
           user = authentication.user
           user.update_attributes!(:name => callback_data[:info][:name])
@@ -44,9 +44,9 @@ class SessionsController < ApplicationController
         # user = User.from_omniauth(env["omniauth.auth"])
         session[:user_id] = user.id
         redirect_to root_url, notice: "Signed in!"
-      else
-        redirect_to root_url, :notice => "Not so clever!"
-      end
+      # else
+        # redirect_to root_url, :notice => "Not so clever!"
+      # end
 
 
 
