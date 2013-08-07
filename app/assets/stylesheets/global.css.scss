@@ -51,7 +51,7 @@ Notification section
 ------------------------------------------ */
 
 
-#header2                       { background:image-url('purple-shadow.jpg'); padding:135px 0; }
+#header2                       { background:image-url('bg-header-b3.jpg'); padding:135px 0; }
 #logo                          { text-align:center; font-family:'Delikatessen';
                                  font-size:63pt; letter-spacing:3px; color:#fff; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25); }
 #notification #flash_notice    { background-color:yellow; text-align:center; padding: 10px 0px; position:absolute; width:100%; }
@@ -76,7 +76,7 @@ Notification section
 @media screen and (max-width:520px) { 
 embed                               { height:325px; }
 iframe                              { height:325px; }
-img                                 { height:275px; }
+img                                 { }
 #fluid                              { 
   #links                            { 
     a                               { font-size:18px; margin:5px 25px; } } }

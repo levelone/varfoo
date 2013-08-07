@@ -40,7 +40,7 @@
           &:hover                 { text-decoration:none; text-shadow:2px 0px 3px #999 } } } 
       p.author                    { margin:5px 0 20px 6px; word-spacing:2px; font-size:17px; }
       .left-side                  { float:left; width:100%; display:inline;
-        p.description             { width:100%; font-size:25px; line-height:42px;
+        p.description             { width:100%; font-size:21px; line-height:36px;
           a                       { text-decoration:none; } 
           img                     { } } }
       .right-side                 { display:inline; position:absolute; right:0; border-left:1px solid #f2f2f2; border-bottom:1px solid #f2f2f2; max-width:350px; width:350px;
@@ -77,7 +77,7 @@
           &:hover                   { text-decoration:none; text-shadow:2px 0px 3px #999 } } } 
       p.author                      { display:none; }
       .left-side                    { float:left; width:100%; display:inline;
-        p.description               { font-size:25px; line-height:42px; margin:10px 20px 0px 20px; text-align: justify; 
+        p.description               { font-size:21px; line-height:36px; margin:10px 20px 0px 20px; text-align: justify; 
           a                         { text-decoration:none; }
           img                       { width:100%; } }
         ul.resized-author           { cursor:default; color:#fff; margin:40px 0;

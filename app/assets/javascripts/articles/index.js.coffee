@@ -270,6 +270,7 @@ jQuery ->
                       html += "</h1>\n"
                       html += "<p class='author'>#{Date.today(Date.parse(article.created_at)).toString('dd MMM. yyyy')} &middot "
 
+
                       for tag in article.tags 
                         do ->
                           html += "#{tag.name} &middot "
@@ -284,7 +285,7 @@ jQuery ->
 
                       for video in article.videos
                         do ->
-                          html += "<embed src='http://www.youtube.com/v/#{video.video_url}?version=3&amp;hl=en_US&amp;rel=0' type='application/x-shockwave-flash' width='100%' height='705' allowscriptaccess='always' allowfullscreen='true'></embed>"
+                          html += "<embed src='http://www.youtube.com/v/#{video.video_url}?version=3&amp;hl=en_US&amp;rel=0' type='application/x-shockwave-flash' width='100%' height='650' allowscriptaccess='always' allowfullscreen='true'></embed>"
                       
                       html += "#{article.content}"
                       html += "</p>"

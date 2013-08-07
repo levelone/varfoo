@@ -22,7 +22,7 @@
 
       <% if article.videos.present? %>
         <% article.videos.each do |video| %>
-          <embed src="http://www.youtube.com/v/<%=video.video_url%>?version=3&amp;hl=en_US&amp;rel=0" type="application/x-shockwave-flash" width="100%" height="705" allowscriptaccess="always" allowfullscreen="true"></embed>
+          <embed src="http://www.youtube.com/v/<%=video.video_url%>?version=3&amp;hl=en_US&amp;rel=0" type="application/x-shockwave-flash" width="100%" height="650" allowscriptaccess="always" allowfullscreen="true"></embed>
         <% end %> 
       <% end %>
       <%= article.content.html_safe %>
