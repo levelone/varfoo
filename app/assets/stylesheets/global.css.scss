@@ -51,28 +51,43 @@ Notification section
 ------------------------------------------ */
 
 
-#header2                       { background:image-url('bg-header-b3.jpg'); padding:135px 0; }
-#logo                          { text-align:center; font-family:'Delikatessen';
-                                 font-size:63pt; letter-spacing:3px; color:#fff; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25); }
+// #header2                       { background:image-url('bg-header-b3.jpg'); padding:135px 0; }
+// #logo                          { text-align:center; font-family:'Delikatessen';
+//                                  font-size:63pt; letter-spacing:3px; color:#fff; text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25); }
 #notification #flash_notice    { background-color:yellow; text-align:center; padding: 10px 0px; position:absolute; width:100%; }
 #notification #flash_error     { background-color:red; text-align:center; padding: 20px 0px; color:#fff; font-weight:bold; }
-#links                         { position:relative; text-align:center; padding:24px 0px; border-bottom:1px solid #f2f2f2; box-shadow:0px -1px 7px #999;
-      a                        { display:inline; margin:5px 50px; color: rgba(0, 0, 0, 0.5); font-size:20px; transition: color 220ms ease-in-out 0s; transition: border 120ms ease-in-out 0s;
-        &:hover                { text-decoration:none; border-bottom:3px solid #000; color:#000; } } }
 
-#fluid                         { background-color:#fff; top:375px; } 
+
+/* --------------------------------------
+Header
+------------------------------------------ */
+#fluid                         { z-index:-1; background-color:#222; padding: 30px 0; transition:height 0.5s; -webkit-transition:height 0.5s; height:100px;
+  &:hover                      { height: 150px; }
+#fluid-wrapper                 { max-width:940px; margin: 0 auto; }
+#header                        { width:200px; display:inline-block; color:#fff; font-size:48px; padding:20px 0; border-top:2px solid #fff; position:absolute; }
+#links                         { border-top:2px solid #333; padding: 15px 0; margin-left:225px; width:715px;
+      a                        { color: #FFFFFF; display: inline-block; font-size: 14px; font-weight: bold; letter-spacing: -1px; width: 150px; padding:0 0 15px 0; border-bottom:1px solid #333;
+       &:hover                 { text-decoration:none; border-bottom:1px solid #555; } } } }
+
 .container                     { width:100%; }
 
 
 
+/*--------------------------------------
+Screen size for Tablet
+------------------------------------------ */
 @media screen and (max-width:1040px) { 
-  #fluid                             { background-color:#fff; position:static; top:375px; }
+  #fluid                             { background-color:#222; }
   #links                             { 
     a                                { margin:5px 35px; } }
   embed                              { height:500px; }
   iframe                             { height:500px; }
 }
 
+
+/* --------------------------------------
+Screen size for mobile
+------------------------------------------ */
 @media screen and (max-width:520px) { 
 embed                               { height:325px; }
 iframe                              { height:325px; }
