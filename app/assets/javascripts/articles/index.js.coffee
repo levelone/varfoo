@@ -107,7 +107,7 @@ jQuery ->
     
     $(this).siblings('.resized-comment-list').prepend(html)
     
-    $('.new').fadeIn().removeClass('new').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: 'default'  }, 'slow')
+    $('.new').fadeIn().removeClass('new').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: 'transparent'  }, 'slow')
     e.preventDefault()
 
   # Post Resized-Show Comment
@@ -120,7 +120,7 @@ jQuery ->
     
     $(this).parent('div.resized-comment-input-show').siblings('ul.resized-comment-list-show').prepend(html)
     
-    $('.new').fadeIn().removeClass('new').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: 'default'  }, 'slow')
+    $('.new').fadeIn().removeClass('new').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: 'transparent'  }, 'slow')
     e.preventDefault()
 
   # Show Resized More Comments
@@ -155,7 +155,7 @@ jQuery ->
             html += '</li>\n'
 
       parent_container.parent('.resized-comment-input').find('ul.resized-comment-list').append(html)
-      $('.old').fadeIn().removeClass('old').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: '#fff' }, 'fast')
+      $('.old').fadeIn().removeClass('old').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: 'transparent' }, 'fast')
 
       # Show the comment button, hide the loading spinner
       parent_container.css('display', 'block')
@@ -213,7 +213,7 @@ jQuery ->
             html += '</li>\n'
 
       $('.resized-comment-list-show').append(html)
-      $('.old').fadeIn().removeClass('old').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: '#fff' }, 'fast')
+      $('.old').fadeIn().removeClass('old').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: 'transparent' }, 'fast')
 
       # Show the comment button, hide the loading spinner
       parent_container.css('display', 'block')

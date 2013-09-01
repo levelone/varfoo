@@ -43,8 +43,18 @@
           Varfoo
         </div>
         <div id='links'>
-          <%= link_to 'Recent Posts',  root_path, :class => 'recent_posts' %> &middot;
-          <%= link_to 'About / CV', '#', :class => 'about_cv' %>
+          <div id='alignment'>
+            <%= link_to 'Recent Posts',  root_path, :class => 'recent_posts' %> 
+            <p>Article 1</p>
+            <p>Article 2</p>
+            <p>Article 3</p>
+          </div>
+          <div id='alignment'>
+            <%= link_to 'About / CV', '#', :class => 'about_cv' %>
+            <p>Article 1</p>
+            <p>Article 2</p>
+            <p>Article 3</p>
+          </div>
           <% if current_admin.present? %>
              &middot; <%= link_to 'New Article', new_article_path %>
           <% end %>

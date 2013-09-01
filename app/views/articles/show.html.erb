@@ -1,84 +1,91 @@
 <div id='show-wrapper'>
-	<h1 class="title"><%= @article.title %></h1>
-  <p class="content">
-    <% if @article.images.present? %>
-      <% @article.images.each do |image| %>
-        <%= image_tag image.image_url.to_s %>
-      <% end %> 
-    <% end %>
-    <% if @article.videos.present? %>
-      <% @article.videos.each do |video| %>
-        <embed src="http://www.youtube.com/v/<%=video.video_url%>?version=3&amp;hl=en_US&amp;rel=0" type="application/x-shockwave-flash" width="100%" height="705" allowscriptaccess="always" allowfullscreen="true"></embed>
-      <% end %> 
-    <% end %>
-    <%= @article.content.html_safe %>
-  </p>
-
-  <ul class='resized-author-show'>
-    <li class='resized-back-show'>
-      <%= link_to 'Back to Articles', articles_path, :class => 'return' %>
-    </li>
-    <li class='resized-date-show'>
-      <%= @article.created_at.strftime("%d %b. %Y") %>
-    </li>
-    <li class='resized-tags-show'>
-      <% if @article.tags.present? %>
-        <% @article.tags.each do |tag| %>
-          <%= tag.name %>
+  <div id='show-background'>
+    <h1 class="title"><%= @article.title %></h1>
+    <div class='left-side clearfix'>
+      <p class="content">
+        <% if @article.images.present? %>
+          <% @article.images.each do |image| %>
+            <%= image_tag image.image_url.to_s %>
+          <% end %> 
         <% end %>
-      <% end %> 
-    </li>
-    <li class='resized-comments-show'>
-      <%= (@article.comments.count.to_s + ' Comments') %>
-    </li>
-  </ul>
-  
-  <div class="resized-comment-input-show" >
-    <%= form_for [@article, Comment.new], :remote => true, :html => { :id => nil, :class => 'new-comment', :'data-article-id' => @article.id, :'data-type' => 'json' } do |f| %>
-      <% if @article.errors.any? %>
-        <div id="error_explanation">
-          <h2>
-            <%= pluralize(@article.errors.count, "error") %> prohibited this user from being saved:
-          </h2>
-          <ul>
-            <% @article.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
+        <% if @article.videos.present? %>
+          <% @article.videos.each do |video| %>
+            <embed src="http://www.youtube.com/v/<%=video.video_url%>?version=3&amp;hl=en_US&amp;rel=0" type="application/x-shockwave-flash" width="100%" height="480" allowscriptaccess="always" allowfullscreen="true"></embed>
+          <% end %> 
+        <% end %>
+        <%= @article.content.html_safe %>
+      </p>
+
+      <ul class='resized-author-show'>
+        <li class='resized-back-show'>
+          <%= link_to 'Back to Articles', articles_path, :class => 'return' %> 
+        </li> &middot;
+        <li class='resized-date-show'>
+          <%= @article.created_at.strftime("%d %b. %Y") %>
+        </li>&middot;
+        <li class='resized-tags-show'>
+          <% if @article.tags.present? %>
+            <% @article.tags.each do |tag| %>
+              <%= tag.name %>
             <% end %>
-          </ul>
-        </div>
+          <% end %>
+        </li> &middot;
+        <li class='resized-comments-show'>
+          <%= (@article.comments.count.to_s + ' Comments') %>
+        </li>&middot;
+      </ul>
+    </div>
+    
+    <div class="right-side">
+      <div class="comments-wrapper">
+    <!-- <div class="resized&#45;comment&#45;input&#45;show" > -->
+        <%= form_for [@article, Comment.new], :remote => true, :html => { :id => nil, :class => 'new-comment', :'data-article-id' => @article.id, :'data-type' => 'json' } do |f| %>
+          <% if @article.errors.any? %>
+            <div id="error_explanation">
+              <h2>
+                <%= pluralize(@article.errors.count, "error") %> prohibited this user from being saved:
+              </h2>
+              <ul>
+                <% @article.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class='field'>
+            <%= f.text_field :name, :placeholder => 'name' %>
+          </div>
+
+          <div class='field'>
+            <%= f.text_area :content, :placeholder => 'comment..', :id => 'test', :type => 'text' %>
+          </div>
+
+          <div class='submit'>
+            <%= f.submit 'hit me', :class => 'comment-button-show' %>
+          </div>
+        <% end %>
+      </div>
+
+      <ul class='resized-comment-list-show' >
+        <% @article.comments.order('created_at DESC').limit(4).each do |comment| %>
+          <li class='resized-comment-show'>
+            <span><%= "#{comment.name} " %></span><%=' says, '%><br /><br />
+            <%= comment.content %>
+          </li>
+        <% end %>
+      </ul>
+
+      <% if @article.comments.order('created_at DESC').count > 4 %>
+        <%= link_to 'more', '#', :class => 'resized-more-comments-show', :'data-article-id' => @article.id, :'data-offset' => 4, :'data-comments-count' => @article.comments.count %>
+        <div class="loading"></div>
       <% end %>
 
-      <div class='field'>
-        <%= f.text_field :name, :placeholder => 'Nickname' %>
-      </div>
-
-      <div class='field'>
-        <%= f.text_area :content, :placeholder => 'What is on your mind?', :id => 'test', :type => 'text' %>
-      </div>
-
-      <div class='submit'>
-        <%= f.submit 'Submit', :class => 'btn btn-success' %>
-      </div>
-    <% end %>
+      <% if current_admin.present? %>
+        <%= link_to 'View Comments', article_comments_path(@article) %> &middot;
+        <%= link_to 'Edit', edit_article_path(@article) %> &middot;
+        <%= link_to 'Delete', article_path(@article), :confirm => "Are you sure you want to delete", :method => :delete %>
+      <% end %>
+    </div>
   </div>
-
-    <ul class='resized-comment-list-show' >
-      <% @article.comments.order('created_at DESC').limit(4).each do |comment| %>
-        <li class='resized-comment-show'>
-          <span><%= "#{comment.name} " %></span><%=' says, '%><br /><br />
-          <%= comment.content %>
-        </li>
-      <% end %>
-    </ul>
-
-    <% if @article.comments.order('created_at DESC').count > 4 %>
-      <%= link_to 'more', '#', :class => 'resized-more-comments-show', :'data-article-id' => @article.id, :'data-offset' => 4, :'data-comments-count' => @article.comments.count %>
-      <div class="loading"></div>
-    <% end %>
-
-  <% if current_admin.present? %>
-    <%= link_to 'View Comments', article_comments_path(@article) %> &middot;
-    <%= link_to 'Edit', edit_article_path(@article) %> &middot;
-    <%= link_to 'Delete', article_path(@article), :confirm => "Are you sure you want to delete", :method => :delete %>
-  <% end %>
 </div>
