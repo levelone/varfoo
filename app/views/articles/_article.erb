@@ -2,16 +2,6 @@
   <h1 class="title">
     <%= link_to article.title, (article), :class => "#{article.id}-#{article.title.parameterize}", :'data-current-user' => true %>
   </h1>
-  <p class="author">
-    <%= article.created_at.strftime("%d %b. %Y") %> &middot;
-      <% if article.tags.present? %>
-        <% article.tags.each do |tag| %>
-          <%= tag.name %>
-        <% end %> &middot;
-      <% end %> 
-    <span><%= "#{article.comments.count} Comments" %></span>
-  </p>
-
   <div class='left-side clearfix'>
     <p class='description'>
       <% if article.images.present? %>
@@ -43,6 +33,16 @@
         </li>
       </ul>
     </p>
+
+    <p class="author">
+      <%= article.created_at.strftime("%d %b. %Y") %> &middot;
+        <% if article.tags.present? %>
+          <% article.tags.each do |tag| %>
+            <%= tag.name %>
+          <% end %> &middot;
+        <% end %> 
+      <span><%= "#{article.comments.count} Comments" %></span>
+    </p>
   </div>
 
   <div class='right-side'>
@@ -72,7 +72,7 @@
         </div>
 
         <div class='submit'>
-          <%= f.submit 'Submit', :class => 'btn btn-success' %>
+          <%= f.submit 'Hit Me!', :class => 'comment-button' %>
         </div>
       <% end %>
     </div>

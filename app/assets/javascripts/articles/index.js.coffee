@@ -27,7 +27,7 @@ jQuery ->
     
     $(this).parent('.comments-wrapper').siblings('.comments').prepend(html)
     
-    $('.new').fadeIn().removeClass('new').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: 'default'  }, 'slow')
+    $('.new').fadeIn().removeClass('new').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: 'transparent'  }, 'slow')
     e.preventDefault()
 
   # Show More Comments when clicked
@@ -62,7 +62,7 @@ jQuery ->
             html += '</li>\n'
 
       parent_container.parent('.right-side').find('.comments').append(html)
-      $('.old').fadeIn().removeClass('old').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: '#fff' }, 'fast')
+      $('.old').fadeIn().removeClass('old').animate({ backgroundColor: 'yellow' }, 'slow').animate({ backgroundColor: 'transparent' }, 'fast')
 
       # Show the comment button, hide the loading spinner
       parent_container.css('display', 'block')
@@ -268,14 +268,7 @@ jQuery ->
                         html += "#{article.title}"
 
                       html += "</h1>\n"
-                      html += "<p class='author'>#{Date.today(Date.parse(article.created_at)).toString('dd MMM. yyyy')} &middot "
 
-
-                      for tag in article.tags 
-                        do ->
-                          html += "#{tag.name} &middot "
-
-                      html += "<span>#{article.comments.length} Comments</span>"
                       html += "<div class='left-side clearfix'>"
                       html += "<p class='description'>"
 
@@ -285,10 +278,18 @@ jQuery ->
 
                       for video in article.videos
                         do ->
-                          html += "<embed src='http://www.youtube.com/v/#{video.video_url}?version=3&amp;hl=en_US&amp;rel=0' type='application/x-shockwave-flash' width='100%' height='650' allowscriptaccess='always' allowfullscreen='true'></embed>"
+                          html += "<embed src='http://www.youtube.com/v/#{video.video_url}?version=3&amp;hl=en_US&amp;rel=0' type='application/x-shockwave-flash' width='100%' height='480' allowscriptaccess='always' allowfullscreen='true'></embed>"
                       
                       html += "#{article.content}"
                       html += "</p>"
+
+                      html += "<p class='author'>#{Date.today(Date.parse(article.created_at)).toString('dd MMM. yyyy')} &middot "
+
+                      for tag in article.tags 
+                        do ->
+                          html += "#{tag.name} &middot "
+
+                      html += "<span>#{article.comments.length} Comments</span>"
 
                       # Extra code for resized-author class
                       html += "<ul class='resized-author'>"

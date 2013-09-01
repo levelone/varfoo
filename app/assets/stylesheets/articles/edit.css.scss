@@ -1,0 +1,7 @@
+// Place all the styles related to the articles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#article-wrapper     { padding-top:200px; max-width:940px; margin:0 auto;
+  h1                 { font-size:32px; border-bottom: 1px solid #333; padding:15px; margin-bottom:15px; }
+  form.edit_article  { padding:15px; } }
