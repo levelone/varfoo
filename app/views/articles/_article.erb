@@ -41,7 +41,7 @@
             <%= tag.name %>
           <% end %> &middot;
         <% end %> 
-      <span><%= "#{article.comments.count} Comments" %></span>
+      <%= "#{article.comments.count} Comments" %>
     </p>
   </div>
 
@@ -64,15 +64,15 @@
         <%= hidden_field_tag(:redirect_to, 'homepage') %>
 
         <div class='field'>
-          <%= f.text_field :name, :placeholder => 'Nickname' %>
+          <%= f.text_field :name, :placeholder => 'name' %>
         </div>
 
         <div class='field'>
-          <%= f.text_area :content, :placeholder => 'What is on your mind?', :id => 'test', :type => 'text' %>
+          <%= f.text_area :content, :placeholder => 'comment..', :id => 'test', :type => 'text' %>
         </div>
 
         <div class='submit'>
-          <%= f.submit 'Hit Me!', :class => 'comment-button' %>
+          <%= f.submit 'hit me', :class => 'comment-button' %>
         </div>
       <% end %>
     </div>

@@ -29,7 +29,7 @@
 
 // Body Content //
   span                            { font-size:18px; color:#fff; }
-  #wrapper                        { margin-top:250px; 
+  #wrapper                        { margin-top:300px; 
     .article                      { background-color:#222; margin: 0 auto; max-width: 940px;
       // &.odd                       { background-color:#fff; border-bottom:1px solid #fff;
       //   .right-side               {  
@@ -47,18 +47,19 @@
           a                       { text-decoration:none; } 
           img                     { } } 
         p.author                  { margin:20px 0; word-spacing:2px; font-size:16px; } }
-      .right-side                 { display:inline; position:absolute; max-width:255px; width:255px; margin: 15px 0;
+      .right-side                 { display:inline; position:absolute; max-width:259px; width:259px; margin: 15px 0;
         .comments-wrapper         { padding-bottom:15px; border-bottom: 1px solid #333;
           form.new-comment        { padding: 0 20px;
           .field                  { }
           .submit                 { 
-          input.comment-button    { color:#999; font-size:12px; padding:7px 10px; border:1px solid #333; background-color:#222; margin-top:8px; } } } }
+            input.comment-button  { color:#999; font-size:12px; padding:7px 10px; border:1px solid #333; background-color:#222; margin-top:8px; 
+              &:hover             { background-color:#555; color:#fff; } } } } }
         ul.comments               { max-height:400px; font-size:14px; overflow-y:auto;
           li.comment              { border-bottom: 1px solid #333; color:#999; padding:20px 36px;
             p.comment_delete      { float:right;  
               a.icon              { width:10px; height:5px; padding:0; } } } }
-        a                         { color:#fff; text-align:center; display:inline-block; padding: 10px 0px; width:100%; border-bottom: 1px solid #333; font-size:14px;
-          &:hover                 { text-decoration:none; } } }
+        a                         { color:#999; text-align:center; display:inline-block; padding: 10px 0px; width:100%; border-bottom: 1px solid #333; font-size:14px;
+          &:hover                 { background-color:#555; color:#fff; text-decoration:none; } } }
       .resized-comment-input      { display:none !important; 
          .new-comment             { 
           .field                  { display:none; } 

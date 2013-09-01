@@ -289,7 +289,7 @@ jQuery ->
                         do ->
                           html += "#{tag.name} &middot "
 
-                      html += "<span>#{article.comments.length} Comments</span>"
+                      html += "#{article.comments.length} Comments"
 
                       # Extra code for resized-author class
                       html += "<ul class='resized-author'>"
@@ -318,7 +318,7 @@ jQuery ->
                                <textarea id='test' type='text' rows='20' placeholder='What is on your mind?' name='comment[content]' cols='40'></textarea>
                                </div>"
                       html += "<div class='submit'>
-                               <input class='btn btn-success' type='submit' value='Submit' name='commit'>
+                               <input class='comment-button' type='submit' value='hit me' name='commit'>
                                </div>"
                       html += "<input id='redirect_to' type='hidden' value='homepage' name='redirect_to'>"
                       html += "</form>"
