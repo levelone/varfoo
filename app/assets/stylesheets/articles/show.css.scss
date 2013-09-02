@@ -8,8 +8,8 @@ img                                    { width:100%; }
       p.content                        { width:640px; color:#fff; font-size:18px; line-height:28px; 
         a                              { color:#999; 
           &:hover                      { text-decoration:none; color:#fff; } } } }
-  	ul.resized-author-show             { cursor:default; color:#fff;  margin:20px 0; color:#999;
-      li                               { display:inline-block; font-size:16px; margin:0 2px; color:#555; border: 1px solid #333; padding:5px; 
+  	ul.resized-author-show             { cursor:default; color:#fff;  margin:40px 0 10px 0; color:#999;
+      li                               { display:inline-block; font-size:16px; padding-right:2px; 
         &:hover                        { } 
         a                              { color:#999;
          &:hover                       { text-decoration:none; color:#fff; } } } }
