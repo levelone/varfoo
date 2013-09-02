@@ -22,7 +22,7 @@
         </li> &middot;
         <li class='resized-date-show'>
           <%= @article.created_at.strftime("%d %b. %Y") %>
-        </li>&middot;
+        </li> &middot;
         <li class='resized-tags-show'>
           <% if @article.tags.present? %>
             <% @article.tags.each do |tag| %>
@@ -32,7 +32,7 @@
         </li> &middot;
         <li class='resized-comments-show'>
           <%= (@article.comments.count.to_s + ' Comments') %>
-        </li>&middot;
+        </li>
       </ul>
     </div>
     

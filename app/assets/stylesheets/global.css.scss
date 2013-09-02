@@ -78,24 +78,24 @@ Header
 /*--------------------------------------
 Screen size for Tablet
 ------------------------------------------ */
-@media screen and (max-width:1040px) { 
-  #fluid                             { background-color:#222; }
-  #links                             { 
-    a                                { margin:5px 35px; } }
-  embed                              { height:500px; }
-  iframe                             { height:500px; }
-}
+// @media screen and (max-width:1040px) { 
+//   #fluid                             { background-color:#222; }
+//   #links                             { 
+//     a                                { margin:5px 35px; } }
+//   embed                              { height:500px; }
+//   iframe                             { height:500px; }
+// }
 
 
 /* --------------------------------------
 Screen size for mobile
 ------------------------------------------ */
-@media screen and (max-width:520px) { 
-embed                               { height:325px; }
-iframe                              { height:325px; }
-img                                 { }
-#fluid                              { 
-  #links                            { 
-    a                               { font-size:18px; margin:5px 25px; } } }
-}
-
+// @media screen and (max-width:520px) { 
+// embed                               { height:325px; }
+// iframe                              { height:325px; }
+// img                                 { }
+// #fluid                              { 
+//   #links                            { 
+//     a                               { font-size:18px; margin:5px 25px; } } }
+// }
+// 
