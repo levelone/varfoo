@@ -45,7 +45,7 @@ tr:nth-of-type(odd) {
           a                       { text-decoration:none; color:#999; padding: 0 5px;
             &:hover               { color:#fff; } } 
           img                     { } } 
-        p.author                  { margin:20px 0; word-spacing:2px; font-size:16px; } }
+        p.author                  { margin:40px 0 10px 0; word-spacing:2px; font-size:16px; } }
       .right-side                 { display:inline; position:absolute; max-width:259px; width:259px; margin: 15px 0;
         .comments-wrapper         { padding-bottom:15px; border-bottom: 1px solid #333;
           form.new-comment        { padding: 0 20px;
