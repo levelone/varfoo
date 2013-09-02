@@ -56,7 +56,12 @@
             <p>Article 3</p>
           </div>
           <% if current_admin.present? %>
-             &middot; <%= link_to 'New Article', new_article_path %>
+            <div id='alignment'>
+              <%= link_to 'New Article', new_article_path %>
+              <p>Article 1</p>
+              <p>Article 2</p>
+              <p>Article 3</p>
+            </div>
           <% end %>
         </div>
       </div>
