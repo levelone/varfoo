@@ -228,177 +228,177 @@ jQuery ->
 
 
   # Infinity Scroll and Pagination of Articles
-  if $('#wrapper').length
-    $(window).data('scroll_ready', true)
-    all_articles_fetched = false
-    page = $('#wrapper').data('article-page')    
-    
-    if $(window).data('scroll_ready', true)
-      $(window).data('scroll_ready', false)
-
-
-      tag = document.createElement('script')
-      tag.src = "//www.youtube.com/iframe_api"
-      firstScriptTag = document.getElementsByTagName('script')[0]
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
-
-      $(window).scroll (e) ->
-        if ($(window).scrollTop() >= $(document).height() - $(window).height()) 
-          $('#wrapper').data('article-page', $('#wrapper').data('article-page') + 1)
-          
-          if !all_articles_fetched
-            $.get "articles?page=" + $('#wrapper').data('article-page'), (data) ->
-              if data.articles.length <= 0
-                all_articles_fetched = true
-              else
-                if data.articles.length || !all_articles_fetched 
-                  index = 0
-                  for article in data.articles
-                    do ->
-                      console.log article.id
-                      index += 1
-
-                      html = ''
-                      html += "<div class='article clearfix #{if ((index % 2) > 0) then 'even' else 'odd'}'>"
-                      html += "<h1 class='title'>"
-
-                      if $('.title a').attr('data-current-user')
-                        html += "<a class='#{article.id}-#{article.title}' href='/articles/#{article.id}' data-current-user='true'>#{article.title} </a>"
-                      else
-                        html += "#{article.title}"
-
-                      html += "</h1>\n"
-
-                      html += "<div class='left-side clearfix'>"
-                      html += "<p class='description'>"
-
-                      for image in article.images
-                        do ->
-                          html += "<img src='#{image.image_url.url}' />"
-
-                      for video in article.videos
-                        do ->
-                          html += "<embed src='http://www.youtube.com/v/#{video.video_url}?version=3&amp;hl=en_US&amp;rel=0' type='application/x-shockwave-flash' width='100%' height='480' allowscriptaccess='always' allowfullscreen='true'></embed>"
-                      
-                      html += "#{article.content}"
-                      html += "</p>"
-
-                      html += "<p class='author'>#{Date.today(Date.parse(article.created_at)).toString('dd MMM. yyyy')} &middot "
-
-                      for tag in article.tags 
-                        do ->
-                          html += "#{tag.name} &middot "
-
-                      html += "#{article.comments.length} Comments"
-
-                      # Extra code for resized-author class
-                      html += "<ul class='resized-author'>"
-                      html += "<li class='resized-date first'>#{Date.today(Date.parse(article.created_at)).toString('dd MMM. yyyy')}</li>"
-
-                      for tag in article.tags 
-                        do ->
-                          html += "<li class='resized-tags'>#{tag.name}</li>"
-
-                      html += "<li>"
-                      html += "<a class='resized-comments' data-article-id='#{article.id}' href='#'> #{article.comments.length} Comments </a>"
-                      html += "</ul>"
-                      html += "</div>"
-
-                      html += "<div class='right-side clearfix'>"
-                      html += "<div class='comments-wrapper'>"
-                      html += "<form class='new-comment' method='post' data-type='json' data-remote='true' action='/articles/#{article.id}/comments' accept-charset='UTF-8'>"
-                      html += "<div style='margin:0; padding:0; display:inline;'>
-                               <input type='hidden' value='✓' name='utf8' name='authenticity_token'>
-                               <input type='hidden' value='IOAjsyjgp9Uql2VnhCqy64SY34pl79Tg8Pb0ctuFr/U=' name='authenticity_token'>
-                               </div>"
-                      html += "<div class='field'>
-                               <input id='comment_name' type='text' size='30' placeholder='Nickname' name='comment[name]'>
-                               </div>"
-                      html += "<div class='field'>
-                               <textarea id='test' type='text' rows='20' placeholder='What is on your mind?' name='comment[content]' cols='40'></textarea>
-                               </div>"
-                      html += "<div class='submit'>
-                               <input class='comment-button' type='submit' value='hit me' name='commit'>
-                               </div>"
-                      html += "<input id='redirect_to' type='hidden' value='homepage' name='redirect_to'>"
-                      html += "</form>"
-                      html += "</div>"
-
-                      $.get "articles/#{article.id}/comments", (data) ->
-                        html += "<ul class='comments'>\n"
-
-                        for comment in data.comments
-                          do ->
-                            html += "<li class='comment'>\n"
-
-                            if $('p.comment_delete a').attr('data-current-user')
-                              html += "<p class='comment_delete'>"
-                              html += "<a class='icon' rel='nofollow' data-method='delete' data-confirm='Are you sure?' href='/articles/#{article.id}/comments/#{comment.id}'>"
-                              html += "<img src='/assets/button_cancel.png' alt='Button_cancel'>"
-                              html += "</a></p>"
-                              html += "<span>#{comment.name}</span> says,<br/><br/>#{comment.content}\n"
-                              html += "</li>\n"
-                            else
-                              html += "<span>#{comment.name}</span> says,<br/><br/>#{comment.content}\n"
-                              html += "</li>\n"
-
-                        html += "</ul>\n"
-
-                        if data.comments_count > 4 
-                          html += "<a class='more-comments' data-offset='4' data-comments-count='#{data.comments.length}'
-                                   data-article-id='#{article.id}' href='#'>more</a>"
-                          html += "<div class='loading'></div>"
-
-                        html += "</div>"
-                        html += "<div class='resized-comment-input' style='display:none;'>"
-                        html += "<form class='new-comment' method='post' data-type='json' data-remote='true' action='/articles/#{article.id}/comments' accept-charset='UTF-8'>"
-                        html += "<div style='margin:0; padding:0; display:inline;'>
-                                 <input type='hidden' value='✓' name='utf8' name='authenticity_token'>
-                                 <input type='hidden' value='IOAjsyjgp9Uql2VnhCqy64SY34pl79Tg8Pb0ctuFr/U=' name='authenticity_token'>
-                                 </div>"
-                        html += "<div class='field'>
-                                 <input id='comment_name' type='text' size='30' placeholder='Nickname' name='comment[name]'>
-                                 </div>"
-                        html += "<div class='field'>
-                                 <textarea id='test' type='text' rows='20' placeholder='What is on your mind?' name='comment[content]' cols='40'></textarea>
-                                 </div>"
-                        html += "<div class='submit'>
-                                 <input class='btn btn-success' type='submit' value='Submit' name='commit'>
-                                 </div>"
-                        html += "<input id='redirect_to' type='hidden' value='homepage' name='redirect_to'>"
-                        html += "</form>"
-
-                        
-                        html += "<ul class='resized-comment-list'>\n"
-
-                        for comment in data.comments
-                          do ->
-                            html += "<li class='resized-comment'>\n"
-
-                            if $('p.comment_delete a').attr('data-current-user')
-                              html += "<p class='comment_delete'>"
-                              html += "<a class='icon' rel='nofollow' data-method='delete' data-confirm='Are you sure?' href='/articles/#{article.id}/comments/#{comment.id}'>"
-                              html += "<img src='/assets/button_cancel.png' alt='Button_cancel'>"
-                              html += "</a></p>"
-                              html += "<span>#{comment.name}</span> says,<br/><br/>#{comment.content}\n"
-                              html += "</li>\n"
-                            else
-                              html += "<span>#{comment.name}</span> says,<br/><br/>#{comment.content}\n"
-                              html += "</li>\n"
-
-                        html += "</ul>\n"
-
-                        if data.comments_count > 4 
-                          html += "<a class='resized-more-comments' data-offset='4' data-comments-count='#{article.comments.length}'
-                                   data-article-id='#{article.id}' href='#'>more</a>"
-                          html += "<div class='loading'></div>"
-                          html += "</div>"
-
-                        html += "</div>"
-                        html += "\n"
-
-                        $('#wrapper').append(html)
-
-
-                    # determins if it should grab new results
-                    $(window).data('scroll_ready', true)
+ # if $('#wrapper').length
+ #   $(window).data('scroll_ready', true)
+ #   all_articles_fetched = false
+ #   page = $('#wrapper').data('article-page')    
+ #   
+ #   if $(window).data('scroll_ready', true)
+ #     $(window).data('scroll_ready', false)
+ #
+ #
+  #    tag = document.createElement('script')
+  #    tag.src = "//www.youtube.com/iframe_api"
+ #     firstScriptTag = document.getElementsByTagName('script')[0]
+ #     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+#
+ #     $(window).scroll (e) ->
+ #       if ($(window).scrollTop() >= $(document).height() - $(window).height()) 
+ #         $('#wrapper').data('article-page', $('#wrapper').data('article-page') + 1)
+ #         
+ #         if !all_articles_fetched
+ #           $.get "articles?page=" + $('#wrapper').data('article-page'), (data) ->
+ #             if data.articles.length <= 0
+ #               all_articles_fetched = true
+ #             else
+ #               if data.articles.length || !all_articles_fetched 
+ #                 index = 0
+ #                 for article in data.articles
+ #                   do ->
+ #                     console.log article.id
+ #                     index += 1
+#
+ #                     html = ''
+ #                     html += "<div class='article clearfix #{if ((index % 2) > 0) then 'even' else 'odd'}'>"
+ #                     html += "<h1 class='title'>"
+#
+ #                     if $('.title a').attr('data-current-user')
+ #                       html += "<a class='#{article.id}-#{article.title}' href='/articles/#{article.id}' data-current-user='true'>#{article.title} </a>"
+ #                     else
+ #                       html += "#{article.title}"
+#
+ #                     html += "</h1>\n"
+#
+ #                     html += "<div class='left-side clearfix'>"
+ #                     html += "<p class='description'>"
+#
+ #                     for image in article.images
+ #                       do ->
+ #                         html += "<img src='#{image.image_url.url}' />"
+#
+ #                     for video in article.videos
+ #                       do ->
+ #                         html += "<embed src='http://www.youtube.com/v/#{video.video_url}?version=3&amp;hl=en_US&amp;rel=0' type='application/x-shockwave-flash' width='100%' height='480' allowscriptaccess='always' allowfullscreen='true'></embed>"
+ #                     
+ #                     html += "#{article.content}"
+ #                     html += "</p>"
+#
+ #                     html += "<p class='author'>#{Date.today(Date.parse(article.created_at)).toString('dd MMM. yyyy')} &middot "
+#
+ #                     for tag in article.tags 
+ #                       do ->
+ #                         html += "#{tag.name} &middot "
+#
+ #                     html += "#{article.comments.length} Comments"
+#
+ #                     # Extra code for resized-author class
+ #                     html += "<ul class='resized-author'>"
+ #                     html += "<li class='resized-date first'>#{Date.today(Date.parse(article.created_at)).toString('dd MMM. yyyy')}</li>"
+#
+ #                     for tag in article.tags 
+ #                       do ->
+ #                         html += "<li class='resized-tags'>#{tag.name}</li>"
+#
+ #                     html += "<li>"
+ #                     html += "<a class='resized-comments' data-article-id='#{article.id}' href='#'> #{article.comments.length} Comments </a>"
+ #                     html += "</ul>"
+ #                     html += "</div>"
+#
+ #                     html += "<div class='right-side clearfix'>"
+ #                     html += "<div class='comments-wrapper'>"
+ #                     html += "<form class='new-comment' method='post' data-type='json' data-remote='true' action='/articles/#{article.id}/comments' accept-charset='UTF-8'>"
+ #                     html += "<div style='margin:0; padding:0; display:inline;'>
+ #                              <input type='hidden' value='✓' name='utf8' name='authenticity_token'>
+ #                              <input type='hidden' value='IOAjsyjgp9Uql2VnhCqy64SY34pl79Tg8Pb0ctuFr/U=' name='authenticity_token'>
+ #                              </div>"
+ #                     html += "<div class='field'>
+ #                              <input id='comment_name' type='text' size='30' placeholder='Nickname' name='comment[name]'>
+ #                              </div>"
+ #                     html += "<div class='field'>
+ #                              <textarea id='test' type='text' rows='20' placeholder='What is on your mind?' name='comment[content]' cols='40'></textarea>
+ #                              </div>"
+ #                     html += "<div class='submit'>
+ #                              <input class='comment-button' type='submit' value='hit me' name='commit'>
+ #                              </div>"
+ #                     html += "<input id='redirect_to' type='hidden' value='homepage' name='redirect_to'>"
+ #                     html += "</form>"
+ #                     html += "</div>"
+#
+ #                     $.get "articles/#{article.id}/comments", (data) ->
+ #                       html += "<ul class='comments'>\n"
+#
+ #                       for comment in data.comments
+ #                         do ->
+ #                           html += "<li class='comment'>\n"
+#
+ #                           if $('p.comment_delete a').attr('data-current-user')
+ #                             html += "<p class='comment_delete'>"
+ #                             html += "<a class='icon' rel='nofollow' data-method='delete' data-confirm='Are you sure?' href='/articles/#{article.id}/comments/#{comment.id}'>"
+ #                             html += "<img src='/assets/button_cancel.png' alt='Button_cancel'>"
+ #                             html += "</a></p>"
+ #                             html += "<span>#{comment.name}</span> says,<br/><br/>#{comment.content}\n"
+ #                             html += "</li>\n"
+ #                           else
+ #                             html += "<span>#{comment.name}</span> says,<br/><br/>#{comment.content}\n"
+ #                             html += "</li>\n"
+#
+ #                       html += "</ul>\n"
+#
+ #                       if data.comments_count > 4 
+ #                         html += "<a class='more-comments' data-offset='4' data-comments-count='#{data.comments.length}'
+ #                                  data-article-id='#{article.id}' href='#'>more</a>"
+ #                         html += "<div class='loading'></div>"
+#
+ #                       html += "</div>"
+ #                       html += "<div class='resized-comment-input' style='display:none;'>"
+ #                       html += "<form class='new-comment' method='post' data-type='json' data-remote='true' action='/articles/#{article.id}/comments' accept-charset='UTF-8'>"
+ #                       html += "<div style='margin:0; padding:0; display:inline;'>
+ #                                <input type='hidden' value='✓' name='utf8' name='authenticity_token'>
+ #                                <input type='hidden' value='IOAjsyjgp9Uql2VnhCqy64SY34pl79Tg8Pb0ctuFr/U=' name='authenticity_token'>
+ #                                </div>"
+ #                       html += "<div class='field'>
+ #                                <input id='comment_name' type='text' size='30' placeholder='Nickname' name='comment[name]'>
+ #                                </div>"
+ #                       html += "<div class='field'>
+ #                                <textarea id='test' type='text' rows='20' placeholder='What is on your mind?' name='comment[content]' cols='40'></textarea>
+ #                                </div>"
+ #                       html += "<div class='submit'>
+ #                                <input class='btn btn-success' type='submit' value='Submit' name='commit'>
+ #                                </div>"
+ #                       html += "<input id='redirect_to' type='hidden' value='homepage' name='redirect_to'>"
+ #                       html += "</form>"
+#
+ #                       
+ #                       html += "<ul class='resized-comment-list'>\n"
+#
+ #                       for comment in data.comments
+ #                         do ->
+ #                           html += "<li class='resized-comment'>\n"
+#
+ #                           if $('p.comment_delete a').attr('data-current-user')
+ #                             html += "<p class='comment_delete'>"
+ #                             html += "<a class='icon' rel='nofollow' data-method='delete' data-confirm='Are you sure?' href='/articles/#{article.id}/comments/#{comment.id}'>"
+ #                             html += "<img src='/assets/button_cancel.png' alt='Button_cancel'>"
+ #                             html += "</a></p>"
+ #                             html += "<span>#{comment.name}</span> says,<br/><br/>#{comment.content}\n"
+ #                             html += "</li>\n"
+ #                           else
+ #                             html += "<span>#{comment.name}</span> says,<br/><br/>#{comment.content}\n"
+ #                             html += "</li>\n"
+#
+ #                       html += "</ul>\n"
+#
+ #                       if data.comments_count > 4 
+ #                         html += "<a class='resized-more-comments' data-offset='4' data-comments-count='#{article.comments.length}'
+ #                                  data-article-id='#{article.id}' href='#'>more</a>"
+ #                         html += "<div class='loading'></div>"
+ #                         html += "</div>"
+#
+ #                       html += "</div>"
+ #                       html += "\n"
+#
+ #                       $('#wrapper').append(html)
+#
+#
+ #                   # determins if it should grab new results
+ #                   $(window).data('scroll_ready', true)
