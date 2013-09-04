@@ -28,7 +28,7 @@ tr:nth-of-type(odd) {
 // Body Content //
   span                            { font-size:18px; color:#fff; }
   #wrapper                        { margin-top:300px; 
-    .article                      { background-color:#222; margin: 0 auto 50px; max-width: 940px;
+    .article                      { background-color:#222; margin: 0 auto 50px; max-width: 940px; position:relative; z-index:999;
       // &.odd                       { background-color:#fff; border-bottom:1px solid #fff;
       //   .right-side               {  
       //     .submit                 { 
