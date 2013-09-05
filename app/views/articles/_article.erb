@@ -64,15 +64,15 @@
         <%= hidden_field_tag(:redirect_to, 'homepage') %>
 
         <div class='field'>
-          <%= f.text_field :name, :placeholder => 'name' %>
+          <%= f.text_field :name, :placeholder => '' %>
         </div>
 
         <div class='field'>
-          <%= f.text_area :content, :placeholder => 'comment..', :id => 'test', :type => 'text' %>
+          <%= f.text_field :content, :placeholder => 'message..', :id => 'test', :type => 'text' %>
         </div>
 
         <div class='submit'>
-          <%= f.submit 'hit me', :class => 'comment-button' %>
+          <%= f.submit 'comment', :class => 'comment-button' %>
         </div>
       <% end %>
     </div>
@@ -85,7 +85,7 @@
               <%= link_to image_tag("button_cancel.png"), [comment.article, comment], :class => 'icon', data: { confirm: 'Are you sure?'},  :method => :delete, :'data-current-user' => true %>
             </p>
           <% end %>
-          <span><%= "#{comment.name} " %></span><%=' says, '%><br /><br />
+          <span><%= "#{comment.name}" %></span>,<br /><br />
           <%= comment.content %>
         </li>
       <% end %>
@@ -95,7 +95,7 @@
       <div class="loading"></div>
     <% end %>
   </div>
-  
+ 
 
   <div class="resized-comment-input" >
     <%= form_for [article, Comment.new], :remote => true, :html => { :id => nil, :class => 'new-comment', :'data-article-id' => article.id, :'data-type' => 'json' } do |f| %>
@@ -117,7 +117,7 @@
       </div>
 
       <div class='field'>
-        <%= f.text_area :content, :placeholder => 'What is on your mind?', :id => 'test', :type => 'text' %>
+        <%= f.text_field :content, :placeholder => 'What is on your mind?', :id => 'test', :type => 'text' %>
       </div>
 
       <div class='submit'>
@@ -133,7 +133,7 @@
               <%= link_to image_tag("button_cancel.png"), [comment.article, comment], :class => 'icon', data: { confirm: 'Are you sure?'}, :method => :delete, :'data-current-user' => true %>
             </p>
           <% end %>
-          <span><%= "#{comment.name} " %></span><%=' says, '%><br /><br />
+          <span><%= "#{comment.name}"%></span>,<br/><br/>
           <%= comment.content %>
         </li>
       <% end %>

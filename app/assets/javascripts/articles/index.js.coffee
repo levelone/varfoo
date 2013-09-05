@@ -22,7 +22,7 @@ jQuery ->
     console.log 'clicked'
     html = ''
     html += "<li class='comment clearfix new'>\n"
-    html += "<span>#{data.comment.name}</span> says,<br/><br/>#{data.comment.content}\n"
+    html += "<span>#{data.comment.name}</span>,<br/><br/>#{data.comment.content}\n"
     html += "</li>\n" 
     
     $(this).parent('.comments-wrapper').siblings('.comments').prepend(html)
@@ -54,11 +54,11 @@ jQuery ->
             html += "<a class='icon' rel='nofollow' data-method='delete' data-confirm='Are you sure?' href='articles/#{article_id}/comments/#{comment.id}'>"
             html += "<img src='/assets/button_cancel.png' alt='Button_cancel'>"
             html += "</a></p>"
-            html += "<span>#{comment.name}</span> says,<br /><br /> #{comment.content}\n"
+            html += "<span>#{comment.name}</span>,<br /><br /> #{comment.content}\n"
             html += '</li>\n'
           else
             html += '<li class="comment clearfix old">\n'
-            html += "<span>#{comment.name}</span> says,<br /><br /> #{comment.content}\n"
+            html += "<span>#{comment.name}</span>,<br /><br /> #{comment.content}\n"
             html += '</li>\n'
 
       parent_container.parent('.right-side').find('.comments').append(html)
@@ -81,11 +81,10 @@ jQuery ->
     #   $("#fluid").css "top", $(window).scrollTop()  if $(window).scrollTop() > 370
 
   # Scroll Up
-    # $("a[href='#top']").click ->
-    #   $("html, body").animate
-    #     scrollTop: 0
-    #   , "slow"
-    #   false 
+    $("a[href='#top']").click ->
+      $("html, body").animate
+        scrollTop: 0
+      , "slow"
 
   # Scroll Link - Paste In Layout/Application
     # <%= link_to 'Scroll Up', '#top', :class => 'scroll_up' %>
@@ -102,7 +101,7 @@ jQuery ->
 
     html = ''
     html += "<li class='resized-comment new'>\n"
-    html += "<span>#{data.comment.name}</span> says,<br/><br/>#{data.comment.content}\n"
+    html += "<span>#{data.comment.name}</span>,<br/><br/>#{data.comment.content}\n"
     html += "</li>\n" 
     
     $(this).siblings('.resized-comment-list').prepend(html)
@@ -115,7 +114,7 @@ jQuery ->
 
     html = ''
     html += "<li class='resized-comment-show new'>\n"
-    html += "<span>#{data.comment.name}</span> says,<br/><br/>#{data.comment.content}\n"
+    html += "<span>#{data.comment.name}</span>,<br/><br/>#{data.comment.content}\n"
     html += "</li>\n" 
     
     $(this).parent('div.resized-comment-input-show').siblings('ul.resized-comment-list-show').prepend(html)
@@ -147,11 +146,11 @@ jQuery ->
             html += "<a class='icon' rel='nofollow' data-method='delete' data-confirm='Are you sure?' href='articles/#{article_id}/comments/#{comment.id}'>"
             html += "<img src='/assets/button_cancel.png' alt='Button_cancel'>"
             html += "</a> </p>"
-            html += "<span>#{comment.name}</span> says,<br /><br /> #{comment.content}\n"
+            html += "<span>#{comment.name}</span>,<br /><br /> #{comment.content}\n"
             html += '</li>\n'
           else
             html += '<li class="resized-comment old">\n'
-            html += "<span>#{comment.name}</span> says,<br /><br /> #{comment.content}\n"
+            html += "<span>#{comment.name}</span>,<br /><br /> #{comment.content}\n"
             html += '</li>\n'
 
       parent_container.parent('.resized-comment-input').find('ul.resized-comment-list').append(html)
@@ -205,11 +204,11 @@ jQuery ->
             html += "<a class='icon' rel='nofollow' data-method='delete' data-confirm='Are you sure?' href='articles/#{article_id}/comments/#{comment.id}'>"
             html += "<img src='/assets/button_cancel.png' alt='Button_cancel'>"
             html += "</a> </p>"
-            html += "<span>#{comment.name}</span> says,<br /><br /> #{comment.content}\n"
+            html += "<span>#{comment.name}</span>,<br /><br /> #{comment.content}\n"
             html += '</li>\n'
           else
             html += '<li class="resized-comment-show old">\n'
-            html += "<span>#{comment.name}</span> says,<br /><br /> #{comment.content}\n"
+            html += "<span>#{comment.name}</span>,<br /><br /> #{comment.content}\n"
             html += '</li>\n'
 
       $('.resized-comment-list-show').append(html)
@@ -336,10 +335,10 @@ jQuery ->
  #                             html += "<a class='icon' rel='nofollow' data-method='delete' data-confirm='Are you sure?' href='/articles/#{article.id}/comments/#{comment.id}'>"
  #                             html += "<img src='/assets/button_cancel.png' alt='Button_cancel'>"
  #                             html += "</a></p>"
- #                             html += "<span>#{comment.name}</span> says,<br/><br/>#{comment.content}\n"
+ #                             html += "<span>#{comment.name}</span>,<br/><br/>#{comment.content}\n"
  #                             html += "</li>\n"
  #                           else
- #                             html += "<span>#{comment.name}</span> says,<br/><br/>#{comment.content}\n"
+ #                             html += "<span>#{comment.name}</span>,<br/><br/>#{comment.content}\n"
  #                             html += "</li>\n"
 #
  #                       html += "</ul>\n"
@@ -380,10 +379,10 @@ jQuery ->
  #                             html += "<a class='icon' rel='nofollow' data-method='delete' data-confirm='Are you sure?' href='/articles/#{article.id}/comments/#{comment.id}'>"
  #                             html += "<img src='/assets/button_cancel.png' alt='Button_cancel'>"
  #                             html += "</a></p>"
- #                             html += "<span>#{comment.name}</span> says,<br/><br/>#{comment.content}\n"
+ #                             html += "<span>#{comment.name}</span>,<br/><br/>#{comment.content}\n"
  #                             html += "</li>\n"
  #                           else
- #                             html += "<span>#{comment.name}</span> says,<br/><br/>#{comment.content}\n"
+ #                             html += "<span>#{comment.name}</span>,<br/><br/>#{comment.content}\n"
  #                             html += "</li>\n"
 #
  #                       html += "</ul>\n"
