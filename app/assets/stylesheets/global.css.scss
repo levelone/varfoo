@@ -63,19 +63,20 @@ Header
 ------------------------------------------ */
 #fluid                         { position:absolute; width:100%; background-color:#222; padding: 30px 0; transition:height 0.5s; -webkit-transition:height 0.5s; height:100px;
   &:hover                      { height: 130px; }
-#fluid-wrapper                 { max-width:940px; margin: 0 auto; }
-#header                        { width:200px; display:inline-block; color:#fff; font-size:48px; padding:20px 0; border-top:2px solid #fff; position:absolute; }
-#links                         { border-top:2px solid #333; margin-left:225px; width:715px;
-  #alignment                   { display:inline-block;
-    p                          { display:none; }
-    a                          { color: #FFFFFF; display: inline-block; font-size: 14px; width: 150px; padding:15px 0; border-bottom:1px solid #333;
-      &:hover                  { text-decoration:none; border-bottom:1px solid #555; } } } } }
+  #fluid-wrapper               { max-width:940px; margin: 0 auto; }
+  #header                      { width:200px; display:inline-block; color:#fff; font-size:48px; padding:20px 0; border-top:2px solid #fff; position:absolute; }
+  #links                       { border-top:2px solid #333; margin-left:225px; width:715px;
+    #alignment                 { display:inline-block;
+      p                        { display:none; }
+      a                        { color: #FFFFFF; display: inline-block; font-size: 14px; width: 150px; padding:15px 0; border-bottom:1px solid #333;
+        &:hover                { text-decoration:none; border-bottom:1px solid #555; } } } } }
 #catchphrase                   { position:absolute; margin-top:230px; width:100%; text-align:center; font-size:22px; }
 .container                     { width:100%; }
 #footer                        { background-color:#222; font-size:20px; height:50px; padding-top:27px; }
-#top                           { text-decoration:none; color:#fff }
-
-
+#top                           { text-decoration:none; color:#fff; display:block; 
+  // -webkit-transform:rotate(180deg); -moz-transform:rotate(180deg);
+  // &:hover                      { animation: rotate 0.5s ease-out; -moz-animation:rotate 0.5s ease-out; -webkit-animation:rotate 0.5s ease-out; -webkit-transform:rotate(360deg); -moz-transform:rotate(360deg); } 
+}
 
 /*--------------------------------------
 Screen size for Tablet
