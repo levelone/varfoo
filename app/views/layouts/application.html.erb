@@ -44,23 +44,25 @@
         </div>
         <div id='links'>
           <div id='alignment'>
-            <%= link_to 'Recent Posts',  root_path, :class => 'recent_posts' %> 
-            <p>Article 1</p>
-            <p>Article 2</p>
-            <p>Article 3</p>
+            <%= link_to 'Recent Posts',  root_path, :class => 'navlink' %> 
+            <%= link_to 'Babes',  '', :class => 'subnavlink' %> 
+            <%= link_to 'Movies',  '', :class => 'subnavlink' %> 
+            <%= link_to 'Technology',  '', :class => 'subnavlink' %> 
           </div>
           <div id='alignment'>
-            <%= link_to 'About / CV', '#', :class => 'about_cv' %>
-            <p>Article 1</p>
-            <p>Article 2</p>
-            <p>Article 3</p>
+            <%= link_to 'About / CV', '#', :class => 'navlink' %>
+            <%= link_to 'Biography',  '', :class => 'subnavlink' %> 
+            <%= link_to 'Works',  '', :class => 'subnavlink' %> 
+          </div>
+          <div id='alignment'>
+            <%= link_to 'Contact', '#', :class => 'navlink' %>
+            <%= link_to 'Email',  '', :class => 'subnavlink' %> 
+            <%= link_to 'Facebook',  '', :class => 'subnavlink' %> 
+            <%= link_to 'Twitter',  '', :class => 'subnavlink' %> 
           </div>
           <% if current_admin.present? %>
             <div id='alignment'>
-              <%= link_to 'New Article', new_article_path %>
-              <p>Article 1</p>
-              <p>Article 2</p>
-              <p>Article 3</p>
+              <%= link_to 'New Article', new_article_path, :class => 'navlink'%>
             </div>
           <% end %>
         </div>
