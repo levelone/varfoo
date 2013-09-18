@@ -42,7 +42,7 @@
         <%= link_to 'Varfoo', root_path, :id => 'header' %>
         <div id='links'>
           <div class='alignment'>
-            <%= link_to 'Recent Posts',  '#', :class => 'navlink1' %> 
+            <%= link_to 'Recent Posts',  root_path, :class => 'navlink1' %> 
             <%= link_to 'Babes',  '#', :class => 'subnavlink1' %> 
             <%= link_to 'Movies',  '#', :class => 'subnavlink1' %> 
             <%= link_to 'Technology',  '#', :class => 'subnavlink1' %> 
@@ -57,8 +57,8 @@
           <div class='alignment'>
             <%= link_to 'Contact', '#', :class => 'navlink3' %>
             <%= link_to 'Email',  '#', :class => 'subnavlink3' %> 
-            <%= link_to 'Facebook',  '#', :class => 'subnavlink3' %> 
-            <%= link_to 'Twitter',  '#', :class => 'subnavlink3' %> 
+            <%= link_to 'Facebook',  'http://www.facebook.com/itsmarcseifert', :class => 'subnavlink3' %> 
+            <%= link_to 'Twitter',  'http://www.twitter.com/marcseifert', :class => 'subnavlink3' %> 
           </div>
 
           <% if current_admin.present? %>
