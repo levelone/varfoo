@@ -39,12 +39,10 @@
 
     <div id='fluid'>
       <div id='fluid-wrapper'>
-        <div id='header'>
-          Varfoo
-        </div>
+        <%= link_to 'Varfoo', root_path, :id => 'header' %>
         <div id='links'>
           <div class='alignment'>
-            <%= link_to 'Recent Posts',  root_path, :class => 'navlink1' %> 
+            <%= link_to 'Recent Posts',  '#', :class => 'navlink1' %> 
             <%= link_to 'Babes',  '#', :class => 'subnavlink1' %> 
             <%= link_to 'Movies',  '#', :class => 'subnavlink1' %> 
             <%= link_to 'Technology',  '#', :class => 'subnavlink1' %> 
