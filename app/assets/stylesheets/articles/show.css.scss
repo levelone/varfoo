@@ -17,7 +17,7 @@ img                                    { width:100%; }
       .comments-wrapper                { padding-bottom:15px; border-bottom: 1px solid #333;
         .new-comment                   { padding:0 20px;
           .submit                      { 
-            input.comment-button-show  { color:#999; font-size:12px; padding:7px 10px; border:1px solid #333; background-color:#222; margin-top:8px; 
+            input.comment-button-show  { color:#999; font-size:12px; padding:7px 10px; border:1px solid #333; background-color:#222;
               &:hover                  { background-color:#555; color:#fff; } } } } } 
       .resized-comment-list-show       { font-size:14px; max-height:400px; overflow-y:auto;
         .resized-comment-show          { padding:20px 36px; border-bottom: 1px solid #333; color:#999; } }

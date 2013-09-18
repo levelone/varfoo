@@ -43,28 +43,32 @@
           Varfoo
         </div>
         <div id='links'>
-          <div id='alignment'>
-            <%= link_to 'Recent Posts',  root_path, :class => 'navlink' %> 
-            <%= link_to 'Babes',  '', :class => 'subnavlink' %> 
-            <%= link_to 'Movies',  '', :class => 'subnavlink' %> 
-            <%= link_to 'Technology',  '', :class => 'subnavlink' %> 
+          <div class='alignment'>
+            <%= link_to 'Recent Posts',  root_path, :class => 'navlink1' %> 
+            <%= link_to 'Babes',  '#', :class => 'subnavlink1' %> 
+            <%= link_to 'Movies',  '#', :class => 'subnavlink1' %> 
+            <%= link_to 'Technology',  '#', :class => 'subnavlink1' %> 
           </div>
-          <div id='alignment'>
-            <%= link_to 'About / CV', '#', :class => 'navlink' %>
-            <%= link_to 'Biography',  '', :class => 'subnavlink' %> 
-            <%= link_to 'Works',  '', :class => 'subnavlink' %> 
+
+          <div class='alignment'>
+            <%= link_to 'About / CV', '#', :class => 'navlink2' %>
+            <%= link_to 'Biography',  '#', :class => 'subnavlink2' %> 
+            <%= link_to 'Works',  '#', :class => 'subnavlink2' %> 
           </div>
-          <div id='alignment'>
-            <%= link_to 'Contact', '#', :class => 'navlink' %>
-            <%= link_to 'Email',  '', :class => 'subnavlink' %> 
-            <%= link_to 'Facebook',  '', :class => 'subnavlink' %> 
-            <%= link_to 'Twitter',  '', :class => 'subnavlink' %> 
+
+          <div class='alignment'>
+            <%= link_to 'Contact', '#', :class => 'navlink3' %>
+            <%= link_to 'Email',  '#', :class => 'subnavlink3' %> 
+            <%= link_to 'Facebook',  '#', :class => 'subnavlink3' %> 
+            <%= link_to 'Twitter',  '#', :class => 'subnavlink3' %> 
           </div>
+
           <% if current_admin.present? %>
             <div id='alignment'>
-              <%= link_to 'New Article', new_article_path, :class => 'navlink'%>
+              <%= link_to 'New Article', new_article_path, :class => 'navlink4'%>
             </div>
           <% end %>
+
         </div>
       </div>
     </div>
