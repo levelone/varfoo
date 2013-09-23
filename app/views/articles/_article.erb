@@ -76,15 +76,10 @@
           <%= f.submit 'comment', :class => "comment-button", :'data-article-id' => article.id %>
         </div>
 
-        <%= puts '---------------------------' %>
-        <%= puts request.session_options[:id] %>
-
         <% if $redis.hexists("session_id:#{request.session_options[:id]}", "article_id:#{article.id}") %>
           <p class='article-liked-true'>+ 1</p>
-          <%= link_to '+ 1', article_likes_path(article), :id => "article_#{article.id}_liked_true", :class => 'article-liked-true', :style => "display:none;", :method => :post, :remote => true %>
         <% else %>
           <%= link_to '+ 1', article_likes_path(article), :id => "article_#{article.id}_liked_false", :class => 'article-liked-false', :method => :post, :remote => true, :'data-article-id' => article.id, :'data-type' => 'json' %>
-          <%= link_to '+ 1', article_likes_path(article), :id => "article_#{article.id}_liked_true", :class => 'article-liked-true', :style => "display:none;", :method => :post, :remote => true %>
         <% end %>
 
       <% end %>

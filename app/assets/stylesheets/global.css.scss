@@ -88,7 +88,9 @@ Header
 .container                     { width:100%; }
 #footer                        { background-color:#222; font-size:18px; height:50px; padding-top:27px; }
 #top                           { text-decoration:none; color:#fff; display:block; }
-.article-liked-true            { text-decoration:none !important; color:#33FF00 !important; }
+.article-liked-true            {
+  &:focus                      { text-decoration:none !important; color:#33FF00 !important; } }
+
   // -webkit-transform:rotate(180deg); -moz-transform:rotate(180deg);
   // &:hover                      { animation: rotate 0.5s ease-out; -moz-animation:rotate 0.5s ease-out; -webkit-animation:rotate 0.5s ease-out; -webkit-transform:rotate(360deg); -moz-transform:rotate(360deg); } 
 
