@@ -68,13 +68,13 @@ Header
     &:hover                    { text-decoration:none; } }
   #links                       { border-top:2px solid #333; margin-left:225px; width:715px;
     .alignment                 { float:left; margin-right:10px; 
-      .subnavlink1             { color:#999; border-bottom:1px solid #333; font-size:14px; padding:5px 12px; display:block; display:none;
+      .subnavlink1             { color:#999; border-bottom:1px solid #333; font-size:12px; padding:5px 12px; display:block; display:none;
         &:hover                { text-decoration:none; border-bottom:1px solid #555; color:#fff; } }
-      .subnavlink2             { color:#999; border-bottom:1px solid #333; font-size:14px; padding:5px 12px; display:block; display:none;
+      .subnavlink2             { color:#999; border-bottom:1px solid #333; font-size:12px; padding:5px 12px; display:block; display:none;
         &:hover                { text-decoration:none; border-bottom:1px solid #555; color:#fff; } }
-      .subnavlink3             { color:#999; border-bottom:1px solid #333; font-size:14px; padding:5px 12px; display:block; display:none;
+      .subnavlink3             { color:#999; border-bottom:1px solid #333; font-size:12px; padding:5px 12px; display:block; display:none;
         &:hover                { text-decoration:none; border-bottom:1px solid #555; color:#fff; } }
-      .subnavlink4             { color:#999; border-bottom:1px solid #333; font-size:14px; padding:5px 12px; display:block; display:none;
+      .subnavlink4             { color:#999; border-bottom:1px solid #333; font-size:12px; padding:5px 12px; display:block; display:none;
         &:hover                { text-decoration:none; border-bottom:1px solid #555; color:#fff; } }
       .navlink1                { color: #FFFFFF; display: inline-block; font-size: 14px; width: 150px; padding:15px 0; border-bottom:1px solid #333;
         &:hover                { text-decoration:none; border-bottom:1px solid #555; } }
@@ -84,15 +84,13 @@ Header
         &:hover                { text-decoration:none; border-bottom:1px solid #555; } }
       .navlink4                { color: #FFFFFF; display: inline-block; font-size: 14px; width: 150px; padding:15px 0; border-bottom:1px solid #333;
         &:hover                { text-decoration:none; border-bottom:1px solid #555; } } } } }
-
 #catchphrase                   { position:absolute; margin-top:230px; width:100%; text-align:center; font-size:22px; }
 .container                     { width:100%; }
 #footer                        { background-color:#222; font-size:18px; height:50px; padding-top:27px; }
-#top                           { text-decoration:none; color:#fff; display:block; 
-
+#top                           { text-decoration:none; color:#fff; display:block; }
+.article-liked-true            { text-decoration:none !important; color:#33FF00 !important; }
   // -webkit-transform:rotate(180deg); -moz-transform:rotate(180deg);
   // &:hover                      { animation: rotate 0.5s ease-out; -moz-animation:rotate 0.5s ease-out; -webkit-animation:rotate 0.5s ease-out; -webkit-transform:rotate(360deg); -moz-transform:rotate(360deg); } 
-}
 
 /*--------------------------------------
 Screen size for Tablet

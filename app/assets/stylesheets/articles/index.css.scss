@@ -39,36 +39,41 @@ tr:nth-of-type(odd) {
       //       li.comment            { background-color:#fff; line-height:20px;
       //         p.comment_delete    { float:right;  
       //           a.icon            { width:10px; height:5px; padding:0; } } } } } }
-      h1.title                    { font-size:36px; border-bottom: 1px solid #333; padding:20px 305px 10px 45px;
-        a                         { color:#fff; text-decoration:none; 
-          &:hover                 { } } } 
-      .left-side                  { float:left; width: 640px; display:inline; padding: 15px 20px; border-right: 1px solid #333; color:#999;
-        p.description             { color:#fff; font-size:18px; line-height:28px;
-          a                       { text-decoration:none; color:#999; padding: 0 5px;
-            &:hover               { color:#fff; } } 
-          img                     { } } 
-        p.author                  { margin:40px 0 10px 0; word-spacing:2px; font-size:16px; } }
-      .right-side                 { display:inline; position:absolute; max-width:259px; width:259px; margin: 15px 0;
-        .comments-wrapper         { padding-bottom:15px; border-bottom: 1px solid #333;
-          form.new-comment        { padding: 0 20px;
-          .field                  { }
-          .submit                 { 
-            input.comment-button  { color:#999; font-size:12px; padding:7px; border:1px solid #333; background-color:#222;
-              &:hover             { background-color:#555; color:#fff; } } } } }
-        ul.comments               { max-height:400px; font-size:14px; overflow-y:auto;
-          li.comment              { border-bottom: 1px solid #333; color:#999; padding:20px 36px;
-            p.comment_delete      { float:right;  
-              a.icon              { width:10px; height:5px; padding:0; } } } }
-        a                         { color:#999; text-align:center; display:inline-block; padding: 10px 0px; width:100%; border-bottom: 1px solid #333; font-size:14px;
-          &:hover                 { background-color:#555; color:#fff; text-decoration:none; } } }
-      .resized-comment-input      { display:none !important; 
-         .new-comment             { 
-          .field                  { display:none; } 
-          .submit                 { display:none; } } } } }
-      .loading                    { display:none; }
-      ul.resized-author           { display:none;
-        li                        { display:none; } }
-
+      h1.title                      { font-size:36px; border-bottom: 1px solid #333; padding:20px 305px 10px 45px;
+        a                           { color:#fff; text-decoration:none; 
+          &:hover                   { } } } 
+      .left-side                    { float:left; width: 640px; display:inline; padding: 15px 20px; border-right: 1px solid #333; color:#999;
+        p.description               { color:#fff; font-size:16px; line-height:28px;
+          a                         { text-decoration:none; color:#999; padding: 0 5px;
+            &:hover                 { color:#fff; } } 
+          img                       { } } 
+        p.author                    { margin:40px 0 10px 0; word-spacing:2px; font-size:14px; } }
+      .right-side                   { display:inline; float:left; max-width:259px; width:259px;
+        .comments-wrapper           { padding:25px 20px; border-bottom: 1px solid #333;
+          form.new-comment          { position:relative;
+            .field                  { }
+            .submit                 { display:inline-block;
+              input.comment-button  { color:#999; font-size:12px; border:1px solid #333; background-color:#222; position:absolute; right:0; bottom:-12px; padding:6px 10px;
+                &:hover             { background-color:#555; color:#fff; } } } } } 
+        ul.comments                 { max-height:400px; font-size:14px; overflow-y:auto;
+          li.comment                { border-bottom: 1px solid #333; color:#999; padding:20px 36px;
+            p.comment_delete        { float:right;  
+              a.icon                { width:10px; height:5px; padding:0; } } } }
+        .more-comments              { color:#999; text-align:center; display:inline-block; padding: 10px 0px; width:100%; border-bottom: 1px solid #333; font-size:14px;
+          &:hover                   { background-color:#555; color:#fff; text-decoration:none; } } }
+      .resized-comment-input        { display:none !important;
+         .new-comment               {
+          .field                    { display:none; }
+          .submit                   { display:none; } } }
+      .loading                      { display:none; }
+      ul.resized-author             { display:none;
+        li                          { display:none; } } } }
+.article-liked-false                { border:1px solid #333; font-size:14px; padding:7px 8px 8px; color:#2E8B57; background-color:#222; text-decoration:none; position:absolute; left:0; bottom:-12px;
+  &:hover                           { background-color:#555; color:#33FF00; text-decoration:none; }
+  &:focus                           { background-color:#555; color:#33FF00; text-decoration:none; }
+  &:active                          { background-color:#555; color:#33FF00; text-decoration:none; } }
+.article-liked-true                 { border:1px solid #333; font-size:14px; padding:7px 8px 8px; background-color:#555; color:#33FF00; text-decoration:none; position:absolute; left:0; bottom:-12px;
+  &:hover                           { cursor:default; text-decoration:none !important; color:#33FF00 !important; } }
 // }
 
 

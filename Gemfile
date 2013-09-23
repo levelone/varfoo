@@ -49,6 +49,7 @@ gem 'fog', '~> 1.3.1'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
+gem 'redis'
 
 # Rails 4 Requirement / Format
 # gem 'protected_attributes'

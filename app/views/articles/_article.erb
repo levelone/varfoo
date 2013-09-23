@@ -41,13 +41,14 @@
             <%= tag.name %>
           <% end %> &middot;
         <% end %> 
-      <%= "#{article.comments.count} Comments" %>
+      <%= "#{article.comments.count} Comments" %> &middot;
+      <%= "#{article.likes_count} Likes" %>
     </p>
   </div>
 
   <div class='right-side'>
     <div class='comments-wrapper'>
-      <%= form_for [article, Comment.new], :remote => true, :html => { :id => nil, :class => 'new-comment', :'data-type' => 'json' } do |f| %>
+      <%= form_for [article, Comment.new], :remote => true, :html => { :id => "article_#{article.id}", :class => "new-comment", :'data-type' => 'json' } do |f| %>
         <% if article.errors.any? %>
           <div id="error_explanation">
             <h2>
@@ -72,8 +73,20 @@
         </div>
 
         <div class='submit'>
-          <%= f.submit 'comment', :class => 'comment-button' %>
+          <%= f.submit 'comment', :class => "comment-button", :'data-article-id' => article.id %>
         </div>
+
+        <%= puts '---------------------------' %>
+        <%= puts request.session_options[:id] %>
+
+        <% if $redis.hexists("session_id:#{request.session_options[:id]}", "article_id:#{article.id}") %>
+          <p class='article-liked-true'>+ 1</p>
+          <%= link_to '+ 1', article_likes_path(article), :id => "article_#{article.id}_liked_true", :class => 'article-liked-true', :style => "display:none;", :method => :post, :remote => true %>
+        <% else %>
+          <%= link_to '+ 1', article_likes_path(article), :id => "article_#{article.id}_liked_false", :class => 'article-liked-false', :method => :post, :remote => true, :'data-article-id' => article.id, :'data-type' => 'json' %>
+          <%= link_to '+ 1', article_likes_path(article), :id => "article_#{article.id}_liked_true", :class => 'article-liked-true', :style => "display:none;", :method => :post, :remote => true %>
+        <% end %>
+
       <% end %>
     </div>
 
@@ -92,55 +105,6 @@
     </ul>
     <% if article.comments.order('created_at DESC').count > 4 %>
       <%= link_to 'more', '#', :class => 'more-comments', :'data-article-id' => article.id, :'data-offset' => 4, :'data-comments-count' => article.comments.count %>
-      <div class="loading"></div>
-    <% end %>
-  </div>
- 
-
-  <div class="resized-comment-input" >
-    <%= form_for [article, Comment.new], :remote => true, :html => { :id => nil, :class => 'new-comment', :'data-article-id' => article.id, :'data-type' => 'json' } do |f| %>
-      <% if article.errors.any? %>
-        <div id="error_explanation">
-          <h2>
-            <%= pluralize(article.errors.count, "error") %> prohibited this user from being saved:
-          </h2>
-          <ul>
-            <% article.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-
-      <div class='field'>
-        <%= f.text_field :name, :placeholder => 'Nickname' %>
-      </div>
-
-      <div class='field'>
-        <%= f.text_field :content, :placeholder => 'What is on your mind?', :id => 'test', :type => 'text' %>
-      </div>
-
-      <div class='submit'>
-        <%= f.submit 'Submit', :class => 'btn btn-success' %>
-      </div>
-    <% end %>
-
-    <ul class='resized-comment-list' >
-      <% article.comments.order('created_at DESC').limit(4).each do |comment| %>
-        <li class='resized-comment'>
-          <% if current_admin.present? %>
-            <p class='comment_delete'>
-              <%= link_to image_tag("button_cancel.png"), [comment.article, comment], :class => 'icon', data: { confirm: 'Are you sure?'}, :method => :delete, :'data-current-user' => true %>
-            </p>
-          <% end %>
-          <span><%= "#{comment.name}"%></span>,<br/><br/>
-          <%= comment.content %>
-        </li>
-      <% end %>
-    </ul>
-
-    <% if article.comments.order('created_at DESC').count > 4 %>
-      <%= link_to 'more', '#', :class => 'resized-more-comments', :'data-article-id' => article.id, :'data-offset' => 4, :'data-comments-count' => article.comments.count %>
       <div class="loading"></div>
     <% end %>
   </div>

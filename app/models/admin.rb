@@ -5,7 +5,9 @@ class Admin < User
   default_scope { where(admin: true) }
   
   attr_accessor :password
-  before_save :encrypt_password, :admin_must_be_set_to_true
+  # before_save :encrypt_password, :admin_must_be_set_to_true
+
+  before_save :encrypt_password
 
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
