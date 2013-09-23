@@ -43,17 +43,10 @@ jQuery ->
     console.log '+ 1'
     article_id = $(e.target).attr('data-article-id')
 
-    # $("#article_#{article_id}_liked_false").css('display', 'none')
-    # $("#article_#{article_id}_liked_true").css('display', 'block')
-
     $("#article_#{article_id}_liked_false").removeClass()
     $("#article_#{article_id}_liked_false").addClass('article-liked-true')
     e.preventDefault()
 
-#     # $.post("articles/#{article_id}/likes#create")
-#     # (data) ->
-#     #   console.log 'hellooooo'
-# 
 #   # $(document).on 'ajax:success', 'form.new-comment', (e, data, status, xhr) ->
 #   #   console.log(e)
 #   #   html = ''
@@ -116,8 +109,8 @@ jQuery ->
 
 
   # Sticky Navagation Bar to Scroll down
-    # $(window).scroll ->
-    #   $("#fluid").css "top", $(window).scrollTop()  if $(window).scrollTop() > 370
+  #   $(window).scroll ->
+  #     $("#fluid").css "top", $(window).scrollTop()  if $(window).scrollTop() > 370
 
   # Scroll Up
     $("a[href='#top']").click ->
